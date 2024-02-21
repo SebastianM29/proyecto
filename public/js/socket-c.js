@@ -51,7 +51,7 @@ socket.on('usuario-mensaje',(date)=> {
     console.log(date.usuario , date.mensaje)
     const selectChat = document.querySelector('.chat-messages')
     const div = document.createElement('div')
-    div.innerHTML= `<p><strong>${date.usuario}:</strong>${date.mensaje}</p> `
+    div.innerHTML= `<p><strong>${date.usuario}: </strong>${date.mensaje}</p> `
     selectChat.appendChild(div)
     contador ++
     const oldMessage = document.querySelectorAll('.chat-messages > div');

@@ -1,17 +1,18 @@
-.container{
+.contain{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-color: blueviolet;
+    background-image: url('../image/paisaje.jpg');
+    background-color: rgb(99, 97, 100);
 }
 
 .formulario{
    
-    background-color: aqua;
+    background-color: rgba(97, 117, 117, 0.648);
     width: 800px;
-    height: 640px;
+    height: 720px;
   
    
 
@@ -31,10 +32,13 @@
 
 .chat-messages{
     margin: 15px;
-    background-color: bisque;
+    background-color: rgba(255, 255, 255, 0.585);
     height: 450px;
 }
 
 #message{
     margin-bottom: 5px;
+}
+p{
+    margin-left: 15px;
 }
