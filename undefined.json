@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "title": "stanley",
+    "description": "taladro",
+    "code": 442,
+    "price": 10000,
+    "status": true,
+    "stock": 52,
+    "category": "ferreteria",
+    "thumbnail": [
+      "/ubicacion/misteriosa1.image.jpg"
+    ]
+  }
+]

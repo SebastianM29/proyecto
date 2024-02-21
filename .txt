@@ -1,0 +1,5 @@
+user = zvz
+pass = PAHgqyJpvyUlwWvb
+
+
+mongodb+srv://zvz:PAHgqyJpvyUlwWvb@zvzecommerce.1ltihtw.mongodb.net/ecommerce?retryWrites=true&w=majority
