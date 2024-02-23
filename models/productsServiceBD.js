@@ -1,5 +1,6 @@
 
-import  products  from "../dao/modelsDB/productsModels.js";
+import  products  from "./productsModels.js";
+
 
 
 export class ProductServiceDB {
@@ -9,18 +10,47 @@ export class ProductServiceDB {
       
     }
      
-    async getProducts(limit){
+    async getProducts({limits,pages,categoria,ordering,status}){
+        let filtro = {}
+        //todo: Agregar valores limits,pages,ordering
+        let option = {}
+        let resultadoOrdering = ordering
+       
         try {
            
-            if (limit) {
-                console.log('viendo el limit')
+            const parseValue = JSON.parse(limits)
+            const parsePages = JSON.parse(pages)
+           
+
+            if(Object.keys(categoria).length > 0){
+                filtro.category = categoria
                
             }
+            if (status === 'true') {
+                filtro.status = true;
+            } else if (status === 'false') {
+                filtro.status = false;
+            }
 
-           const prod = await products.find()
-           return prod
+            if(ordering === 'asc'){
+              resultadoOrdering ={price:1}
+            }
+            if(ordering === 'desc'){
+                resultadoOrdering={price:-1}
+            }
+
+             
+           
+       
+        
+   
+           
+           
+        const paginate =await products.paginate(filtro,{limit:parseValue,page:parsePages,sort:resultadoOrdering})
+        return paginate
                 
         } catch (error) {
+            console.log(error.message)
             return 'Sin Datos en el archivo'
         }
     }

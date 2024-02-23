@@ -1,6 +1,10 @@
-import { Schema,model } from "mongoose";
+import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
-const ProductsSchema = Schema({
+//nombre para el model
+const prod = "products"
+
+const ProductsSchema = mongoose.Schema({
     title:{
         type: String,
         required:[true , 'title obligatorio']
@@ -39,4 +43,9 @@ const ProductsSchema = Schema({
 })
 
 
-export default model ('products', ProductsSchema)
+//habilitar paginate mediante plugin
+ProductsSchema.plugin(mongoosePaginate)
+
+const productModel = mongoose.model(prod,ProductsSchema)
+
+export default productModel

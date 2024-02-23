@@ -1,5 +1,5 @@
 import { request,response } from "express";
-import { CartServiceDB } from "../dao/cartsServiceBD.js";
+import { CartServiceDB } from "../models/cartsServiceBD.js";
 const cartDB = new CartServiceDB()
 
 export const getCartsAll = async(req=request,res=response) => {
@@ -57,5 +57,22 @@ export const addPostCarts = async(req=request,res=response) => {
     } catch (error) {
         console.log(error)
         
+    }
+}
+
+
+export const deleteOfCarts = async(req=request,res=response) => {
+    try {
+        const cid = req.params.cid
+        const pid = req.params.pid
+        const resp = await cartDB.deleteProducts(cid,pid)
+        
+        res.json(resp)
+        
+    } catch (error) {
+        res.status(404).json({
+            msg:'error',
+            error:error.message
+        })
     }
 }

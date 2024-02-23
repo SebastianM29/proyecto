@@ -1,17 +1,36 @@
 import { request,response } from "express";
-import { ProductServiceDB } from "../dao/productsServiceBD.js";
+import { ProductServiceDB } from "../models/productsServiceBD.js";
+import  products  from "../models/productsModels.js";
+
 
 const prod = new ProductServiceDB()
 
 export const getProducts = async(req=request,res=response) => {
-   
-    const resp = await prod.getProducts()
     
-    res.json({
+
+    //limit page ,categoria, productos , sort
+    const limits = req.query.limit || "10"
+    const pages = req.query.page || "1"
+    const categoria = req.query.category
+    const ordering = req.query.ordering || {}
+    const status = req.query.status
+    console.log("ruta veo status?",status)
+    const obj={
+        limits,
+        pages,
+        categoria,
+        ordering,
+        status
+    }
+
+     const respDB =await  prod.getProducts(obj)
+     console.log(respDB)
+      res.json({
         msg: 'desde products: Get',
-        productos: resp           
+        respDB
       })
 }
+
 export const getProductsPorId = async(req=request,res=response) => {
    try {
        const id = req.params.id

@@ -1,5 +1,5 @@
-import  products  from "../dao/modelsDB/productsModels.js";
-import carts from "../dao/modelsDB/cartsModels.js";
+import  products  from "./productsModels.js";
+import carts from "./cartsModels.js";
 
 
 export class CartServiceDB {
@@ -108,7 +108,42 @@ export class CartServiceDB {
                 error:error.message}
             
         }
+    }
+    async deleteProducts(cid,pid){
+        try {
+            const cartFind = await carts.findById(cid)
+            const productFind = await products.findById(pid)
+            console.log('este seria el producto ' , productFind)
+            if (!cartFind) {
+              throw new Error ( ' No existe el carrito')
+                
+            }
+            if (!productFind) {
 
+              throw new Error ( ' No existe el producto en base de datos')
+
+            }
+            for (const iterator of cartFind.products) {
+                if (iterator.id.toString() === productFind._id.toString()) {
+                    console.log('esta adentro del if')
+                    const valorDevuelto = cartFind.products.filter(element => element.id.toString() !== productFind._id.toString())
+                    cartFind.products = valorDevuelto
+                    // save() se puede aplicar a una instancia de un modelo, no al modelo en sí mismo.
+                    cartFind.save()
+                    return {
+                        eliminado:productFind,
+                        carrito:valorDevuelto
+                    }
+                }
+                
+            }
+            return {
+                msg: 'el producto ingresado no pertenece a este carrito'
+            }
+           
+        } catch (error) {
+            throw new Error (`codigo mal ingresado: ${error.message}`)
+        }
 
     }
 }
