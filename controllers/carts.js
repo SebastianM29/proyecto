@@ -76,3 +76,53 @@ export const deleteOfCarts = async(req=request,res=response) => {
         })
     }
 }
+
+export const putAllCarts = async(req=request,res=response) => {
+    try {
+        const cid = req.params.cid
+        const array = req.body
+        const resp = await cartDB.putAll(cid,array)
+
+        res.json(resp)
+        
+    } catch (error) {
+        res.status(404).json({
+            msg:'error',
+            error:error.message
+        })
+    }
+}
+export const putQuantityCarts = async(req=request,res=response) => {
+    try {
+        const cid = req.params.cid
+        const pid = req.params.pid
+        const quantity = req.body
+
+        const resp = await cartDB.putQuantity(cid,pid,quantity)
+
+        res.json(resp)
+        
+    } catch (error) {
+        res.status(404).json({
+            msg:'error',
+            error:error.message
+        })
+    }
+}
+
+export const deleteCarts = async(req=request,res=response) => {
+    try {
+        const cid = req.params.cid
+      
+
+        const resp = await cartDB.delCarts(cid)
+
+        res.json(resp)
+        
+    } catch (error) {
+        res.status(404).json({
+            msg:'error',
+            error:error.message
+        })
+    }
+}

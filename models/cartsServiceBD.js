@@ -146,4 +146,100 @@ export class CartServiceDB {
         }
 
     }
+
+    async putAll(cid,arrayCarts){
+        try {
+            console.log('put all products',cid,'y el body!!!!',arrayCarts)
+            const cart = await carts.findById(cid)
+            cart.products = []
+            console.log('cart encontrado!!!',cart)
+            for (const iterator of arrayCarts) {
+                console.log('viendo idividual individual', iterator)
+                const prodExist = await products.findById(iterator.id)
+                if (!prodExist) {
+                    throw new Error ('el id del producto no existe')
+                }
+                const obj = {
+                    id : iterator.id,
+                    quantity: iterator.quantity
+                }
+                cart.products.push(obj)
+                await cart.save()
+
+            }
+            return {
+                msg:"actualizado",
+                cart
+            }
+        } catch (error) {
+
+            throw new Error (`Error : ${error.message}`)
+            
+        }
+    }
+    async putQuantity(cid,pid,quantity){
+       
+        try {
+        
+            const cart = await carts.findById(cid)
+            const prodExist = await products.findById(pid)
+            
+            console.log('deberia ver el cart ',cart.products)
+            console.log('deberia ver el producto ',prodExist)
+
+
+            if (!prodExist) {
+                throw new Error ('producto no existe en la base de datos carrito')
+                
+            }
+
+
+            const filterProd = cart.products.filter(element => element.id.toString() === prodExist._id.toString())
+
+            console.log('debo ver algo productyo encotnrado?',filterProd)
+            
+            if (filterProd.length !== 0) {
+                // filterProd.quantity = quantity
+                console.log(quantity.quantity)
+                filterProd[0].quantity = quantity.quantity
+                console.log('estoy en validacion ',filterProd[0].quantity)
+                await cart.save()
+                return cart
+            }else{
+                return 'no se encontro producto en el carro seleccionado' 
+            }
+         
+       
+        } catch (error) {
+
+            throw new Error (`Error : ${error.message}`)
+            
+        }
+    }
+    async delCarts(cid){
+       
+        try {
+        
+            const cart = await carts.findById(cid)
+          
+            
+
+            if (cart.products.length === 0) {
+                throw new Error ('no existe ningun producto en el carrito')
+                
+            }
+            cart.products = []
+            await cart.save()
+
+           return {
+            msg: ' formateado con exito productos',
+            cart
+           }
+       
+        } catch (error) {
+
+            throw new Error (`Error : ${error.message}`)
+            
+        }
+    }
 }
