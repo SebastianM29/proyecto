@@ -81,9 +81,7 @@ export const addPostCarts = async(req=request,res=response) => {
      
         console.log('entro aca?')
         
-        res.json(
-            
-            resp)
+        res.json({resp})
         
     } catch (error) {
 

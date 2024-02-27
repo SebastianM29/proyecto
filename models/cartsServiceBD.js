@@ -95,8 +95,8 @@ export class CartServiceDB {
                 // const pop = await carts.findById(cartId).populate('products.id')
                 // console.log('deberia ver pop',pop.products)
                 // .populate('products.id')
-                const resp = prod._id.toString()
-                return resp
+                // const resp = prod._id.toString()
+                return car
                 
                 
             }else{
@@ -114,6 +114,7 @@ export class CartServiceDB {
                 console.log('mirando el car',car)
                 await carts.updateOne({_id:car._id},{$set: {products: car.products}})
                 await prod.save()
+
                 return prod._id.toString()
             }
           
