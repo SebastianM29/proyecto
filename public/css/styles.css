@@ -10,7 +10,7 @@ body {
     background-image: url('../image/image1.jpg');
     background-size: cover;
     
-    height: 100vh;
+    height: 100%;
     
 }
 .a2{
@@ -31,14 +31,14 @@ padding: 10px;
 margin-top: 100px;
 background-color: rgba(214, 221, 175, 0.275);
 width: 80%;
-height: 80%;
+height: 900px;
 }
 .prod{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 150px;
-    height: 300px;
+    width: 170px;
+    height: 400px;
     margin: 10px;
     background-color: rgba(238, 208, 186, 0.603);
     
@@ -53,17 +53,32 @@ height: 80%;
     font-size: 13px;
 }
  .prod button {
-   height: 50px;
-   margin: 10px;
+   height: 40px;
+   /* margin: 20px; */
+   justify-content: center;
+   margin-left: 5px;
+   width: 160px;
    font-size: 13px;
     
 } 
+.stock{
+    margin-top: 3px;
+    font-size: 10px;
+   
+    text-align: center;
+    
+}
 
 a{
+   
     text-decoration: none !important;
-    color: brown !important;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+a:hover{
+    color: rgba(53, 222, 248, 0.515);
+    transition: 0.3s;
 }
 
 .numero{
@@ -89,7 +104,8 @@ a{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: aqua;
+    background-image: url('../image/image2.jpg');
+    background-size: cover;
     width: 100%;
     height: 100vh;
 }
@@ -100,8 +116,27 @@ a{
 
 }
 .carritos{
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
     width: 80%;
     height: 700px;
-    background-color: blueviolet;
+    background-color: rgba(43, 144, 226, 0.308);
     margin-bottom: 50px;
 }
+
+.viewsCart {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    width: 150px;
+    height: 300px;
+    margin: 10px;
+    background-color: rgba(210, 105, 30, 0.185);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+.viewsCart > * {
+    margin-bottom: 3px; /* Ajusta el margen inferior según sea necesario */
+}
+

@@ -20,9 +20,10 @@ export const getCarts = async(req=request,res=response) => {
 try {
     const id = req.params.cid
     const value = await cartDB.cartsById(id)
-    res.json({
+    console.log(value)
+    res.json(
         value
-    })
+    )
 } catch (error) {
     console.log(error.message)
 }
@@ -78,13 +79,19 @@ export const addPostCarts = async(req=request,res=response) => {
         const pid = req.params.pid
         const resp = await cartDB.addProductCart(cid,pid)
      
-        console.log(resp)
-        res.json({
-            msg:'mensaje',
-            resp})
+        console.log('entro aca?')
+        
+        res.json(
+            
+            resp)
         
     } catch (error) {
-        console.log(error)
+
+        
+       res.status(400).json(
+       
+        error.message
+      )
         
     }
 }

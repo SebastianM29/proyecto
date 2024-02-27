@@ -35,14 +35,15 @@
           {{#each respDB.docs}}
           <div class="prod">
           <div>
-          <p class="items">{{this.title}}</p>
-          <p class="items">{{this.description}}</p>
-          <p class="items">{{this.code}}</p>
-          <p class="items">{{this.price}}</p>
-          <p class="items">{{this.category}}</p>
+          <p class="items mt-2"><strong>Categoria:</strong>{{this.category}}</p>
+          <p class="items"><strong>Titulo:</strong>{{this.title}}</p>
+          <p class="items"><strong>Descripcion:</strong>{{this.description}}</p>
+          <p class="items"><strong>Precio:</strong>{{this.price}}</p>
+          <p class="items"><strong>Codigo:</strong>{{this.code}}</p>
+          <p class="items"><strong>Stock:</strong>{{this.stock}}</p>
           </div>
           <div>
-           <button id={{this._id}} class="btn btn-warning" onclick="agregarAlCarrito(this.id)">agregar al carrito</button>
+           <button id={{this._id}} class="btn btn-warning mb-5" onclick="agregarAlCarrito(this.id)">agregar al carrito</button>
           </div>
           </div>
           {{/each}}

@@ -47,8 +47,8 @@ export class CartServiceDB {
     async cartsById (id) {
         try { 
         if (id) {
-            const cartsValue = await carts.findById(id)
-            console.log(cartsValue)
+            const cartsValue = await carts.findById(id).populate('products.id')
+            
             return cartsValue
         }
           
@@ -70,20 +70,41 @@ export class CartServiceDB {
                  products.findById(productId),
             ])
             
+            if (prod.stock === 0) {
+                console.log('no valida',prod.stock)
+                
+                     
+               
+               const resp = prod._id.toString()
+                throw new Error (resp)
+            }
             console.log('que se ve de product aca',prod._id.toString())
             
             const validate = car.products.find(element => element.id.toString() === prod._id.toString())
             if (validate) {
-                console.log('validate',validate)
+
+                
+                if (prod.stock>0) {
+                    prod.stock -= 1
+                    
+                }
+
                 validate.quantity += 1
                 await carts.updateOne({_id:car._id},{$set: {products: car.products}})
+                await prod.save()
                 // const pop = await carts.findById(cartId).populate('products.id')
                 // console.log('deberia ver pop',pop.products)
                 // .populate('products.id')
-                return car
+                const resp = prod._id.toString()
+                return resp
                 
                 
             }else{
+                if (prod.stock>0) {
+                    prod.stock -= 1
+                    
+                }
+                console.log('debo ver el producto a agregar recien creado',prod)
                 console.log('no existe')
                 const productToAdd = {
                     id:productId,
@@ -92,7 +113,8 @@ export class CartServiceDB {
                 car.products.push(productToAdd)
                 console.log('mirando el car',car)
                 await carts.updateOne({_id:car._id},{$set: {products: car.products}})
-                return car
+                await prod.save()
+                return prod._id.toString()
             }
           
 
@@ -103,9 +125,7 @@ export class CartServiceDB {
        
         } catch (error) {
 
-             return {
-                msg: 'error codigo producto/carrito',
-                error:error.message}
+             throw new Error ( `${error.message}` )
             
         }
     }
