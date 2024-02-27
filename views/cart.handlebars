@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="secciones">
+    {{#if cartsId}}
+    <form id="cart-form">
+      <select id="cart-select" class="form-select" name="cart">
+        <option value="" disabled selected>Seleccione un carrito</option>
+            {{#each cartsId}}
+                <option value="{{this.id}}">carrito{{this.contador}}</option>
+            {{/each}}
+      </select>
+     <input type="submit" value="Submit">
+    </form>
+    {{/if}}
+
+    <div class="carritos">
+        <h1>probando</h1>
+    </div>
+
+
+
+
+    </div>
+
+</body>
+</html>

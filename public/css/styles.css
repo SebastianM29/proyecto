@@ -1,44 +1,107 @@
-.contain{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background-image: url('../image/paisaje.jpg');
-    background-color: rgb(99, 97, 100);
+body {
+    margin: 0;
+    padding: 0;
 }
-
-.formulario{
-   
-    background-color: rgba(97, 117, 117, 0.648);
-    width: 800px;
-    height: 720px;
-  
-   
-
-}
-
-.formulario form{
+.field{
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    margin-top: 5px;
-
+    /* justify-content: center; */
+    align-items: center;
+    background-image: url('../image/image1.jpg');
+    background-size: cover;
+    
+    height: 100vh;
+    
+}
+.a2{
+    
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    /* background-color: aqua; */
+    width: 90%;
+    
 }
 
-#username{
-    margin-bottom: 5px;
+.a1{
+display: flex;
+flex-wrap: wrap;
+justify-content:flex-start;
+padding: 10px;
+margin-top: 100px;
+background-color: rgba(214, 221, 175, 0.275);
+width: 80%;
+height: 80%;
+}
+.prod{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 150px;
+    height: 300px;
+    margin: 10px;
+    background-color: rgba(238, 208, 186, 0.603);
+    
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* offsetX offsetY blurRadius color */
+    border-radius: 5px;
+    
+    
+}
+.items{
+
+    margin-left: 10px;
+    font-size: 13px;
+}
+ .prod button {
+   height: 50px;
+   margin: 10px;
+   font-size: 13px;
+    
+} 
+
+a{
+    text-decoration: none !important;
+    color: brown !important;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
 }
 
-.chat-messages{
-    margin: 15px;
-    background-color: rgba(255, 255, 255, 0.585);
-    height: 450px;
+.numero{
+    display: inline;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+}
+#carrito-select{
+    width: 300px;
 }
 
-#message{
-    margin-bottom: 5px;
+
+
+
+
+
+
+
+/*otra pagina*/
+
+.secciones{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+    width: 100%;
+    height: 100vh;
 }
-p{
-    margin-left: 15px;
+#cart-select{
+    margin-top: 10px;
+    height: 20px;
+
+
+}
+.carritos{
+    width: 80%;
+    height: 700px;
+    background-color: blueviolet;
+    margin-bottom: 50px;
 }

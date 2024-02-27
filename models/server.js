@@ -2,6 +2,7 @@ import express from "express";
 import path, { dirname } from "path";
 import handlebars from "express-handlebars";
 import { fileURLToPath } from "url";
+import  cors  from "cors";
 
 
 
@@ -34,6 +35,7 @@ export class Server {
     middlewares(){
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended:true}));
+        this.app.use(cors())
 
         this.app.use(express.static(path.join(_dirname,'../public')));
         //registra el motor de plantillas Handlebars con Express
@@ -57,8 +59,8 @@ export class Server {
     }
     listen(){
             //para corroborar el funcionamiento ejecutar en tu local "socket.io/socket.io.js"
-            this.app.listen('6000',()=>{
-            console.log('conectado al localhost 6000 , proyectoFinal')
+            this.app.listen('3000',()=>{
+            console.log('conectado al localhost 3000 , proyectoFinal')
         })
 
     }

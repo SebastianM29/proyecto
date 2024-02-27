@@ -113,6 +113,7 @@ export class CartServiceDB {
         try {
             const cartFind = await carts.findById(cid)
             const productFind = await products.findById(pid)
+            
             console.log('este seria el producto ' , productFind)
             if (!cartFind) {
               throw new Error ( ' No existe el carrito')
@@ -217,11 +218,22 @@ export class CartServiceDB {
         }
     }
     async delCarts(cid){
+        //otra opcion
+        // const result = await carts.updateOne(
+        //     { _id: cid },
+        //     { $set: { products: [] } }
+        // );
+    
+        // if (result.nModified === 0) {
+        //     throw new Error('No se pudo encontrar el carrito');
+        // }
        
         try {
         
             const cart = await carts.findById(cid)
-          
+            if (!cart) {
+                throw new Error ('carrito inexistente') 
+            }
             
 
             if (cart.products.length === 0) {

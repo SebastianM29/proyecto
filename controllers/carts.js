@@ -9,6 +9,7 @@ export const getCartsAll = async(req=request,res=response) => {
         res.json({
             value
         })
+      
     } catch (error) {
         console.log(error.message)
     }
@@ -21,6 +22,34 @@ try {
     const value = await cartDB.cartsById(id)
     res.json({
         value
+    })
+} catch (error) {
+    console.log(error.message)
+}
+}
+//render
+export const getCartById = async(req=request,res=response) => {
+try {
+    let contador = 0
+    const id = req.params.cid
+    
+    const [allCarts , carts] =await Promise.all([
+          cartDB.cartAll(),
+          cartDB.cartsById(id)
+    ])
+
+
+    const cartsId = allCarts.map(element => {
+        const id =  element._id.toString()
+        contador += 1
+        
+        return{ id , contador}
+    })
+   
+
+    console.log(cartsId)
+    res.render('cart',{
+        cartsId
     })
 } catch (error) {
     console.log(error.message)

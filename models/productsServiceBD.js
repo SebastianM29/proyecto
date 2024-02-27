@@ -12,8 +12,6 @@ export class ProductServiceDB {
      
     async getProducts({limits,pages,categoria,ordering,status}){
         let filtro = {}
-        //todo: Agregar valores limits,pages,ordering
-        let option = {}
         let resultadoOrdering = ordering
        
         try {
@@ -21,8 +19,8 @@ export class ProductServiceDB {
             const parseValue = JSON.parse(limits)
             const parsePages = JSON.parse(pages)
            
-
-            if(Object.keys(categoria).length > 0){
+             //validar q exista
+            if(categoria && Object.keys(categoria).length > 0){
                 filtro.category = categoria
                
             }
@@ -38,15 +36,7 @@ export class ProductServiceDB {
             if(ordering === 'desc'){
                 resultadoOrdering={price:-1}
             }
-
-             
-           
-       
-        
-   
-           
-           
-        const paginate =await products.paginate(filtro,{limit:parseValue,page:parsePages,sort:resultadoOrdering})
+        const paginate =await products.paginate(filtro,{limit:parseValue,page:parsePages,sort:resultadoOrdering, lean: true})
         return paginate
                 
         } catch (error) {

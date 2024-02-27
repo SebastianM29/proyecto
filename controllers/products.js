@@ -1,10 +1,57 @@
 import { request,response } from "express";
 import { ProductServiceDB } from "../models/productsServiceBD.js";
 import  products  from "../models/productsModels.js";
+import { CartServiceDB } from "../models/cartsServiceBD.js";
 
 
 const prod = new ProductServiceDB()
+const cart = new CartServiceDB()
 
+export const getProd = async(req=request,res=response) => {
+    
+    let array = []
+    let contador = 0
+    //limit page ,categoria, productos , sort
+    const limits = req.query.limit || "10"
+    const pages = req.query.page || "1"
+    const categoria = req.query.category
+    const ordering = req.query.ordering || {}
+    const status = req.query.status
+    // console.log("ruta veo status?",status)
+    const obj={
+        limits,
+        pages,
+        categoria,
+        ordering,
+        status
+    }
+     const [respDB , carts] =await Promise.all([
+           prod.getProducts(obj),
+           cart.cartAll()
+    ])
+
+    
+    respDB.prevLink = respDB.hasPrevPage ? `http://localhost:3000?page=${respDB.prevPage}`: ''
+
+    respDB.nextLink = respDB.hasNextPage ? `http://localhost:3000?page=${respDB.nextPage} `: ''
+    // res.json(respDB)
+    
+    //respDB.IsValid = (respDB.page > 0 && respDB.page <= respDB.totalPAges) otra opcion
+    const cartsId = carts.map(element => {
+        const id =  element._id.toString()
+        contador += 1
+        
+        return{ id , contador}
+    })
+    
+  
+
+
+     respDB.isValid = !(respDB.page <= 0 || respDB.page > respDB.totalPAges)
+   
+    res.render('product', {respDB,cartsId} );
+
+}
 export const getProducts = async(req=request,res=response) => {
     
 
@@ -14,7 +61,7 @@ export const getProducts = async(req=request,res=response) => {
     const categoria = req.query.category
     const ordering = req.query.ordering || {}
     const status = req.query.status
-    console.log("ruta veo status?",status)
+    // console.log("ruta veo status?",status)
     const obj={
         limits,
         pages,
@@ -23,12 +70,12 @@ export const getProducts = async(req=request,res=response) => {
         status
     }
 
-     const respDB =await  prod.getProducts(obj)
-     console.log(respDB)
-      res.json({
-        msg: 'desde products: Get',
-        respDB
-      })
+     let respDB =await  prod.getProducts(obj)
+
+    res.json(respDB)
+    
+  
+
 }
 
 export const getProductsPorId = async(req=request,res=response) => {
