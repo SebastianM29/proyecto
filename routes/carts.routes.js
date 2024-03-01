@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { addPostCarts, deleteCarts, deleteOfCarts, getCartById, getCarts, getCartsAll, postCarts, putAllCarts, putQuantityCarts } from "../controllers/carts.js";
+import { checkingAuth } from "../middlewares/session.js";
 const router = Router()
 
-router.get('/cart',getCartById)
+router.get('/cart',checkingAuth,getCartById)
 
 router.get('/carts/',getCartsAll)
 router.get('/carts/:cid',getCarts)

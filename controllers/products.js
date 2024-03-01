@@ -31,9 +31,9 @@ export const getProd = async(req=request,res=response) => {
     ])
 
     
-    respDB.prevLink = respDB.hasPrevPage ? `http://localhost:3000?page=${respDB.prevPage}`: ''
+    respDB.prevLink = respDB.hasPrevPage ? `http://localhost:3000/?page=${respDB.prevPage}`: ''
 
-    respDB.nextLink = respDB.hasNextPage ? `http://localhost:3000?page=${respDB.nextPage} `: ''
+    respDB.nextLink = respDB.hasNextPage ? `http://localhost:3000/?page=${respDB.nextPage} `: ''
     // res.json(respDB)
     
     //respDB.IsValid = (respDB.page > 0 && respDB.page <= respDB.totalPAges) otra opcion
@@ -44,12 +44,16 @@ export const getProd = async(req=request,res=response) => {
         return{ id , contador}
     })
     
-  
+    const {first_name,role} = req.session.user
+    const objSession = {
+        first_name,
+        role
+    }
 
 
      respDB.isValid = !(respDB.page <= 0 || respDB.page > respDB.totalPAges)
    
-    res.render('product', {respDB,cartsId} );
+    res.render('product', {respDB,cartsId,objSession} );
 
 }
 export const getProducts = async(req=request,res=response) => {

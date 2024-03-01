@@ -13,7 +13,6 @@ export class ProductServiceDB {
     async getProducts({limits,pages,categoria,ordering,status}){
         let filtro = {}
         let resultadoOrdering = ordering
-       
         try {
            
             const parseValue = JSON.parse(limits)
@@ -22,7 +21,6 @@ export class ProductServiceDB {
              //validar q exista
             if(categoria && Object.keys(categoria).length > 0){
                 filtro.category = categoria
-               
             }
             if (status === 'true') {
                 filtro.status = true;

@@ -9,7 +9,12 @@ import  cors  from "cors";
 
 import  cartsRoutes  from "../routes/carts.routes.js";
 import  productsRoutes  from "../routes/products.routes.js";
+import  sessionRoutes  from "../routes/session.routes.js";
+import viewsRoutes from    "../routes/views.routes.js";
+
 import { dbConnection } from "../db/config.js";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
 
 
@@ -36,20 +41,40 @@ export class Server {
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended:true}));
         this.app.use(cors())
+        //congif de session
+        this.app.use(session({
+            store:MongoStore.create({
+                mongoUrl:"mongodb+srv://zevaz:BCx8XolgC60yQZ8E@pf.jtreerf.mongodb.net/user?retryWrites=true&w=majority&appName=pf",
+                ttl:300
+            }),
+            secret: 'sessionSecret',
+            resave:true,
+            saveUninitialized:true
+        }))
 
         this.app.use(express.static(path.join(_dirname,'../public')));
         //registra el motor de plantillas Handlebars con Express
-        this.app.engine('handlebars',handlebars.engine());
+        this.app.engine('handlebars', handlebars.engine({
+            helpers: {
+                eq: function(a, b) {
+                    return a === b;
+                }
+            }
+        }));
         //ubicacion de las plantillas para el renderizado
         this.app.set(path.resolve(_dirname,'../views'));
         //ubicacion de las plantillas para el renderizado
         this.app.set('view engine','handlebars')
+
+
 
     }
     routes(){
 
         this.app.use('/',cartsRoutes);
         this.app.use('/',productsRoutes);
+        this.app.use('/api/session/',sessionRoutes);
+        this.app.use('/',viewsRoutes)
 
     }
 
