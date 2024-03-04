@@ -13,3 +13,6 @@ export const checkingAuth = (req,res,next) => {
     next()
 
 }
+
+
+//validar si es admin para el profile

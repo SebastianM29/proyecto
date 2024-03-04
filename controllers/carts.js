@@ -48,7 +48,6 @@ try {
     })
    
 
-    console.log(cartsId)
     res.render('cart',{
         cartsId
     })
@@ -79,7 +78,7 @@ export const addPostCarts = async(req=request,res=response) => {
         const pid = req.params.pid
         const resp = await cartDB.addProductCart(cid,pid)
      
-        console.log('entro aca?')
+       
         
         res.json({resp})
         

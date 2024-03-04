@@ -65,7 +65,7 @@ export const getProducts = async(req=request,res=response) => {
     const categoria = req.query.category
     const ordering = req.query.ordering || {}
     const status = req.query.status
-    // console.log("ruta veo status?",status)
+   
     const obj={
         limits,
         pages,
@@ -102,7 +102,7 @@ export const postProducts = async(req=request,res=response) => {
         
         const resp = req.body
         const producto = await prod.addProduct(resp)
-        console.log(producto)
+      
         
         
         res.json({
@@ -111,7 +111,7 @@ export const postProducts = async(req=request,res=response) => {
             
         })
     } catch (error) {
-        console.log('entrando a error',error.message) 
+        
         res.status(400).json({
             msg:error.message
         })
@@ -124,7 +124,7 @@ export const deleteProducts = async(req=request,res=response) => {
    try {
     
        const id = req.params.id 
-       console.log(id)
+       
        const resp = await prod.deleteProducts(id)
         
         res.json({

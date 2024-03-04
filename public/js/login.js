@@ -29,7 +29,7 @@ document.querySelector('.formulario-login').addEventListener(('submit') , async(
             document.getElementById('button-register').textContent = `${res.msg}`
             document.getElementById('button-register').disabled = true
             setTimeout(() => {
-                document.getElementById('button-register').textContent = 'email/pass incorrecto'
+                document.getElementById('button-register').textContent = 'iniciar sesion'
                 document.getElementById('button-register').disabled = false
             }, 3000);
         }

@@ -17,16 +17,32 @@ const agregarAlCarrito = async(id) => {
     
         })
         if (resp.ok) {
-           const res = await resp.json()
-           console.log('que me trae',res)
-           const selecProd = document.getElementById(`${res}`)
-           selecProd.textContent= 'agregado'
-           setTimeout(() => {
-            selecProd.textContent = 'agregar al carrito'
-           }, 3000);
-
-
-            window.location.href = 'http://localhost:3000/'
+            try {
+                
+                const res = await resp.json()
+               
+                console.log('me selecciona el producto?',res)
+                
+                const result = await fetch(`/products/${id}`)
+                const datos  =await result.json()
+                console.log('este deberia ser el producto', datos.productos.stock)  
+                
+                const stock = document.getElementById(`1${id}`)
+                stock.innerHTML = `<strong>Stock:</strong>${datos.productos.stock}`
+                
+                const selecProd = document.getElementById(id)
+                
+                console.log(selecProd)
+                selecProd.textContent= 'agregado'
+                setTimeout(() => {
+                 selecProd.textContent = 'agregar al carrito'
+                }, 3000);
+     
+     
+                //  window.location.href = 'http://localhost:3000/'
+            } catch (error) {
+                console.log(error)
+            }
         }else{
 
            const res = await resp.json()
@@ -62,6 +78,7 @@ try {
         const resCarr = res.products
         carritos.innerHTML=''
         resCarr.forEach(element => {
+            console.log(element)
             const div = document.createElement('div')
             div.classList= 'viewsCart'
             div.innerHTML= `
