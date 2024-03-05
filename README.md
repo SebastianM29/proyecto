@@ -56,3 +56,54 @@ y volviendo a los productos la mascara va a tener un stock de 31 debido a que a 
 
 
 -a optimizar: incluir el boton de agregar al carrito en un submit parea manipular mejor su correcto funcionamiento-
+
+# Implementacion Login
+Entregable 
+
+* Se implemento un registro en el cual se puede seleccionar Admin o user, y solo es permitido un usuario "Admin" con el email : "adminCoder@coder.com" y el password : "adminCod3r123"
+
+![alt text](image-35.png)
+![alt text](image-41.png)
+* Admin creado 
+![alt text](image-42.png)
+
+*login de Admin
+![alt text](image-43.png)
+* Campo Admin creado solo para ese usuario, 'seba' traido de session
+![alt text](image-44.png)
+* Otro usuario sin campo Admin
+![alt text](image-45.png)
+
+*Apartado de Perfil con datos traidos desde session
+![alt text](image-47.png)
+
+
+
+
+
+se implementa las vistas empleadas en el hands on lab asi como los controladores  , en los mismos se pueden ver el middleware en en cual se encargar de chequear mediante session si esta activo y puede ingresar a la pagina 
+
+![alt text](image-36.png)
+
+* controladores vistas
+
+![alt text](image-37.png)
+
+* Rutas de session 
+
+![alt text](image-38.png)
+
+* controladores de session 
+
+![alt text](image-39.png)
+
+* Middleware para emplear en las rutas
+
+![alt text](image-40.png)
+
+* Guardado en base de datos solo un Admin 
+![alt text](image-46.png)
+
+
+* Se agrego extra ... el campo de admin / user en el registro con mensajes de error o exito asi como en login... a la hora de agregar un producto al carrito el stock va disminuyendo... a la hora de llegar a 0 informa q queda "sin stock" -(Solucionado)
+Queda obviada la generacion de ruta privada ya q solo deje visual el campo de Admin.

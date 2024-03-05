@@ -71,15 +71,11 @@ export class CartServiceDB {
             ])
             
             if (prod.stock === 0) {
-                console.log('no valida',prod.stock)
-                
-                     
-               
+       
                const resp = prod._id.toString()
                 throw new Error (resp)
             }
-            console.log('que se ve de product aca',prod._id.toString())
-            
+    
             const validate = car.products.find(element => element.id.toString() === prod._id.toString())
             if (validate) {
 
@@ -105,14 +101,14 @@ export class CartServiceDB {
                     prod.stock -= 1
                     
                 }
-                console.log('debo ver el producto a agregar recien creado',prod)
-                console.log('no existe')
+               
+                
                 const productToAdd = {
                     id:productId,
                     quantity:1
                 }
                 car.products.push(productToAdd)
-                console.log('mirando el car',car)
+                
                 await carts.updateOne({_id:car._id},{$set: {products: car.products}})
                 await prod.save()
 
