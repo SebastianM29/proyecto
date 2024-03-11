@@ -44,7 +44,7 @@ export class Server {
         this.app.use(session({
             store:MongoStore.create({
                 mongoUrl:"mongodb+srv://zevaz:BCx8XolgC60yQZ8E@pf.jtreerf.mongodb.net/user?retryWrites=true&w=majority&appName=pf",
-                ttl:300
+                ttl:30
             }),
             secret: 'sessionSecret',
             resave:true,

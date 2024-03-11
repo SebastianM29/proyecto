@@ -20,7 +20,7 @@ body{
     background-color: rgba(137, 43, 226, 0.114);
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.889);
     width: 300px;
-    height: 300px;
+    height: 400px;
     border-radius: 15px;
 }
 label{
@@ -28,7 +28,7 @@ label{
     font-size: 16px;
 }
 #link-register{
-    margin-top: 25px;
+    margin-top: 10px;
     font-size: 17px;
     color:rgb(62, 194, 60);
     text-align: end;
