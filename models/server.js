@@ -15,6 +15,8 @@ import viewsRoutes from    "../routes/views.routes.js";
 import { dbConnection } from "../db/config.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import  passport  from "passport";
+import initializePassport from "../helpers/passportHelpers.js";
 
 
 
@@ -27,14 +29,11 @@ const _dirname = dirname(_filename)
 export class Server {
     constructor() {
         this.app = express()
-    
-        
-
         this.middlewares();
         this.routes();
         this.conectionDB();
-    
-
+        initializePassport()
+        
     }
 
     middlewares(){
@@ -51,6 +50,8 @@ export class Server {
             resave:true,
             saveUninitialized:true
         }))
+        this.app.use(passport.initialize())
+        this.app.use(passport.session())
 
         this.app.use(express.static(path.join(_dirname,'../public')));
         //registra el motor de plantillas Handlebars con Express
@@ -65,9 +66,6 @@ export class Server {
         this.app.set(path.resolve(_dirname,'../views'));
         //ubicacion de las plantillas para el renderizado
         this.app.set('view engine','handlebars')
-
-
-
     }
     routes(){
 
@@ -77,7 +75,8 @@ export class Server {
         this.app.use('/',viewsRoutes)
 
     }
-
+    
+    
     async conectionDB(){
         await dbConnection()
 

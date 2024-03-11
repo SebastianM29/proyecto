@@ -2,8 +2,10 @@ user = zevaz
 pass = BCx8XolgC60yQZ8E
 
 
-mongodb+srv://zvz:PAHgqyJpvyUlwWvb@zvzecommerce.1ltihtw.mongodb.net/ecommerce?retryWrites=true&w=majority
-
-
 //el que va
 mongodb+srv://zevaz:BCx8XolgC60yQZ8E@pf.jtreerf.mongodb.net/proyectoFinal?retryWrites=true&w=majority&appName=pf
+client secret = ade19ef4eb71095aa27c0891df6a065ad23af461
+
+Admin
+email: adminCoder@coder.com
+password : adminCod3r123

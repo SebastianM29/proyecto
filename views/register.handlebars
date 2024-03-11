@@ -10,18 +10,18 @@
 <body>
     <div class="fondo">
 
-        <form class="formulario">
+        <form action="/api/session/register" method="post" class="formulario">
             
             <label for="first_name">nombre</label>
-            <input type="text" class="form-control" id="first_name" placeholder="ingrese su nombre">
+            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="ingrese su nombre">
             <label for="last_name">apellido</label>
-            <input type="text" class="form-control" id="last_name" placeholder="ingrese su apellido">
+            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="ingrese su apellido">
             <label for="test-correo">correo</label>
-            <input type="email" class="form-control" id="email" placeholder="ingrese su correo">
+            <input type="email" class="form-control" id="email" name="email" placeholder="ingrese su correo">
             <label for="age">edad</label>
-            <input type="text" class="form-control" id="age" placeholder="ingrese su edad">
+            <input type="text" class="form-control" id="age" name="age" placeholder="ingrese su edad">
             <label for="password">password</label>
-            <input type="password" class="form-control"  id="password" placeholder="ingrese su contraseña">
+            <input type="password" class="form-control"  id="password" name="password" placeholder="ingrese su contraseña">
             <div class="options">
             <input id="admin" type="radio" name="role" value="admin">
             <label for="admin">admin</label>

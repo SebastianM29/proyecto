@@ -38,15 +38,10 @@ export const register = async(req = request,res = response)=> {
 export const login =  async(req = request,res = response)=> {
 
     try {
-        const {email,password} = req.body
-        const resp = await User.findOne({email ,password})
-        if (!resp) {
-            
-         throw new Error ('no existe el usuario')
-        }
-        if (resp) {
+            console.log('este es el user de passport?',req.user)
+            if (req.user) {
             console.log('entro aca al res backend')
-            const {first_name,last_name,email,age,role} = resp
+            const {first_name,last_name,email,age,role} = req.user
             req.session.user = {
                 first_name,
                 last_name,
@@ -55,7 +50,7 @@ export const login =  async(req = request,res = response)=> {
                 role
             }
        
-            res.json('usuario encontrado')
+            res.redirect('/')
         }
         
     } catch (error) {
