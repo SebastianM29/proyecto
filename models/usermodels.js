@@ -1,4 +1,4 @@
-import { Schema,model } from "mongoose";
+import mongoose , { Schema,model } from "mongoose";
 
 const UserSchema = new Schema({
     first_name:{ 
@@ -29,7 +29,22 @@ const UserSchema = new Schema({
         enum:['user','admin'],
         default:'user'
 
+    },
+     carts: {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'carts'
+            
     }
+    
+
+
+    // carritoAsignado:{
+    //     id: {
+    //         type:mongoose.Schema.Types.ObjectId,
+    //         ref:'carts'
+            
+    //     },
+    // }
 
 
 }

@@ -11,6 +11,9 @@ export const getProd = async(req=request,res=response) => {
     
     let array = []
     let contador = 0
+    const {first_name,role,carts} = req.session.user
+
+    console.log('debo ver el id', carts)
     //limit page ,categoria, productos , sort
     const limits = req.query.limit || "10"
     const pages = req.query.page || "1"
@@ -25,10 +28,12 @@ export const getProd = async(req=request,res=response) => {
         ordering,
         status
     }
-     const [respDB , carts] =await Promise.all([
-           prod.getProducts(obj),
-           cart.cartAll()
-    ])
+
+    const respDB  =await prod.getProducts(obj)
+        
+    
+
+    
 
     
     respDB.prevLink = respDB.hasPrevPage ? `http://localhost:3000/?page=${respDB.prevPage}`: ''
@@ -37,14 +42,9 @@ export const getProd = async(req=request,res=response) => {
     // res.json(respDB)
     
     //respDB.IsValid = (respDB.page > 0 && respDB.page <= respDB.totalPAges) otra opcion
-    const cartsId = carts.map(element => {
-        const id =  element._id.toString()
-        contador += 1
-        
-        return{ id , contador}
-    })
+    //filtrar el id del carrito que necesito
+   
     
-    const {first_name,role} = req.session.user
     const objSession = {
         first_name,
         role
@@ -53,7 +53,7 @@ export const getProd = async(req=request,res=response) => {
 
      respDB.isValid = !(respDB.page <= 0 || respDB.page > respDB.totalPAges)
    
-    res.render('product', {respDB,cartsId,objSession} );
+    res.render('product', {respDB,carts,objSession} );
 
 }
 export const getProducts = async(req=request,res=response) => {

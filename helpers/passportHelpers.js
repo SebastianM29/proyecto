@@ -3,6 +3,9 @@ import  local  from "passport-local";
 import GithubStrategy from "passport-github2";
 import User from "../models/usermodels.js";
 import { createHash,compare } from "./hash.js";
+import { CartServiceDB } from "../models/cartsServiceBD.js";
+
+const cartDB= new CartServiceDB()
 
 
 
@@ -76,6 +79,7 @@ const localStrategy = local.Strategy
                 console.log('entrando a login')
                 try {
                     const findUser = await User.findOne({email:username})
+                   
                     if (!findUser) {
                         console.log('no existe usuario')
                         return done(null,false)
@@ -84,7 +88,21 @@ const localStrategy = local.Strategy
                         console.log('contraseña incorrecta')
                         return done(null,false)
                     }
-                    
+                    //si no tiene carrito ya lo creamos y asignamos el id 
+                    if (!findUser.carts) {
+                        console.log('no tiene carritto!!!!!!')
+                        const createCart = await CartServiceDB.addCart()
+                        findUser.carts = createCart._id
+                        await findUser.save()
+
+                        console.log(findUser)
+                    }
+                    if (findUser.carts) {
+                        const findUser = await User.findOne({email:username}).populate('carts')
+                        console.log('necesitaria ver el carrito que ya tiene',findUser)
+                     
+                        
+                    }
                    
                     
                      return done (null,findUser)
@@ -107,20 +125,32 @@ const localStrategy = local.Strategy
                 let searchEmail = profile._json.email
                 let user =await User.findOne({email: searchEmail })
                 if(!user) {
+                    
+                    const createCart = await CartServiceDB.addCart()
+                  
+                    // const carritoAsignado = {
+                    //     id: createCart._id
+                    // };
+                    const carritoAsignado = createCart._id
+                    
+
+                
+
                     const create = {
                         first_name:profile._json.name,
                         last_name: ' ',
                         email:profile._json.email,
                         age:' ',
                         password:' ',
+                        carts:carritoAsignado
                         
                     }
-                    console.log('esto no lo veo?',create)
-
+                    
+           
                     let result = await User.create(create)
                     return done(null,result)
                 }    
-                    console.log('viene a usuario existente')
+                    console.log('viene a usuario existente',user)
                     return done(null,user)
              } catch (error) {
                 

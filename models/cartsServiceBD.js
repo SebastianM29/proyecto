@@ -18,10 +18,8 @@ export class CartServiceDB {
             console.log('aca va pasando Add cart')
             const cart = await carts.create({products:[]})
            
-            return {
-                msg: 'carrito creado',
-                cart
-            }
+            return cart
+            
 
          } catch (error) {
 
@@ -48,7 +46,7 @@ export class CartServiceDB {
         try { 
         if (id) {
             const cartsValue = await carts.findById(id).populate('products.id')
-            
+            console.log(cartsValue)
             return cartsValue
         }
           

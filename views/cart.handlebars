@@ -9,17 +9,12 @@
 </head>
 <body>
     <div class="secciones">
-    {{#if cartsId}}
-    <form id="cart-form">
-      <select id="cart-select" class="form-select" name="cart">
-        <option value="" disabled selected>Seleccione un carrito</option>
-            {{#each cartsId}}
-                <option value="{{this.id}}">carrito{{this.contador}}</option>
-            {{/each}}
-      </select>
-      <button  type="submit" class="button-cart btn btn-warning" >enviar</button>
-     {{!-- <input type="submit" value="Submit"> --}}
-    </form>
+    {{#if carts}}
+         <div id="prid" data-id="{{carts}}">
+          Productos
+
+         </div>
+ 
     {{/if}}
 
     <div class="carritos">

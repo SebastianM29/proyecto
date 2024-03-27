@@ -18,9 +18,11 @@ export const getCartsAll = async(req=request,res=response) => {
 
 export const getCarts = async(req=request,res=response) => {
 try {
-    const id = req.params.cid
+    const id = req.params.cid.toString()
+    console.log('debo entrar aca ehn el getCarts id',id)
+
     const value = await cartDB.cartsById(id)
-    console.log(value)
+    console.log('debo entrar aca ehn el getCarts',value)
     res.json(
         value
     )
@@ -31,25 +33,15 @@ try {
 //render
 export const getCartById = async(req=request,res=response) => {
 try {
-    let contador = 0
-    const id = req.params.cid
     
-    const [allCarts , carts] =await Promise.all([
-          cartDB.cartAll(),
-          cartDB.cartsById(id)
-    ])
+    const {carts} = req.session.user
+    
+    console.log('este es el carrito',carts)
+    
 
-
-    const cartsId = allCarts.map(element => {
-        const id =  element._id.toString()
-        contador += 1
-        
-        return{ id , contador}
-    })
-   
 
     res.render('cart',{
-        cartsId
+        carts
     })
 } catch (error) {
     console.log(error.message)

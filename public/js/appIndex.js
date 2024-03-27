@@ -6,10 +6,11 @@ const agregarAlCarrito = async(id) => {
         
         console.log('aca se va a agregar el carrito',id)
         const cSelect = document.getElementById("carrito-select");
+        console.log('seria el dataset',cSelect.dataset.id)
         // Mostrar el valor del select en la consola
-        console.log(cSelect.value);
+     
         console.log('debo ver el id',id)
-        const resp = await fetch(`/carts/${cSelect.value}/products/${id}`,{
+        const resp = await fetch(`/carts/${cSelect.dataset.id}/products/${id}`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json' // Indica que los datos son de tipo JSON
@@ -62,48 +63,47 @@ const agregarAlCarrito = async(id) => {
     
 
 }
+const eject = async() => {
+        const id = document.getElementById('prid')
+        const valor = id.dataset.id
+        console.log('debo ver el valor',valor)
+         const resp = await fetch(`/carts/${valor}`)
+         if (resp.ok) {
+            const res =await resp.json()
+            console.log(res.products)
+            const carritos = document.querySelector('.carritos')
+            // const resCarr = res.products
+            carritos.innerHTML=''
+            res.products.forEach(element => {
+                console.log(element)
+                const div = document.createElement('div')
+                div.classList= 'viewsCart'
+                div.innerHTML= `
+                <p><strong>Categoría: </strong>${element.id.category}</p>
+                <p><strong>Titulo: </strong>${element.id.title}</p>
+                <p><strong>Descripcion: </strong>${element.id.description}</p>
+                <p><strong>Precio: </strong>${element.id.price}</p>
+                <p><strong>Codigo: </strong>${element.id.code}</p>
+                <p><strong>Stock: </strong>${element.id.stock}</p>
+                <p><strong>Cantidad: </strong>${element.quantity}</p>
+                `
+                carritos.appendChild(div)
+                
+            });
+    
+        }else{
+             const res =await resp.json()
+             console.log('error',res)
+    
+         }
 
-seeCart.addEventListener('submit', async(e)=> {
-e.preventDefault()
-//especificar un camino o ruta para encontrar un elemento dentro de la estructura del DOM
-const cart = document.querySelector('.form-select')
-console.log(cart.value)
-console.log('llegando al submit')
-try {
-     const resp = await fetch(`/carts/${cart.value}`)
-     if (resp.ok) {
-        const res =await resp.json()
-        console.log(res.products)
-        const carritos = document.querySelector('.carritos')
-        const resCarr = res.products
-        carritos.innerHTML=''
-        resCarr.forEach(element => {
-            console.log(element)
-            const div = document.createElement('div')
-            div.classList= 'viewsCart'
-            div.innerHTML= `
-            <p><strong>Categoría: </strong>${element.id.category}</p>
-            <p><strong>Titulo: </strong>${element.id.title}</p>
-            <p><strong>Descripcion: </strong>${element.id.description}</p>
-            <p><strong>Precio: </strong>${element.id.price}</p>
-            <p><strong>Codigo: </strong>${element.id.code}</p>
-            <p><strong>Stock: </strong>${element.id.stock}</p>
-            <p><strong>Cantidad: </strong>${element.quantity}</p>
-            `
-            carritos.appendChild(div)
-            
-        });
 
-    }else{
-         const res =await resp.json()
-         console.log('error',res)
 
      }
+
+eject()
     
- } catch (error) {
-    
- }
-})
+
 
 
 

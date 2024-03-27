@@ -35,19 +35,24 @@ export const register = async(req = request,res = response)=> {
    
 }
 
+
+
 export const login =  async(req = request,res = response)=> {
 
     try {
             console.log('este es el user de passport?',req.user)
             if (req.user) {
             console.log('entro aca al res backend')
-            const {first_name,last_name,email,age,role} = req.user
+            const {first_name,last_name,email,age,role,carts} = req.user
+            const idCart = carts
+            console.log('este seria el carrito asignado que quilombo tengo',idCart)
             req.session.user = {
                 first_name,
                 last_name,
                 email,
                 age,
-                role
+                role,
+                carts:idCart
             }
        
             res.redirect('/')

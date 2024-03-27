@@ -44,16 +44,17 @@
        
        
        <div class="a2">
-        <select id="carrito-select" class="form-select">
-         <option value=""disabled selected>Seleccione un carrito</option>
-         {{#if cartsId}}
-          {{#each cartsId}}
-           <option value={{this.id}}><p>carrito{{this.contador}}</p></option>
-          {{/each}}
+       
+        
+         {{#if carts}}
+           <div id="carrito-select" data-id="{{carts}}">
+           <div  >Mi carrito</div>
+           </div>
+           {{!-- <option value={{this.id}}><p>carrito{{this.contador}}</p></option> --}}
+         
          {{/if }}
 
-        </select>
-
+       
         
 
 
