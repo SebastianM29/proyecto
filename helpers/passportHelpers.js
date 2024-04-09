@@ -4,6 +4,7 @@ import GithubStrategy from "passport-github2";
 import User from "../dao/models/usermodels.js";
 import { createHash,compare } from "./hash.js";
 import { CartServiceDB } from "../dao/cartsServiceBD.js";
+import config from "../config/config.js"
 
 const cartDB= new CartServiceDB()
 
@@ -24,7 +25,7 @@ const localStrategy = local.Strategy
                    
                    if (role === 'admin'  ) {
 
-                    if ( email === 'adminCoder@coder.com' && password === 'adminCod3r123' ) {
+                    if ( email === config.adminEmail && password === config.passAdmin ) {
                         const datos = {
                             first_name,
                             last_name,
@@ -42,7 +43,7 @@ const localStrategy = local.Strategy
                     }
                     }
                 if (role=== 'user') {
-                    if ( email === 'adminCoder@coder.com' || password === 'adminCod3r123' ){
+                    if ( email === config.adminEmail || password === config.passAdmin ){
 
                         console.log('mail/pass no autorizadas')
                         return done(null,false)
