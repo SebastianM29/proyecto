@@ -1,9 +1,9 @@
 import passport from "passport";
 import  local  from "passport-local";
 import GithubStrategy from "passport-github2";
-import User from "../models/usermodels.js";
+import User from "../dao/models/usermodels.js";
 import { createHash,compare } from "./hash.js";
-import { CartServiceDB } from "../models/cartsServiceBD.js";
+import { CartServiceDB } from "../dao/cartsServiceBD.js";
 
 const cartDB= new CartServiceDB()
 

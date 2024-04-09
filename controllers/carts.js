@@ -1,11 +1,12 @@
 import { request,response } from "express";
-import { CartServiceDB } from "../models/cartsServiceBD.js";
+import { CartServiceDB } from "../dao/cartsServiceBD.js";
+import { addProductToTheCart, createTheCart, deleteIdThisCart, deleteProductsOfTheCart, getAllTheCarts, getTheCartById, putAllOfTheCart, putQuantityIdInCart } from "../services/cartServices.js";
 const cartDB = new CartServiceDB()
 
 export const getCartsAll = async(req=request,res=response) => {
     try {
-        const id = req.params.cid
-        const value = await cartDB.cartAll()
+        // const id = req.params.cid
+        const value = await getAllTheCarts()
         res.json({
             value
         })
@@ -21,7 +22,7 @@ try {
     const id = req.params.cid.toString()
     console.log('debo entrar aca ehn el getCarts id',id)
 
-    const value = await cartDB.cartsById(id)
+    const value = await getTheCartById(id)
     console.log('debo entrar aca ehn el getCarts',value)
     res.json(
         value
@@ -51,8 +52,8 @@ try {
 
 export const postCarts = async(req=request,res=response) => {
     try {
-        
-            const value =  await CartServiceDB.addCart()
+          
+            const value =  await createTheCart()
             res.json(value)
    
         
@@ -68,7 +69,8 @@ export const addPostCarts = async(req=request,res=response) => {
     try {
         const cid = req.params.cid
         const pid = req.params.pid
-        const resp = await cartDB.addProductCart(cid,pid)
+        
+        const resp = await addProductToTheCart(cid,pid)
      
        
         
@@ -90,7 +92,7 @@ export const deleteOfCarts = async(req=request,res=response) => {
     try {
         const cid = req.params.cid
         const pid = req.params.pid
-        const resp = await cartDB.deleteProducts(cid,pid)
+        const resp = await deleteProductsOfTheCart(cid,pid)
         
         res.json(resp)
         
@@ -106,7 +108,7 @@ export const putAllCarts = async(req=request,res=response) => {
     try {
         const cid = req.params.cid
         const array = req.body
-        const resp = await cartDB.putAll(cid,array)
+        const resp = await putAllOfTheCart(cid,array)
 
         res.json(resp)
         
@@ -123,7 +125,7 @@ export const putQuantityCarts = async(req=request,res=response) => {
         const pid = req.params.pid
         const quantity = req.body
 
-        const resp = await cartDB.putQuantity(cid,pid,quantity)
+        const resp = await putQuantityIdInCart(cid,pid,quantity)
 
         res.json(resp)
         
@@ -140,7 +142,7 @@ export const deleteCarts = async(req=request,res=response) => {
         const cid = req.params.cid
       
 
-        const resp = await cartDB.delCarts(cid)
+        const resp = await deleteIdThisCart(cid)
 
         res.json(resp)
         

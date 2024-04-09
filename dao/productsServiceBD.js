@@ -1,5 +1,5 @@
 
-import  products  from "./productsModels.js";
+import  products  from "./models/productsModels.js";
 
 
 

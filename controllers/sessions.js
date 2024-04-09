@@ -1,6 +1,6 @@
 
 import { request,response } from "express";
-import User from "../models/usermodels.js";
+import User from "../dao/models/usermodels.js";
 
 export const register = async(req = request,res = response)=> {
     try {

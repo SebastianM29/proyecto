@@ -1,5 +1,5 @@
-import  products  from "./productsModels.js";
-import carts from "./cartsModels.js";
+import  products  from "./models/productsModels.js";
+import carts from "./models/cartsModels.js";
 
 
 export class CartServiceDB {
@@ -67,7 +67,7 @@ export class CartServiceDB {
                  carts.findById(cartId),
                  products.findById(productId),
             ])
-            
+            console.log(`car: ${car} , products: ${prod}`)
             if (prod.stock === 0) {
        
                const resp = prod._id.toString()

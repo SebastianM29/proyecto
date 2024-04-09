@@ -1,10 +1,11 @@
 import { request,response } from "express";
-import { ProductServiceDB } from "../models/productsServiceBD.js";
-import  products  from "../models/productsModels.js";
-import { CartServiceDB } from "../models/cartsServiceBD.js";
+import { ProductServiceDB } from "../dao/productsServiceBD.js";
+import  products  from "../dao/models/productsModels.js";
+import { CartServiceDB } from "../dao/cartsServiceBD.js";
+import { deleteTheProduct, getAllProducts, getProductById, postCreateTheProduct, putProductsById } from "../services/productServices.js";
 
 
-const prod = new ProductServiceDB()
+// const prod = new ProductServiceDB()
 const cart = new CartServiceDB()
 
 export const getProd = async(req=request,res=response) => {
@@ -15,7 +16,7 @@ export const getProd = async(req=request,res=response) => {
 
     console.log('debo ver el id', carts)
     //limit page ,categoria, productos , sort
-    const limits = req.query.limit || "10"
+    const limits = req.query.limit || "9"
     const pages = req.query.page || "1"
     const categoria = req.query.category
     const ordering = req.query.ordering || {}
@@ -29,7 +30,7 @@ export const getProd = async(req=request,res=response) => {
         status
     }
 
-    const respDB  =await prod.getProducts(obj)
+    const respDB  =await getAllProducts(obj)
         
     
 
@@ -56,6 +57,8 @@ export const getProd = async(req=request,res=response) => {
     res.render('product', {respDB,carts,objSession} );
 
 }
+
+
 export const getProducts = async(req=request,res=response) => {
     
 
@@ -74,7 +77,7 @@ export const getProducts = async(req=request,res=response) => {
         status
     }
 
-     let respDB =await  prod.getProducts(obj)
+     let respDB =await  getAllProducts(obj)
 
     res.json(respDB)
     
@@ -85,7 +88,7 @@ export const getProducts = async(req=request,res=response) => {
 export const getProductsPorId = async(req=request,res=response) => {
    try {
        const id = req.params.id
-       const resp = await prod.getProductById(id)
+       const resp = await getProductById(id)
        
        res.json({
            msg: 'producto entcontrado',
@@ -101,7 +104,7 @@ export const postProducts = async(req=request,res=response) => {
     try {
         
         const resp = req.body
-        const producto = await prod.addProduct(resp)
+        const producto = await postCreateTheProduct(resp)
       
         
         
@@ -125,7 +128,7 @@ export const deleteProducts = async(req=request,res=response) => {
     
        const id = req.params.id 
        
-       const resp = await prod.deleteProducts(id)
+       const resp = await deleteTheProduct(id)
         
         res.json({
           msg:'producto eliminado',
@@ -146,7 +149,7 @@ export const putProducts = async(req=request,res=response) => {
     
        const id = req.params.id 
        const valueUpd = req.body
-       const resp = await prod.updateProducts(id,valueUpd)
+       const resp = await putProductsById(id,valueUpd)
         
         res.json({
           msg:'producto actualizado',
