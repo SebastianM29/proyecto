@@ -1,5 +1,10 @@
-import { CartServiceDB } from "../dao/cartsServiceBD.js";
+// import  CartServiceDB  from "../dao/cartsServiceBD.js";
 
+import  {CartServiceDB}  from "../dao/factory.js"
+
+
+
+console.log('hola',CartServiceDB)
 const cartDB = new CartServiceDB()
 
 export const getAllcarts = async() => {

@@ -1,4 +1,4 @@
-import { Server } from "./dao/models/server.js";
+import { Server } from "./dao/server.js";
 
 
 

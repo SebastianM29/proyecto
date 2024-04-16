@@ -1,7 +1,7 @@
 import { request,response } from "express";
-import { ProductServiceDB } from "../dao/productsServiceBD.js";
-import  products  from "../dao/models/productsModels.js";
-import { CartServiceDB } from "../dao/cartsServiceBD.js";
+import  ProductServiceDB  from "../dao/mongo/productsServiceBD.js";
+import  products  from "../dao/mongo/models/productsModels.js";
+import  CartServiceDB  from "../dao/mongo/cartsServiceBD.js";
 import { deleteTheProduct, getAllProducts, getProductById, postCreateTheProduct, putProductsById } from "../services/productServices.js";
 
 

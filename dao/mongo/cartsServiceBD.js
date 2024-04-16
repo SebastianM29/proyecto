@@ -2,7 +2,7 @@ import  products  from "./models/productsModels.js";
 import carts from "./models/cartsModels.js";
 
 
-export class CartServiceDB {
+export default class CartServiceDB {
     constructor() {
 
 

@@ -1,5 +1,7 @@
-import { ProductServiceDB } from "../dao/productsServiceBD.js"
+// import  ProductServiceDB  from "../dao/productsServiceBD.js"
+import {ProductServiceDB} from "../dao/factory.js";
 
+console.log('hola productService', ProductServiceDB)
 const prod = new ProductServiceDB()
 
 

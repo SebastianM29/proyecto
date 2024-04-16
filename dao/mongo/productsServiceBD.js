@@ -3,7 +3,7 @@ import  products  from "./models/productsModels.js";
 
 
 
-export class ProductServiceDB {
+export default class ProductServiceDB {
    constructor(){
         
        

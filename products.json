@@ -1,0 +1,54 @@
+[
+   {
+      "id": 1,
+      "title": "alacena",
+      "description": "alacena madera de pino",
+      "code": 70,
+      "price": 30000,
+      "status": true,
+      "stock": 57,
+      "category": "muebleria",
+      "thumbnail": [
+         "/ubicacion/misteriosa7.image.jpg"
+      ]
+   },
+   {
+      "id": 2,
+      "title": "alacenita",
+      "description": " alacena de madera de pinotea",
+      "code": 13,
+      "price": 30000,
+      "status": true,
+      "stock": 57,
+      "category": "muebleria",
+      "thumbnail": [
+         "/ubicacion/misteriosa7.image.jpg"
+      ]
+   },
+   {
+      "id": 3,
+      "title": "alacena",
+      "description": "alacena madera de laurel",
+      "code": 43,
+      "price": 30000,
+      "status": true,
+      "stock": 57,
+      "category": "muebleria",
+      "thumbnail": [
+         "/ubicacion/misteriosa7.image.jpg"
+      ]
+   },
+   {
+      "id": 4,
+      "title": "alacena",
+      "description": "alacena madera de grapia",
+      "code": 33,
+      "price": 30000,
+      "status": true,
+      "stock": 57,
+      "category": "muebleria",
+      "thumbnail": [
+         "/ubicacion/misteriosa7.image.jpg"
+      ]
+   }
+]

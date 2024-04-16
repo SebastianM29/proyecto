@@ -1,20 +1,22 @@
 import fs  from 'fs'
 
 
-export class ProductServiceDB {
-   constructor(path){
+export default class ProductServiceDB {
+   constructor(){
         this.products = []
-        this.path=path
+        
       
     }
+
+    static path = 'products'
      
-    async getProducts(limit){
+    async getProducts({limits}){
         try {
-            await fs.promises.access(`${this.path}.json`, fs.constants.F_OK)
-            const data =  JSON.parse(fs.readFileSync(`${this.path}.json`,'utf-8'))
-            if (limit) {
-                console.log('viendo el limit')
-                const limitResp = data.slice(0,limit)
+            await fs.promises.access(`${ProductServiceDB.path}.json`, fs.constants.F_OK)
+            const data =  JSON.parse(fs.readFileSync(`${ProductServiceDB.path}.json`,'utf-8'))
+            if (limits) {
+                console.log('viendo el limit',limits)
+                const limitResp = data.slice(0,limits)
                 return limitResp
             }
             console.log('por fuera')
@@ -31,9 +33,9 @@ export class ProductServiceDB {
             let dataParse
 
                 try {
-                await fs.promises.access(`${this.path}.json`)
+                await fs.promises.access(`${ProductServiceDB.path}.json`)
                 console.log('hay dato')
-                const data = await fs.promises.readFile(`${this.path}.json`,'utf-8')
+                const data = await fs.promises.readFile(`${ProductServiceDB.path}.json`,'utf-8')
                 dataParse = JSON.parse(data)
                 console.log(data)
                 } catch (error) {
@@ -80,7 +82,7 @@ export class ProductServiceDB {
                    
                 dataParse.push(newProduct)
                 const productsArrayStrings = JSON.stringify(dataParse,null,2)
-                await  fs.promises.writeFile(`${this.path}.json`,productsArrayStrings)
+                await  fs.promises.writeFile(`${ProductServiceDB.path}.json`,productsArrayStrings)
                 return {
                     msg:'Agregado exitosamente',
                     obj: newProduct  
@@ -95,19 +97,21 @@ export class ProductServiceDB {
             try {
                 
                
-                const data = await fs.promises.readFile(`${this.path}.json`,'utf-8')
+                const data = await fs.promises.readFile(`${ProductServiceDB.path}.json`,'utf-8')
                 let dataParse = JSON.parse(data)
-               
+             
+                const idParse = JSON.parse(id)
+                console.log('esto se ve fuera de for of',JSON.parse(id))
 
                 for (const iterator of dataParse) {
-                    if (iterator.id === id) {
-                        
-                        const find = dataParse.find((value)  => value.id === id)
-                        const deleteSuccess = dataParse.filter(value => value.id !== id)
+                    
+                    if (iterator.id === idParse) {
+                        const find = dataParse.find((value)  => value.id === idParse)
+                        const deleteSuccess = dataParse.filter(value => value.id !== idParse)
                        
                         dataParse = deleteSuccess
                         const productsArrayStrings = JSON.stringify(dataParse,null,2)
-                        await fs.promises.writeFile(`${this.path}.json`,productsArrayStrings)
+                        await fs.promises.writeFile(`${ProductServiceDB.path}.json`,productsArrayStrings)
             
                         return {msg:'producto borrado',
                                 producto: find
@@ -125,12 +129,23 @@ export class ProductServiceDB {
         async getProductById(id) {
         try {
             
-            const data =await fs.promises.readFile(`${this.path}.json`,'utf-8')
+            const data =await fs.promises.readFile(`${ProductServiceDB.path}.json`,'utf-8')
             const dataParse = JSON.parse(data)
-            const findId = dataParse.find((element) => element.id === id)
+            
+            for (const iterator of dataParse) {
+                console.log('entra al for?',iterator.id)
+                if (iterator.id === JSON.parse(id)) {
+                    const findId = dataParse.find((element) => element.id === iterator.id)
+                    console.log(findId)
+                    return findId
+                }
+                
+            }
+             return 'no existente'
           
-            return  findId ? findId 
-             : `id numero:${id}, no existente`
+          
+            // return  findId ? findId 
+            //  : `id numero:${id}, no existente`
         } catch (error) {
             throw error
         }
@@ -139,16 +154,17 @@ export class ProductServiceDB {
     
 
       async updateProducts(id,update){
+
         try {
             
             let oldValue
             let fields =[]
-            const data =await fs.promises.readFile(`${this.path}.json`,'utf-8')
+            const data =await fs.promises.readFile(`${ProductServiceDB.path}.json`,'utf-8')
             const dataParse = JSON.parse(data)
             
-            const findUpdate = dataParse.find((element) => element.id === id)
+            const findUpdate = dataParse.find((element) => element.id === JSON.parse(id))
           
-        
+            console.log('algo en update?', findUpdate,id)
             if (!findUpdate) {
                 return 'no se encontro ningun id'
             }
@@ -163,7 +179,7 @@ export class ProductServiceDB {
                 return {msg:'El codigo no puede ser alterado'}
             }
             dataParse.map((element)=>{
-                if (element.id === id) {
+                if (element.id === JSON.parse(id)) {
                     for (const key in update) {
                        if (!findUpdate[key]) {
                             console.log('verificANDO')
@@ -187,7 +203,7 @@ export class ProductServiceDB {
            
             
             const  newUpdateString = JSON.stringify(dataParse,null,3)
-            await fs.promises.writeFile(`${this.path}.json`,newUpdateString)
+            await fs.promises.writeFile(`${ProductServiceDB.path}.json`,newUpdateString)
             
             return {
                 producto:oldValue,

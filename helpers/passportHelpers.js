@@ -1,9 +1,9 @@
 import passport from "passport";
 import  local  from "passport-local";
 import GithubStrategy from "passport-github2";
-import User from "../dao/models/usermodels.js";
+import User from "../dao/mongo/models/usermodels.js";
 import { createHash,compare } from "./hash.js";
-import { CartServiceDB } from "../dao/cartsServiceBD.js";
+import  CartServiceDB  from "../dao/mongo/cartsServiceBD.js";
 import config from "../config/config.js"
 
 const cartDB= new CartServiceDB()
@@ -118,11 +118,12 @@ const localStrategy = local.Strategy
         passport.use('github', new GithubStrategy({
             clientID: 'Iv1.fe8dbf335678a69a',
             clientSecret:'ade19ef4eb71095aa27c0891df6a065ad23af461',
-            callbackURL:'http://localhost:3000/api/session/githubcallback'
+            callbackURL:config.callbackUrl
             },async(accesToken,refreshToken,profile,done)=>{
              try {
                 console.log('no entra ni a palo,perfil completo',profile._json.email)
                 console.log('no entra ni a palo',profile._json)
+                console.log('viendo el clientId', config.clientSecret)
                 let searchEmail = profile._json.email
                 let user =await User.findOne({email: searchEmail })
                 if(!user) {

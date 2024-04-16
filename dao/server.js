@@ -7,18 +7,26 @@ import  cors  from "cors";
 
 
 
-import  cartsRoutes  from "../../routes/carts.routes.js";
-import  productsRoutes  from "../../routes/products.routes.js";
-import  sessionRoutes  from "../../routes/session.routes.js";
-import viewsRoutes from    "../../routes/views.routes.js";
+import  cartsRoutes  from "../routes/carts.routes.js";
+import  productsRoutes  from "../routes/products.routes.js";
+import  sessionRoutes  from "../routes/session.routes.js";
+import viewsRoutes from    "../routes/views.routes.js";
 
-import { dbConnection } from "../../db/config.js";
+import { dbConnection } from "../db/config.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import  passport  from "passport";
-import initializePassport from "../../helpers/passportHelpers.js";
+import initializePassport from "../helpers/passportHelpers.js";
+/**agregado */
+import  messagesRoutes  from "../routes/messages.routes.js";
 
-import config from "../../config/config.js"
+import * as http from "http";
+import { Server as SocketIoServer } from "socket.io";
+/**agregado */
+
+import config from "../config/config.js"
+import { databaseFactory } from "./factory.js";
+import { socketController } from "../sockets/socketControllers.js";
 
 
 
@@ -31,11 +39,21 @@ const _dirname = dirname(_filename)
 export class Server {
     constructor() {
         this.app = express()
+        /**cambiado */
+        //creo servidor http para socket
+        this.httpServer= http.createServer(this.app);
+        //info clientes conectados
+        this.io = new SocketIoServer(this.httpServer);
+        /**cambiado */
+
+
         this.middlewares();
         this.routes();
         this.conectionDB();
         initializePassport()
-        
+        /**agregado */
+        this.sockets()
+        /**agregado */
     }
 
     middlewares(){
@@ -55,7 +73,7 @@ export class Server {
         this.app.use(passport.initialize())
         this.app.use(passport.session())
 
-        this.app.use(express.static(path.join(_dirname,'../../public')));
+        this.app.use(express.static(path.join(_dirname,'../public')));
         //registra el motor de plantillas Handlebars con Express
         this.app.engine('handlebars', handlebars.engine({
             helpers: {
@@ -66,7 +84,7 @@ export class Server {
         }));
         //ubicacion de las plantillas para el renderizado
         // this.app.set( path.resolve(_dirname , '../../views'));
-        this.app.set('views', path.resolve(_dirname, '../../views'));
+        this.app.set('views', path.resolve(_dirname, '../views'));
 
         //ubicacion de las plantillas para el renderizado
         this.app.set('view engine','handlebars')
@@ -75,19 +93,28 @@ export class Server {
 
         this.app.use('/',cartsRoutes);
         this.app.use('/',productsRoutes);
+        this.app.use('/',messagesRoutes);
         this.app.use('/api/session/',sessionRoutes);
         this.app.use('/',viewsRoutes)
 
     }
-    
+
+    sockets(){
+        this.io.on('connection',(socket)=>{
+            socketController(socket,this.io)
+        })
+    }
+
     
     async conectionDB(){
-        await dbConnection()
+        // await dbConnection()
+        await databaseFactory()
 
     }
+    
     listen(){
             //para corroborar el funcionamiento ejecutar en tu local "socket.io/socket.io.js"
-            this.app.listen(config.port,()=>{
+            this.httpServer.listen(config.port,()=>{
             console.log(`conectado al localhost ${config.port} , ProyectoFinal`)
         })
 
