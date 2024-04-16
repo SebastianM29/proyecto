@@ -2,8 +2,7 @@ import { Router} from "express";
 const router = Router()
 import { login, logout, register } from "../controllers/sessions.js";
 import passport from "passport";
-
-
+import UserDTO from "../dao/DTOs/user.dto.js";
 
 
 
@@ -18,15 +17,16 @@ router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'ht
     const cart = carts ? carts.toString() : null; // Obtén el ID del carrito como cadena de texto si existe
 
     // Asigna los datos desestructurados a req.session.user
-    req.session.user = {
+   
+    const info = new UserDTO({ 
         first_name,
         last_name,
         email,
         age,
-        password,
-        carts: cart // Asigna el ID del carrito como cadena de texto
-    };
-    console.log('nercesito verlooooo',req.session.user)
+        carts: cart })
+
+    req.session.user = info;
+    // console.log('nercesito verlooooo',req.session.user)
     res.redirect('/')
 })
 router.post('/login',passport.authenticate('login',{

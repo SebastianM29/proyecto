@@ -1,6 +1,7 @@
 
 import { request,response } from "express";
 import User from "../dao/mongo/models/usermodels.js";
+import UserDTO from "../dao/DTOs/user.dto.js";
 
 export const register = async(req = request,res = response)=> {
     try {
@@ -46,7 +47,9 @@ export const login =  async(req = request,res = response)=> {
             const {first_name,last_name,email,age,role,carts} = req.user
             const idCart = carts
             console.log('este seria el carrito asignado que quilombo tengo',idCart)
-            req.session.user = {
+            /** agregar dtos */
+
+            const info = new UserDTO({
                 first_name,
                 last_name,
                 email,
@@ -54,6 +57,9 @@ export const login =  async(req = request,res = response)=> {
                 role,
                 carts:idCart
             }
+       )
+
+            req.session.user = info
        
             res.redirect('/')
         }
