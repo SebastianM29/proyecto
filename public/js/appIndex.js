@@ -1,5 +1,6 @@
 
 const seeCart = document.getElementById('cart-form')
+const addProduct = document.getElementById('addProduct')
 
 const agregarAlCarrito = async(id) => {
     try {
@@ -63,6 +64,25 @@ const agregarAlCarrito = async(id) => {
     
 
 }
+addProduct.addEventListener('submit',(e)=>{
+    e.preventDefault()
+    const categoria = document.getElementById('categoria').value
+    const titulo = document.getElementById('titulo').value
+    const descripcion = document.getElementById('descripcion').value
+    const precio = document.getElementById('precio').value
+    const codigo = document.getElementById('codigo').value
+    const stock = document.getElementById('stock').value
+    const formData = {
+        categoria,
+        titulo,
+        descripcion,
+        precio,
+        codigo,
+        stock,
+    }
+    console.log(formData)
+
+})
 const eject = async() => {
         const id = document.getElementById('prid')
         const valor = id.dataset.id

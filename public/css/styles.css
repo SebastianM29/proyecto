@@ -40,6 +40,9 @@ h3{
     
     
 }
+#addProduct{
+    width: 250px;
+}
 
 .a1{
 display: flex;
