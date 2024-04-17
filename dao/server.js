@@ -64,7 +64,7 @@ export class Server {
         this.app.use(session({
             store:MongoStore.create({
                 mongoUrl: config.mongourlsession,
-                ttl:30
+                ttl:400
             }),
             secret: config.sessionKey,
             resave:true,

@@ -51,8 +51,10 @@ export const getProd = async(req=request,res=response) => {
         role
     }
 
-
-     respDB.isValid = !(respDB.page <= 0 || respDB.page > respDB.totalPAges)
+    respDB.role = role
+    respDB.isValid = !(respDB.page <= 0 || respDB.page > respDB.totalPAges)
+    console.log('debo ver respdb',respDB.role)
+     
    
     res.render('product', {respDB,carts,objSession} );
 

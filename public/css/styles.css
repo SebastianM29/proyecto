@@ -34,9 +34,10 @@ h3{
     
     margin-top: 50px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     /* background-color: aqua; */
-    width: 90%;
+    width: 80%;
+    
     
 }
 

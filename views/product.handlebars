@@ -46,8 +46,18 @@
        
        
        <div class="a2">
-       
-        
+          {{#if (eq respDB.role 'admin')}}
+          <form>
+          <h4>Agregar producto</h4>
+          <input class="form-control rounded-0 mb-1" type="text" id="message" placeholder="escriba su mensaje">
+          <input class="form-control rounded-0 mb-1" type="text" id="message" placeholder="escriba su mensaje">
+          <input class="form-control rounded-0 mb-1" type="text" id="message" placeholder="escriba su mensaje">
+          <input class="form-control rounded-0 mb-1" type="text" id="message" placeholder="escriba su mensaje">
+          <input class="form-control rounded-0 mb-1" type="text" id="message" placeholder="escriba su mensaje">
+          <input class="form-control rounded-0 mb-1" type="text" id="message" placeholder="escriba su mensaje">
+          <button  type="submit" class="btn btn-warning mt-2 rounded-0">enviar</button>
+          </form>
+          {{/if }}
          {{#if carts}}
            <div id="carrito-select" data-id="{{carts}}">
            <div  >Mi carrito</div>
@@ -56,6 +66,7 @@
          
          {{/if }}
 
+        
        
         
 
@@ -75,7 +86,11 @@
           <p class="items" id="1{{this._id}}"><strong>Stock: </strong>{{this.stock}}</p>
           </div>
           <div>
-           <button id={{this._id}} class="btn btn-warning mb-5" onclick="agregarAlCarrito(this.id)">agregar al carrito</button>
+           <button id={{this._id}} class="btn btn-warning mb-2" onclick="agregarAlCarrito(this.id)">agregar al carrito</button>
+           {{#if (eq ../respDB.role 'admin')}}
+            <button id="" class="btn btn-success mb-2" onclick="">eliminar</button>
+            <button id="" class="btn btn-success mb-2" onclick="">actualizar</button>
+           {{/if}}
           </div>
           </div>
           {{/each}}
