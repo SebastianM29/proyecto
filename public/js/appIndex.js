@@ -64,23 +64,46 @@ const agregarAlCarrito = async(id) => {
     
 
 }
-addProduct.addEventListener('submit',(e)=>{
-    e.preventDefault()
-    const categoria = document.getElementById('categoria').value
-    const titulo = document.getElementById('titulo').value
-    const descripcion = document.getElementById('descripcion').value
-    const precio = document.getElementById('precio').value
-    const codigo = document.getElementById('codigo').value
-    const stock = document.getElementById('stock').value
-    const formData = {
-        categoria,
-        titulo,
-        descripcion,
-        precio,
-        codigo,
-        stock,
+addProduct.addEventListener('submit',async(e)=>{
+   
+    try {
+        const categoria = document.getElementById('categoria').value
+        const titulo = document.getElementById('titulo').value
+        const descripcion = document.getElementById('descripcion').value
+        const precio = document.getElementById('precio').value
+        const codigo = document.getElementById('codigo').value
+        const stock = document.getElementById('stock').value
+        const formData = {
+            category : categoria,
+            title: titulo,
+            description: descripcion,
+            price: precio,
+            code: codigo,
+            stock: stock,
+        }
+        console.log(formData)
+        const resp = await fetch('/products',{
+            method: 'POST',
+            headers:{
+                'content-Type' : 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+       
+        if (resp.ok) {
+            const datos = await resp.json()  
+            console.log('acaaaaa',datos)
+      
+        }
+        if(!resp.ok){
+            console.log('algo paso');
+        }
+        
+    } catch (error) {
+
+        console.log( 'msg!!!!!',error)
+        
     }
-    console.log(formData)
 
 })
 const eject = async() => {
