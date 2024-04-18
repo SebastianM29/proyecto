@@ -46,7 +46,7 @@ export default class CartServiceDB {
         try { 
         if (id) {
             const cartsValue = await carts.findById(id).populate('products.id')
-            console.log(cartsValue)
+            console.log('populate',cartsValue)
             return cartsValue
         }
           

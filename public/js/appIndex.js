@@ -1,6 +1,8 @@
 
 const seeCart = document.getElementById('cart-form')
 const addProduct = document.getElementById('addProduct')
+const actProducts = document.getElementById('actProductForm')
+
 
 const agregarAlCarrito = async(id) => {
     try {
@@ -64,7 +66,41 @@ const agregarAlCarrito = async(id) => {
     
 
 }
+/**eliminar producto siendo admin */
+const eliminarProd = async(id) => {
+
+    try {
+        
+        console.log('este seria el id', id)
+        const resp = await fetch(`/products/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json' // Indica que los datos son de tipo JSON
+            },
+    
+        })
+        if (resp.ok) {
+            const datos= await resp.json()
+            console.log('borrado',datos)
+            const deleteProd = document.getElementById(`producto-${id}`)
+            deleteProd.remove()
+            
+        }
+        if (!resp.ok) {
+            console.log('borrado')
+            
+        }
+    } catch (error) {
+        
+    }
+
+    
+
+}
+
+/** agregar producto siendo admin */
 addProduct.addEventListener('submit',async(e)=>{
+    // e.preventDefault()
    
     try {
         const categoria = document.getElementById('categoria').value
@@ -92,7 +128,7 @@ addProduct.addEventListener('submit',async(e)=>{
        
         if (resp.ok) {
             const datos = await resp.json()  
-            console.log('acaaaaa',datos)
+            console.log('datos obtenidos',datos)
       
         }
         if(!resp.ok){
@@ -106,47 +142,80 @@ addProduct.addEventListener('submit',async(e)=>{
     }
 
 })
-const eject = async() => {
-        const id = document.getElementById('prid')
-        const valor = id.dataset.id
-        console.log('debo ver el valor',valor)
-         const resp = await fetch(`/carts/${valor}`)
-         if (resp.ok) {
-            const res =await resp.json()
-            console.log(res.products)
-            const carritos = document.querySelector('.carritos')
-            // const resCarr = res.products
-            carritos.innerHTML=''
-            res.products.forEach(element => {
-                console.log(element)
-                const div = document.createElement('div')
-                div.classList= 'viewsCart'
-                div.innerHTML= `
-                <p><strong>Categoría: </strong>${element.id.category}</p>
-                <p><strong>Titulo: </strong>${element.id.title}</p>
-                <p><strong>Descripcion: </strong>${element.id.description}</p>
-                <p><strong>Precio: </strong>${element.id.price}</p>
-                <p><strong>Codigo: </strong>${element.id.code}</p>
-                <p><strong>Stock: </strong>${element.id.stock}</p>
-                <p><strong>Cantidad: </strong>${element.quantity}</p>
-                `
-                carritos.appendChild(div)
-                
-            });
+/** Actualizar */
+const actualizar  = async( id ) => {
+
+
+ try {
+    const resp = await fetch(`/products/${id}`)
+    if (resp.ok) {
+    const datos = await resp.json()
+
+    console.log('seria el id',id)
+    console.log('seria el id',datos.productos._id)
+    const categoria = document.getElementById('categoriaAct')
+    const titulo = document.getElementById('tituloAct')
+    const descripcion = document.getElementById('descripcionAct')
+    const precio = document.getElementById('precioAct')
+    const stock = document.getElementById('stockAct')
     
-        }else{
-             const res =await resp.json()
-             console.log('error',res)
+    categoria.value = datos.productos.category
+    titulo.value = datos.productos.title
+    descripcion.value = datos.productos.description
+    precio.value = datos.productos.price
+    stock.value = datos.productos.stock
     
-         }
+    actProducts.setAttribute('data-id', id)
+ 
 
 
 
-     }
 
-eject()
+}
+} catch (error) {
     
+}
+}
 
 
+    actProducts.addEventListener('submit', async(e) => {
+    e.preventDefault()
+    const idCapture = actProducts.getAttribute('data-id')
+    console.log('estoy tocando ese boton',idCapture);
+    const categoria = document.getElementById('categoriaAct').value
+    const titulo = document.getElementById('tituloAct').value
+    const descripcion = document.getElementById('descripcionAct').value
+    const precio = document.getElementById('precioAct').value
+    const stock = document.getElementById('stockAct').value
+    const formData = {
+        category : categoria,
+        title: titulo,
+        description: descripcion,
+        price: precio,
+        stock: stock,
+    }
+    console.log(formData)
+    
+    const resp = await fetch(`/products/${idCapture}`,{
+        method: 'PUT',
+        headers:{
+            'content-Type' : 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+   
+    if (resp.ok) {
+        const datos = await resp.json()  
+        console.log('datos obtenidos',datos)
+  
+    }
+    if(!resp.ok){
+        const datos = await resp.json() 
+        console.log('algo paso en add actualizar' , datos);
+    }
 
+   
+   
+    
+})
 

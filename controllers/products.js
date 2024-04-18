@@ -151,6 +151,7 @@ export const putProducts = async(req=request,res=response) => {
     
        const id = req.params.id 
        const valueUpd = req.body
+      
        const resp = await putProductsById(id,valueUpd)
         
         res.json({

@@ -55,14 +55,26 @@
           <input class="form-control rounded-0 mb-1" type="text" id="precio" name="precio" placeholder="Precio" autocomplete="off">
           <input class="form-control rounded-0 mb-1" type="text" id="codigo" name="codigo" placeholder="Codigo" autocomplete="off">
           <input class="form-control rounded-0 mb-1" type="text" id="stock" name="stock" placeholder="Stock" autocomplete="off">
-          <button  type="submit" class="form-control btn btn-warning mt-2 rounded-0">Agregar</button>
+          <button  type="submit" id="agregar" class="form-control btn btn-warning mt-2 rounded-0">Agregar</button>
           </form>
+          <form id="actProductForm">
+          <h4>Actualizar producto</h4>
+          <input class="form-control rounded-0 mb-1" type="text" id="categoriaAct" name="categoria" placeholder="Categoria" autocomplete="off">
+          <input class="form-control rounded-0 mb-1" type="text" id="tituloAct" name="titulo" placeholder="Titulo" autocomplete="off">
+          <input class="form-control rounded-0 mb-1" type="text" id="descripcionAct" name="descripcion" placeholder="Descripcion" autocomplete="off">
+          <input class="form-control rounded-0 mb-1" type="text" id="precioAct" name="precio" placeholder="Precio" autocomplete="off">
+          <input class="form-control rounded-0 mb-1" type="text" id="stockAct" name="stock" placeholder="Stock" autocomplete="off">
+          <button  type="submit" id="act" class="form-control btn btn-warning mt-2 rounded-0">Actualizar</button>
+          <button id="actualizarPagina" class="form-control btn btn-primary mt-2 rounded-0">ver producto actualizado</button>
+
+          </form>
+          
           {{/if }}
          {{#if carts}}
            <div id="carrito-select" data-id="{{carts}}">
-           <div  >Mi carrito</div>
+           {{!-- <div  >Mi carrito</div> --}}
            </div>
-           {{!-- <option value={{this.id}}><p>carrito{{this.contador}}</p></option> --}}
+           
          
          {{/if }}
 
@@ -76,7 +88,7 @@
      {{#if respDB.isValid}}
           <div class="a1">
           {{#each respDB.docs}}
-          <div class="prod">
+          <div class="prod" id="producto-{{this._id}}">
           <div>
           <p class="items mt-2"><strong>Categoria: </strong>{{this.category}}</p>
           <p class="items"><strong>Titulo: </strong>{{this.title}}</p>
@@ -88,8 +100,8 @@
           <div>
            <button id={{this._id}} class="btn btn-warning mb-2" onclick="agregarAlCarrito(this.id)">agregar al carrito</button>
            {{#if (eq ../respDB.role 'admin')}}
-            <button id="" class="btn btn-success mb-2" onclick="">eliminar</button>
-            <button id="" class="btn btn-success mb-2" onclick="">actualizar</button>
+            <button id={{this._id}} class="btn btn-success mb-2" onclick="eliminarProd(this.id)">eliminar</button>
+            <button id={{this._id}} class="btn btn-success mb-2" name="hola" onclick="actualizar(this.id)">actualizar</button>
            {{/if}}
           </div>
           </div>
