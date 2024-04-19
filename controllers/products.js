@@ -31,8 +31,6 @@ export const getProd = async(req=request,res=response) => {
     }
 
     const respDB  =await getAllProducts(obj)
-        
-    
 
     
 
@@ -159,6 +157,7 @@ export const putProducts = async(req=request,res=response) => {
           resp
                    
           })
+       
      
    } catch (error) {
     res.status(400).json({

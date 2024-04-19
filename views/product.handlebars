@@ -57,7 +57,7 @@
           <input class="form-control rounded-0 mb-1" type="text" id="stock" name="stock" placeholder="Stock" autocomplete="off">
           <button  type="submit" id="agregar" class="form-control btn btn-warning mt-2 rounded-0">Agregar</button>
           </form>
-          <form id="actProductForm">
+          <form id="actProductForm" hidden>
           <h4>Actualizar producto</h4>
           <input class="form-control rounded-0 mb-1" type="text" id="categoriaAct" name="categoria" placeholder="Categoria" autocomplete="off">
           <input class="form-control rounded-0 mb-1" type="text" id="tituloAct" name="titulo" placeholder="Titulo" autocomplete="off">
@@ -98,7 +98,9 @@
           <p class="items" id="1{{this._id}}"><strong>Stock: </strong>{{this.stock}}</p>
           </div>
           <div>
+            {{#if (eq ../respDB.role 'user')}}
            <button id={{this._id}} class="btn btn-warning mb-2" onclick="agregarAlCarrito(this.id)">agregar al carrito</button>
+           {{/if}}
            {{#if (eq ../respDB.role 'admin')}}
             <button id={{this._id}} class="btn btn-success mb-2" onclick="eliminarProd(this.id)">eliminar</button>
             <button id={{this._id}} class="btn btn-success mb-2" name="hola" onclick="actualizar(this.id)">actualizar</button>

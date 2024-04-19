@@ -4,6 +4,8 @@ const addProduct = document.getElementById('addProduct')
 const actProducts = document.getElementById('actProductForm')
 
 
+
+
 const agregarAlCarrito = async(id) => {
     try {
         
@@ -144,7 +146,16 @@ addProduct.addEventListener('submit',async(e)=>{
 })
 /** Actualizar */
 const actualizar  = async( id ) => {
+  
+    
+const removeAdd = document.getElementById('addProduct')
+const actform = document.getElementById("actProductForm");
+removeAdd.setAttribute('hidden',true)
+actform.removeAttribute('hidden')
 
+
+// Para ocultar el elemento
+  
 
  try {
     const resp = await fetch(`/products/${id}`)
@@ -179,7 +190,8 @@ const actualizar  = async( id ) => {
 
 
     actProducts.addEventListener('submit', async(e) => {
-    e.preventDefault()
+        try {
+               // e.preventDefault()
     const idCapture = actProducts.getAttribute('data-id')
     console.log('estoy tocando ese boton',idCapture);
     const categoria = document.getElementById('categoriaAct').value
@@ -213,9 +225,12 @@ const actualizar  = async( id ) => {
         const datos = await resp.json() 
         console.log('algo paso en add actualizar' , datos);
     }
-
-   
-   
+    
+    window.location = 'http://localhost:3000/'
+    } catch (error) {
+          console.log(error)  
+    }
+ 
     
 })
 
