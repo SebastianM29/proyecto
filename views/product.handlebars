@@ -88,13 +88,14 @@
      {{#if respDB.isValid}}
           <div class="a1">
           {{#each respDB.docs}}
-          <div class="prod" id="producto-{{this._id}}">
+          <div class="prod"  data-producto-id="{{this._id}}" id="producto-{{this._id}}">
           <div>
-          <p class="items mt-2"><strong>Categoria: </strong>{{this.category}}</p>
-          <p class="items"><strong>Titulo: </strong>{{this.title}}</p>
-          <p class="items"><strong>Descripcion: </strong>{{this.description}}</p>
-          <p class="items"><strong>Precio: </strong>{{this.price}}</p>
-          <p class="items"><strong>Codigo: </strong>{{this.code}}</p>
+          
+          <p class="items mt-2" id="categoria{{this._id}}" ><strong>Categoria: </strong>{{this.category}}</p>
+          <p class="items" id="titulo{{this._id}}"><strong>Titulo: </strong>{{this.title}}</p>
+          <p class="items" id="descripcion{{this._id}}" ><strong>Descripcion: </strong>{{this.description}}</p>
+          <p class="items" id="precio{{this._id}}"><strong>Precio: </strong>{{this.price}}</p>
+          <p class="items" id="codigo{{this._id}}" ><strong>Codigo: </strong>{{this.code}}</p>
           <p class="items" id="1{{this._id}}"><strong>Stock: </strong>{{this.stock}}</p>
           </div>
           <div>

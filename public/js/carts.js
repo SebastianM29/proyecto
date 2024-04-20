@@ -1,30 +1,41 @@
+
+
+
+
 const eject = async() => {
+
+    const respprod = JSON.parse(localStorage.getItem('products'))
+
+    console.log(respprod)
     const id = document.getElementById('prid')
     const valor = id.dataset.id
     console.log('debo ver el valor',valor)
+    const carritos = document.querySelector('.carritos')
+    carritos.innerHTML=''
+    respprod.forEach(element => {
+        console.log(element)
+        const div = document.createElement('div')
+        div.classList= 'viewsCart'
+        div.innerHTML= `
+        <p><strong>Categoría: </strong>${element.categoria}</p>
+        <p><strong>Titulo: </strong>${element.titulo}</p>
+        <p><strong>Descripcion: </strong>${element.descripcion}</p>
+        <p><strong>Precio: </strong>${element.precio}</p>
+        <p><strong>Codigo: </strong>${element.codigo}</p>
+        <p><strong>Stock: </strong>${element.cantidad}</p>
+        `
+        carritos.appendChild(div)
+        
+    });
+
+
      const resp = await fetch(`/carts/${valor}`)
      if (resp.ok) {
         const res =await resp.json()
         console.log( 'este es el array?',res)
-        const carritos = document.querySelector('.carritos')
+       
         // const resCarr = res.products
-        carritos.innerHTML=''
-        res.products.forEach(element => {
-            console.log(element)
-            const div = document.createElement('div')
-            div.classList= 'viewsCart'
-            div.innerHTML= `
-            <p><strong>Categoría: </strong>${element.id.category}</p>
-            <p><strong>Titulo: </strong>${element.id.title}</p>
-            <p><strong>Descripcion: </strong>${element.id.description}</p>
-            <p><strong>Precio: </strong>${element.id.price}</p>
-            <p><strong>Codigo: </strong>${element.id.code}</p>
-            <p><strong>Stock: </strong>${element.id.stock}</p>
-            <p><strong>Cantidad: </strong>${element.quantity}</p>
-            `
-            carritos.appendChild(div)
-            
-        });
+      
 
     }else{
          const res =await resp.json()

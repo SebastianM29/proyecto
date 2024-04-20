@@ -7,64 +7,106 @@ const actProducts = document.getElementById('actProductForm')
 
 
 const agregarAlCarrito = async(id) => {
-    try {
-        
-        console.log('aca se va a agregar el carrito',id)
-        const cSelect = document.getElementById("carrito-select");
-        console.log('seria el dataset',cSelect.dataset.id)
-        // Mostrar el valor del select en la consola
-     
-        console.log('debo ver el id',id)
-        const resp = await fetch(`/carts/${cSelect.dataset.id}/products/${id}`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' // Indica que los datos son de tipo JSON
-            },
+
+    const valorProd = JSON.parse(localStorage.getItem('products')) || [];
     
-        })
-        if (resp.ok) {
-            try {
-                
-                const res = await resp.json()
-               
-                console.log('me selecciona el producto?',res)
-                
-                const result = await fetch(`/products/${id}`)
-                const datos  =await result.json()
-                console.log('este deberia ser el producto', datos.productos.stock)  
-                
-                const stock = document.getElementById(`1${id}`)
-                stock.innerHTML = `<strong>Stock:</strong>${datos.productos.stock}`
-                
-                const selecProd = document.getElementById(id)
-                
-                console.log(selecProd)
-                selecProd.textContent= 'agregado'
-                setTimeout(() => {
-                 selecProd.textContent = 'agregar al carrito'
-                }, 3000);
-     
-     
-                //  window.location.href = 'http://localhost:3000/'
-            } catch (error) {
-                console.log(error)
-            }
-        }else{
+    console.log('hago click');
+    const valor = document.getElementById(`producto-${id}`)
+    const nuevo = valor.dataset.productoId
+    const categoria = document.getElementById(`categoria${id}`).childNodes[1].nodeValue.trim()
+    const titulo = document.getElementById(`titulo${id}`).childNodes[1].nodeValue.trim()
+    const descripcion = document.getElementById(`descripcion${id}`).childNodes[1].nodeValue.trim()
+    const precio = document.getElementById(`precio${id}`).childNodes[1].nodeValue.trim()
+    const codigo = document.getElementById(`codigo${id}`).childNodes[1].nodeValue.trim()
+    const stock = document.getElementById(`1${id}`).childNodes[1].nodeValue.trim()
+    
+    const obj = {
+       id : nuevo,
+       categoria,
+       titulo,
+       descripcion,
+       precio,
+       codigo,
+       cantidad : 1
 
-           const res = await resp.json()
-        //    const resmsg = JSON.parse(res)
-           console.log('que me trae en el error',res)
-           const selecProd = document.getElementById(`${res}`)
-           selecProd.textContent= 'sin stock'
-           setTimeout(() => {
-            selecProd.textContent = 'agregar al carrito'
-           }, 3000);
-
-        }
-
-    } catch (error) {
-        
     }
+    if (valorProd.length === 0 ) {
+        valorProd.push(obj)
+        console.log('no hay nada en el array le agrego uno', valorProd);
+        return localStorage.setItem('products',JSON.stringify(valorProd))
+    }else{
+
+        valorProd.map((element) => {
+            if (element.id === obj.id) {
+                console.log('pasando por adentro del map');
+                element.cantidad +=1 
+                localStorage.setItem('products',JSON.stringify(valorProd))
+            }
+        } )
+
+
+
+    }
+    console.log('pasando por afuera');
+    
+    // try {
+        
+    //     console.log('aca se va a agregar el carrito',id)
+    //     const cSelect = document.getElementById("carrito-select");
+    //     console.log('seria el dataset',cSelect.dataset.id)
+    //     // Mostrar el valor del select en la consola
+     
+    //     console.log('debo ver el id',id)
+    //     const resp = await fetch(`/carts/${cSelect.dataset.id}/products/${id}`,{
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json' // Indica que los datos son de tipo JSON
+    //         },
+    
+    //     })
+    //     if (resp.ok) {
+    //         try {
+                
+    //             const res = await resp.json()
+               
+    //             console.log('me selecciona el producto?',res)
+                
+    //             const result = await fetch(`/products/${id}`)
+    //             const datos  =await result.json()
+    //             console.log('este deberia ser el producto', datos.productos.stock)  
+                
+    //             const stock = document.getElementById(`1${id}`)
+    //             stock.innerHTML = `<strong>Stock:</strong>${datos.productos.stock}`
+                
+    //             const selecProd = document.getElementById(id)
+                
+    //             console.log(selecProd)
+    //             selecProd.textContent= 'agregado'
+    //             setTimeout(() => {
+    //              selecProd.textContent = 'agregar al carrito'
+    //             }, 3000);
+     
+     
+    //             //  window.location.href = 'http://localhost:3000/'
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }else{
+
+    //        const res = await resp.json()
+    //     //    const resmsg = JSON.parse(res)
+    //        console.log('que me trae en el error',res)
+    //        const selecProd = document.getElementById(`${res}`)
+    //        selecProd.textContent= 'sin stock'
+    //        setTimeout(() => {
+    //         selecProd.textContent = 'agregar al carrito'
+    //        }, 3000);
+
+    //     }
+
+    // } catch (error) {
+        
+    // }
     
 
 }
