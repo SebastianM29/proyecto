@@ -153,3 +153,26 @@ export const deleteCarts = async(req=request,res=response) => {
         })
     }
 }
+
+export const purchaseCarts =  async(req,res) => {
+    try {
+       
+        console.log('viendo este email',req.session.user)
+        const {email} = req.session.user
+        console.log('viendo este email',email)
+        
+        console.log('entrando',cid)
+        res.json({msg:cid})
+    } catch (error) {
+        console.log(error.message)
+    }
+    // const cid = req.params.cid
+    // console.log( cid)
+    // res.json({
+    //     msg:'llegando al path de compras'})
+
+}
+export const sellCart =  async(req,res) => {
+  res.render('sellCarts')
+
+}

@@ -50,6 +50,24 @@ const eject = async() => {
 eject()
 
 
+const comprar = () => {
+    console.log('haciendo cliock en comprar');
+    const respprod = JSON.parse(localStorage.getItem('products'))
+    console.log('viendo todos los productos', respprod);
+    for (const iterator of respprod) {
+        if (iterator.cantidad > 1){
+            iterator.total = iterator.cantidad * iterator.precio
+        }else{
+
+            iterator.total = iterator.precio
+
+        }
+
+    }
+    // window.location.href = '/cart/sellCarts';
+}
+
+
 
 
 

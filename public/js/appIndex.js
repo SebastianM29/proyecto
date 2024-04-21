@@ -1,4 +1,5 @@
 
+
 const seeCart = document.getElementById('cart-form')
 const addProduct = document.getElementById('addProduct')
 const actProducts = document.getElementById('actProductForm')
@@ -34,20 +35,35 @@ const agregarAlCarrito = async(id) => {
         valorProd.push(obj)
         console.log('no hay nada en el array le agrego uno', valorProd);
         return localStorage.setItem('products',JSON.stringify(valorProd))
-    }else{
-
-        valorProd.map((element) => {
-            if (element.id === obj.id) {
-                console.log('pasando por adentro del map');
-                element.cantidad +=1 
-                localStorage.setItem('products',JSON.stringify(valorProd))
-            }
-        } )
-
-
-
     }
-    console.log('pasando por afuera');
+     
+    const findID = valorProd.find(element => element.id === obj.id)
+    console.log(findID);
+    if (findID) {
+        for (const iterator of valorProd) {
+            if (iterator.id === obj.id) {
+                iterator.cantidad += 1
+            }
+        }
+        console.log('aca anda y entra como corresponde');
+    } 
+    else
+    {
+        valorProd.push(obj)
+    }
+    console.log('aca deberia estar todo arreglado',valorProd)
+    const parseValue = JSON.stringify(valorProd)
+    localStorage.setItem('products',parseValue)
+    
+    
+
+    // const newValue = JSON.stringify(newProdCantidad)
+    // localStorage.setItem('products',JSON.stringify(newValue))
+
+    
+
+    
+    
     
     // try {
         
