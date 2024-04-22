@@ -10,6 +10,12 @@ const actProducts = document.getElementById('actProductForm')
 const agregarAlCarrito = async(id) => {
 
     const valorProd = JSON.parse(localStorage.getItem('products')) || [];
+    const stockSave = document.getElementById(`1${id}`).childNodes[1].nodeValue.trim()
+
+    const changeStock = stockSave - 1 
+    const stockChange = document.getElementById(`1${id}`).childNodes[1]
+  
+        stockChange.nodeValue = `${changeStock}`;
     
     console.log('hago click');
     const valor = document.getElementById(`producto-${id}`)
@@ -28,7 +34,8 @@ const agregarAlCarrito = async(id) => {
        descripcion,
        precio,
        codigo,
-       cantidad : 1
+       cantidad : 1,
+       stock
 
     }
     if (valorProd.length === 0 ) {
@@ -55,7 +62,19 @@ const agregarAlCarrito = async(id) => {
     const parseValue = JSON.stringify(valorProd)
     localStorage.setItem('products',parseValue)
     
+    console.log('manejando valores del boton');
+
+    // console.log('deberia ver el stock',stock)
+    // const newValue = stock - 1
+    // console.log('deberia ver el stock actualizado',newValue)
+
+
     
+    
+    // setTimeout(() => {
+    //     selecProd.textContent = 'agregar al carrito'
+    // }, 3000);
+        
 
     // const newValue = JSON.stringify(newProdCantidad)
     // localStorage.setItem('products',JSON.stringify(newValue))

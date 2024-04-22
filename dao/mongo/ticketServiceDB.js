@@ -1,4 +1,4 @@
-
+import ticket from "../mongo/models/tickets.js"
 
 
 export default class Tickets {
@@ -7,6 +7,7 @@ export default class Tickets {
     }
     async TicketsCreate(obj) {
         console.log('creando ticket',obj)
+        await ticket.create(obj)
 
     }
 

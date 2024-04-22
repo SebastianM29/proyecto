@@ -16,7 +16,7 @@ const TicketSchema = new Schema({
     purchaser:{ 
         type : String,
         required:[true,'purchaser obligatorio/unico'],
-        unique:true
+       
         
     }
 
