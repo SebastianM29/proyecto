@@ -3,19 +3,19 @@ import { Schema,model } from "mongoose";
 const TicketSchema = new Schema({
     code:{ 
       type : String,
-      required:[true,'nombre obligatorio']
+      required:[true,'code obligatorio']
     },
     purchase_datetime:{ 
         type : String,
-        required:[true,'apellido obligatorio']
+        required:[true,'purchase obligatorio']
     },
     amount:{ 
         type : String,
-        required:[true,'apellido obligatorio']
+        required:[true,'amount obligatorio']
     },
     purchaser:{ 
         type : String,
-        required:[true,'correo obligatorio/unico'],
+        required:[true,'purchaser obligatorio/unico'],
         unique:true
         
     }

@@ -20,3 +20,5 @@ respprod.forEach(element => {
     ventas.appendChild(div)
     
 });
+
+localStorage.removeItem('products')

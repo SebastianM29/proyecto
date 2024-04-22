@@ -68,7 +68,7 @@ export default class CartServiceDB {
                  products.findById(productId),
             ])
             console.log(`car: ${car} , products: ${prod}`)
-            if (prod.stock === 0) {
+            if (prod.stock === 0 ) {
        
                const resp = prod._id.toString()
                 throw new Error (resp)

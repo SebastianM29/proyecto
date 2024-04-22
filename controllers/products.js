@@ -168,3 +168,7 @@ export const putProducts = async(req=request,res=response) => {
    }
 
 }
+
+export const fail = (req,res) => {
+  res.render('fail')
+}

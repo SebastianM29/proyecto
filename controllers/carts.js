@@ -1,7 +1,11 @@
 import { request,response } from "express";
 import  CartServiceDB  from "../dao/mongo/cartsServiceBD.js";
+import TicketSchema from "../dao/mongo/ticketServiceDB.js";
 import { addProductToTheCart, createTheCart, deleteIdThisCart, deleteProductsOfTheCart, getAllTheCarts, getTheCartById, putAllOfTheCart, putQuantityIdInCart } from "../services/cartServices.js";
+import { v4 as uuidv4 }  from 'uuid'
+import tickets from "../dao/mongo/models/tickets.js";
 const cartDB = new CartServiceDB()
+const ticketDB = new TicketSchema()
 
 export const getCartsAll = async(req=request,res=response) => {
     try {
@@ -94,6 +98,8 @@ export const deleteOfCarts = async(req=request,res=response) => {
         const cid = req.params.cid
         const pid = req.params.pid
         const resp = await deleteProductsOfTheCart(cid,pid)
+
+        
         
         res.json(resp)
         
@@ -160,7 +166,24 @@ export const purchaseCarts =  async(req,res) => {
        
         console.log('viendo este email',req.session.user)
         const {email} = req.session.user
-        console.log('viendo este email',email)
+        const cid = req.params.cid
+        const{sumaAmount}=req.body
+        console.log('viendo este email',email, "y el id del carrito", cid)
+        const unique = uuidv4()
+        const purchase_datetime = new Date().toISOString();
+        const obj = {
+
+            code : unique,
+            purchase_datetime,
+            amount:sumaAmount,
+            purchaser: email
+
+
+        }
+
+
+
+        ticketDB.TicketsCreate(obj)
         
         console.log('entrando',cid)
         res.json({msg:cid})
