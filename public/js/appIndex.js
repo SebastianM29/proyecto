@@ -7,15 +7,28 @@ const actProducts = document.getElementById('actProductForm')
 
 
 
+
 const agregarAlCarrito = async(id) => {
-
+    
+    // const noStock = JSON.parse(localStorage.getItem('noStock')) || [];
     const valorProd = JSON.parse(localStorage.getItem('products')) || [];
+    //cambiar stock
     const stockSave = document.getElementById(`1${id}`).childNodes[1].nodeValue.trim()
+    console.log('que veo en el stockSave',stockSave);
+    if (stockSave == 0) {
+        console.log('entra para sehabilitar?');
+        const canceledButton = document.getElementById(id)
+        canceledButton.textContent = 'Sin stock'
+        canceledButton.disabled = true;
+        return
+    }else{
 
-    const changeStock = stockSave - 1 
-    const stockChange = document.getElementById(`1${id}`).childNodes[1]
-  
+        const changeStock = stockSave - 1 
+        const stockChange = document.getElementById(`1${id}`).childNodes[1]
         stockChange.nodeValue = `${changeStock}`;
+
+
+    }
     
     console.log('hago click');
     const valor = document.getElementById(`producto-${id}`)
@@ -38,6 +51,7 @@ const agregarAlCarrito = async(id) => {
        stock
 
     }
+
     if (valorProd.length === 0 ) {
         valorProd.push(obj)
         console.log('no hay nada en el array le agrego uno', valorProd);
@@ -48,16 +62,25 @@ const agregarAlCarrito = async(id) => {
     console.log(findID);
     if (findID) {
         for (const iterator of valorProd) {
-            if (iterator.id === obj.id) {
+            // if (iterator.stock < obj.cantidad) {
+            //     console.log('error de stock', iterator)
+            //     noStock.push(iterator)
+            //     localStorage.setItem('noStock',JSON.stringify(iterator))
+            // }
+          if (iterator.id === obj.id) {
                 iterator.cantidad += 1
+                iterator.stock -= 1
+                
             }
         }
+
         console.log('aca anda y entra como corresponde');
     } 
-    else
-    {
-        valorProd.push(obj)
+    else{
+    valorProd.push(obj)
     }
+
+
     console.log('aca deberia estar todo arreglado',valorProd)
     const parseValue = JSON.stringify(valorProd)
     localStorage.setItem('products',parseValue)

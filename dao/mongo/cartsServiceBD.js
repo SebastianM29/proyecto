@@ -71,7 +71,7 @@ export default class CartServiceDB {
             if (prod.stock === 0 || productStock > prod.stock) {
        
                const resp = prod._id.toString()
-                throw new Error (resp)
+                throw new Error (prod)
             }
     
             const validate = car.products.find(element => element.id.toString() === prod._id.toString())

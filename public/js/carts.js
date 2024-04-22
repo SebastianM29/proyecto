@@ -58,23 +58,29 @@ const comprar = async() => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({productStock}) //manejar stock
-                // Si necesitas enviar datos en el cuerpo de la solicitud, reemplaza 'data' con tus datos
             });
+
+            if (resp.status === 404) {
+                
+                const res = await  resp.json()
+                console.log('este seria el faltante',res)
+            }
         
-            // Aquí puedes manejar la respuesta de cada solicitud, por ejemplo, verificar el estado de la respuesta:
             if (resp.ok) {
                 console.log('Solicitud exitosa');
     
              
                
-                // Haz algo con la respuesta, como procesarla o mostrar un mensaje al usuario
+              
             } else {
-                console.error('Error en la solicitud:', resp.status);
+                /** DEVOLVER LOS PRODUCTOS CON STOCK 0 */
+                console.error('Error en la solicitud:', resp.status);ç
+                
                 window.location.href= 'fail'
                 return
-                // Manejar el error de la solicitud, como mostrar un mensaje de error al usuario
             }
         } catch (error) {
+            localStorage.removeItem('products')
             window.location.href= 'fail'
             return
         }
@@ -113,6 +119,7 @@ const comprar = async() => {
         }
         if (!resp.ok) {
             console.log('problema al generar ticket ')
+            
         }
             
         } catch (error) {
@@ -124,6 +131,7 @@ const comprar = async() => {
     console.log('precio total',sumaAmount);
 
     localStorage.setItem('products',JSON.stringify(respprod))
+    
 
 
 
