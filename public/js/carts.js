@@ -48,7 +48,16 @@ const comprar = async() => {
     console.log('debo ver el valor',valor)
 
     /**  Descuenta de a uno... falta q si el stock cambia */
-    for (const iterator of respprod) {
+
+    //ITERATOR.CANTIDAD
+    //ITERATOR.stock
+    const noStock = respprod.filter(element => element.cantidad > element.stock)
+    const siStock = respprod.filter(element => element.cantidad < element.stock)
+    console.log('deberia tener los q no tienen stock', noStock);
+    console.log('deberia tener los q no tienen stock', siStock);
+
+
+    for (const iterator of siStock) {
         try {
             
             let productStock = iterator.cantidad
@@ -74,7 +83,7 @@ const comprar = async() => {
               
             } else {
                 /** DEVOLVER LOS PRODUCTOS CON STOCK 0 */
-                console.error('Error en la solicitud:', resp.status);ç
+                console.error('Error en la solicitud:', resp.status);
                 
                 window.location.href= 'fail'
                 return
@@ -89,7 +98,7 @@ const comprar = async() => {
 
         
     }
-    for (const iterator of respprod) {
+    for (const iterator of siStock) {
         if (iterator.cantidad > 1){
             iterator.total = iterator.cantidad * iterator.precio
             sumaAmount += JSON.parse(iterator.total)
@@ -127,10 +136,12 @@ const comprar = async() => {
         }
 
   
-    console.log('deberia ver todos los productos con el precio total',respprod);
+    console.log('deberia ver todos los productos con el precio total',siStock);
     console.log('precio total',sumaAmount);
 
-    localStorage.setItem('products',JSON.stringify(respprod))
+    localStorage.setItem('products',JSON.stringify(siStock))
+    localStorage.setItem('noproducts',JSON.stringify(noStock))
+
     
 
 
