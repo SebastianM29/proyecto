@@ -107,3 +107,10 @@ se implementa las vistas empleadas en el hands on lab asi como los controladores
 
 * Se agrego extra ... el campo de admin / user en el registro con mensajes de error o exito asi como en login... a la hora de agregar un producto al carrito el stock va disminuyendo... a la hora de llegar a 0 informa q queda "sin stock" -(Solucionado)
 Queda obviada la generacion de ruta privada ya q solo deje visual el campo de Admin.
+
+*intento de compra con dos productos que exceden de stock
+![alt text](image-48.png)
+
+
+*compra realizada con las excepciones de los productos sin stock
+![alt text](image-49.png)

@@ -9,7 +9,7 @@ respprod.forEach(element => {
     const div = document.createElement('div')
     div.classList= 'ventasProducto'
     div.innerHTML= `
-    <p>Categoria: ${element.categoria} , titulo:${element.titulo} , cantidad: ${element.cantidad} , precio unitario: ${element.precio}, total: ${element.total}</p>
+    <h4>Categoria: ${element.categoria} , titulo:${element.titulo} , cantidad: ${element.cantidad} , precio unitario: ${element.precio}, total: ${element.total}</h4>
  
     `
 
@@ -19,14 +19,20 @@ respprod.forEach(element => {
   
  
     ventas.appendChild(div)
+
+    const h1Element = document.querySelector('h1.oculto');
+    
+    if (h1Element) {
+        h1Element.classList.remove('oculto');
+    }
     
 });
 noHayStock.forEach(element => {
     const div = document.createElement('div')
     div.classList= 'sinProducto'
     div.innerHTML= `
-    
-    <p>Categoria: ${element.categoria} , titulo:${element.titulo} , cantidad: ${element.cantidad} , precio unitario: ${element.precio}</p>
+
+    <p><strong>Sin stock suficiente: </strong>Categoria: ${element.categoria} , titulo:${element.titulo} , cantidad: ${element.cantidad}</p>
  
     `
 

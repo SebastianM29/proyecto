@@ -16,3 +16,25 @@ body{
     height: 200px;
     
 }
+.oculto{
+    display: none;
+}
+.ventasProducto{
+    width: 600px;
+    background-color: rgba(135, 208, 222, 0.324);
+    padding: 10px;
+    border-radius: 10px;
+
+}
+.sinProducto{
+    width: 600px;
+    height: 10%;
+    background-color: rgba(241, 46, 46, 0.897);
+    padding: 10px;
+    border-radius: 10px;
+   
+
+}
+.botonHome{
+    margin-top: 100px;
+}

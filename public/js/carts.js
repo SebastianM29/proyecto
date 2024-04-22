@@ -83,6 +83,7 @@ const comprar = async() => {
               
             } else {
                 /** DEVOLVER LOS PRODUCTOS CON STOCK 0 */
+                //nuca va a entrar porque filtro en el post los q tienen stock
                 console.error('Error en la solicitud:', resp.status);
                 
                 window.location.href= 'fail'
