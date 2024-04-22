@@ -21,8 +21,8 @@ export const createTheCart = async() => {
     const value = await createCart()
     return value
 }
-export const addProductToTheCart = async(cid,pid) => {
-const value = await addProductToCart(cid,pid)
+export const addProductToTheCart = async(cid,pid,productStock) => {
+const value = await addProductToCart(cid,pid,productStock)
 return value
 }
 

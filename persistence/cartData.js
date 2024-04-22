@@ -19,8 +19,8 @@ export const createCart = async() => {
    const value = await CartServiceDB.addCart()
    return value
 }
-export const addProductToCart = async (cid,pid) => {
-    const value = await cartDB.addProductCart(cid,pid)
+export const addProductToCart = async (cid,pid,productStock) => {
+    const value = await cartDB.addProductCart(cid,pid,productStock)
     return value
 }
 export const deleteProductsOfCart = async (cid,pid) => {

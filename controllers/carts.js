@@ -70,9 +70,10 @@ export const addPostCarts = async(req=request,res=response) => {
         const cid = req.params.cid
         const pid = req.params.pid
         
-        const resp = await addProductToTheCart(cid,pid)
-     
-       
+        const{productStock} = req.body
+
+        const resp = await addProductToTheCart(cid,pid,productStock)
+       console.log("seria el stock",productStock)
         
         res.json({resp})
         

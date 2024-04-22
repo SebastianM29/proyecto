@@ -60,7 +60,7 @@ export default class CartServiceDB {
       
     }
 
-    async addProductCart (cartId,productId) {
+    async addProductCart (cartId,productId,productStock) {
         try {
             
             const [car , prod ] = await Promise.all([
@@ -79,7 +79,7 @@ export default class CartServiceDB {
 
                 
                 if (prod.stock>0) {
-                    prod.stock -= 1
+                    prod.stock -= productStock
                     
                 }
 

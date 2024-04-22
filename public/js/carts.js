@@ -50,10 +50,39 @@ const eject = async() => {
 eject()
 
 
-const comprar = () => {
+const comprar = async() => {
     console.log('haciendo cliock en comprar');
     const respprod = JSON.parse(localStorage.getItem('products'))
     console.log('viendo todos los productos', respprod);
+    const id = document.getElementById('prid')
+    const valor = id.dataset.id
+    console.log('debo ver el valor',valor)
+
+    /**  Descuenta de a uno... falta q si el stock cambia */
+    for (const iterator of respprod) {
+        let productStock = iterator.cantidad
+        const resp = await fetch(`/carts/${valor}/products/${iterator.id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({productStock}) //manejar stock
+            // Si necesitas enviar datos en el cuerpo de la solicitud, reemplaza 'data' con tus datos
+        });
+    
+        // Aquí puedes manejar la respuesta de cada solicitud, por ejemplo, verificar el estado de la respuesta:
+        if (resp.ok) {
+            console.log('Solicitud exitosa');
+
+         
+           
+            // Haz algo con la respuesta, como procesarla o mostrar un mensaje al usuario
+        } else {
+            console.error('Error en la solicitud:', resp.status);
+            // Manejar el error de la solicitud, como mostrar un mensaje de error al usuario
+        }
+    }
+
     for (const iterator of respprod) {
         if (iterator.cantidad > 1){
             iterator.total = iterator.cantidad * iterator.precio
@@ -64,7 +93,12 @@ const comprar = () => {
         }
 
     }
-    // window.location.href = '/cart/sellCarts';
+    console.log('deberia ver todos los productos con el precio total',respprod);
+    localStorage.setItem('products',JSON.stringify(respprod))
+
+
+
+    window.location.href = '/cart/sellCarts';
 }
 
 
