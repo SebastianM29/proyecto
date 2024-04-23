@@ -114,3 +114,13 @@ Queda obviada la generacion de ruta privada ya q solo deje visual el campo de Ad
 
 *compra realizada con las excepciones de los productos sin stock
 ![alt text](image-49.png)
+
+*agrego al carro y actualizo pagina para q se intenten agregar la misma cantidad la cual me tiraba error.... e hice un filter para solucionar ese error 
+![alt text](image-50.png)
+*como se ve en el adjunto haciendo esto supera el stock q hay 
+![alt text](image-51.png)
+*haciendo como dije un filter en el array solucionado.
+![alt text](image-52.png)
+
+
+

@@ -21,20 +21,22 @@ body{
 }
 .ventasProducto{
     width: 600px;
-    background-color: rgba(135, 208, 222, 0.324);
-    padding: 10px;
-    border-radius: 10px;
+    min-height: fit-content;
+    background-color: rgba(135, 208, 222, 0.213);
+    padding: 1px;
+    
 
 }
 .sinProducto{
     width: 600px;
-    height: 10%;
-    background-color: rgba(241, 46, 46, 0.897);
-    padding: 10px;
-    border-radius: 10px;
+    min-height: fit-content;
+    background-color: rgba(241, 46, 46, 0.381);
+    padding: 1px;
+   
    
 
 }
-.botonHome{
+#botonHome{
     margin-top: 100px;
+    font-size: 50px;
 }
