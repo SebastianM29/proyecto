@@ -119,8 +119,7 @@ Queda obviada la generacion de ruta privada ya q solo deje visual el campo de Ad
 ![alt text](image-50.png)
 *como se ve en el adjunto haciendo esto supera el stock q hay 
 ![alt text](image-51.png)
-*haciendo como dije un filter en el array solucionado.
-![alt text](image-52.png)
-
+*haciendo como dije un filter en el array solucionado, y mejora visual
+![alt text](image-53.png)
 
 

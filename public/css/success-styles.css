@@ -18,6 +18,12 @@ body{
 }
 .oculto{
     display: none;
+    
+}
+h1{
+    font-family: "Outfit", sans-serif;
+    color: rgb(255, 240, 80);
+    margin-bottom: 50px;
 }
 .ventasProducto{
     width: 600px;
@@ -39,4 +45,5 @@ body{
 #botonHome{
     margin-top: 100px;
     font-size: 50px;
+    font-family: "Outfit", sans-serif;
 }
