@@ -11,14 +11,17 @@ import  cartsRoutes  from "../routes/carts.routes.js";
 import  productsRoutes  from "../routes/products.routes.js";
 import  sessionRoutes  from "../routes/session.routes.js";
 import viewsRoutes from    "../routes/views.routes.js";
+/**agregado */
+import  messagesRoutes  from "../routes/messages.routes.js";
+
+
+
 
 import { dbConnection } from "../db/config.js";
-import session from "express-session";
 import MongoStore from "connect-mongo";
 import  passport  from "passport";
 import initializePassport from "../helpers/passportHelpers.js";
-/**agregado */
-import  messagesRoutes  from "../routes/messages.routes.js";
+import session from "express-session";
 
 import * as http from "http";
 import { Server as SocketIoServer } from "socket.io";
@@ -27,6 +30,8 @@ import { Server as SocketIoServer } from "socket.io";
 import config from "../config/config.js"
 import { databaseFactory } from "./factory.js";
 import { socketController } from "../sockets/socketControllers.js";
+/** manejo de errores por middleware */
+import errHandler  from "../middlewares/errors/index.js"
 
 
 
@@ -88,6 +93,7 @@ export class Server {
 
         //ubicacion de las plantillas para el renderizado
         this.app.set('view engine','handlebars')
+        this.app.use(errHandler)
     }
     routes(){
 
