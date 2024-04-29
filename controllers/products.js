@@ -2,10 +2,13 @@ import { request,response } from "express";
 import  ProductServiceDB  from "../dao/mongo/productsServiceBD.js";
 import  products  from "../dao/mongo/models/productsModels.js";
 import  CartServiceDB  from "../dao/mongo/cartsServiceBD.js";
+import CustomError from "../services/errors/CustomError.js";
 import { deleteTheProduct, getAllProducts, getProductById, postCreateTheProduct, putProductsById } from "../services/productServices.js";
+import { generateErrorInfo } from "../services/errors/info.js";
+import EErrors from "../services/errors/enums.js";
 
 
-// const prod = new ProductServiceDB()
+const allProducts = new ProductServiceDB()
 const cart = new CartServiceDB()
 
 export const getProd = async(req=request,res=response) => {
@@ -84,67 +87,86 @@ export const getProducts = async(req=request,res=response) => {
   
 
 }
-
-export const getProductsPorId = async(req=request,res=response) => {
-   try {
-       const id = req.params.id
-       const resp = await getProductById(id)
-       
-       res.json({
-           msg: 'producto entcontrado',
-           productos: resp           
-         })
-    } catch (error) {
-       res.json({
-        error:error.message
-       })
-   }
-}
-export const postProducts = async(req=request,res=response) => {
+/** cambiar luego */
+export const getProductsPorId = async(req=request,res=response,next) => {
     try {
-        
-        const resp = req.body
-        const producto = await postCreateTheProduct(resp)
-      
-        
-        
+        console.log('entrando');
+        const id = req.params.id
+        const resp = await getProductById(id)
+        console.log('entrando este es el id',resp);
+    
         res.json({
-            msg: 'desde products: Post',
-            producto
-            
-        })
+                msg: 'producto entcontrado',
+                productos: resp           
+                })
     } catch (error) {
-        
-        res.status(400).json({
-            msg:error.message
-        })
-        
-        
+        next(error)
     }
     
+       
+     
+
 }
-export const deleteProducts = async(req=request,res=response) => {
-   try {
+
+
+
+/** cambiar luego */
+export const postProducts = async(req=request,res=response,next) => {
+
+
+    try {
+     
+
+     
+            const resp = req.body
+            const prod = await postCreateTheProduct(resp)
+          
+        res.json({
+                msg: 'desde products: Post',
+                prod
+                
+        })
+        
+    } catch (error) {
+        next(error)
+    }
+
+
     
-       const id = req.params.id 
+}
+
+
+
+
+/** cambiar luego */
+export const deleteProducts = async(req=request,res=response,next) => {
+   
+
+    try {
+        const id = req.params.id 
        
        const resp = await deleteTheProduct(id)
+    
         
         res.json({
           msg:'producto eliminado',
           producto:resp
                    
           })
-     
-   } catch (error) {
-    res.status(400).json({
-        msg:error.message
-    })
+       
+    } catch (error) {
+        next(error)
+    }
     
-   }
+     
+ 
 
 }
-export const putProducts = async(req=request,res=response) => {
+
+
+
+
+export const putProducts = async(req=request,res=response,next) => {
    try {
     
        const id = req.params.id 
@@ -160,10 +182,9 @@ export const putProducts = async(req=request,res=response) => {
        
      
    } catch (error) {
-    res.status(400).json({
-
-        msg:error.message
-    })
+    
+        next(error)
+    
     
    }
 

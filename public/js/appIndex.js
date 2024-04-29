@@ -234,7 +234,8 @@ addProduct.addEventListener('submit',async(e)=>{
       
         }
         if(!resp.ok){
-            console.log('algo paso');
+            const datos = await resp.json() 
+            console.log('algo paso',datos);
         }
         
     } catch (error) {

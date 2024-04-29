@@ -20,8 +20,8 @@ export const getCartsAll = async(req=request,res=response) => {
     }
     }
 
-
-export const getCarts = async(req=request,res=response) => {
+/** TERMINADO */
+export const getCarts = async(req=request,res=response,next) => {
 try {
     const id = req.params.cid.toString()
     console.log('debo entrar aca ehn el getCarts id',id)
@@ -32,9 +32,12 @@ try {
         value
     )
 } catch (error) {
-    console.log(error.message)
+    next(error)
 }
 }
+
+
+
 //render
 export const getCartById = async(req=request,res=response) => {
 try {
@@ -68,7 +71,9 @@ export const postCarts = async(req=request,res=response) => {
         
     }
 }
-export const addPostCarts = async(req=request,res=response) => {
+
+/** TERMINADO */
+export const addPostCarts = async(req=request,res=response,next) => {
 
     try {
         const cid = req.params.cid
@@ -84,17 +89,16 @@ export const addPostCarts = async(req=request,res=response) => {
     } catch (error) {
 
         
-       res.status(400).json(
-        
-        error.message
-        
-      )
+     next(error)
         
     }
 }
 
 
-export const deleteOfCarts = async(req=request,res=response) => {
+
+
+
+export const deleteOfCarts = async(req=request,res=response,next) => {
     try {
         const cid = req.params.cid
         const pid = req.params.pid
@@ -105,14 +109,11 @@ export const deleteOfCarts = async(req=request,res=response) => {
         res.json(resp)
         
     } catch (error) {
-        res.status(404).json({
-            msg:'error',
-            error:error.message
-        })
+       next(error)
     }
 }
 
-export const putAllCarts = async(req=request,res=response) => {
+export const putAllCarts = async(req=request,res=response,next) => {
     try {
         const cid = req.params.cid
         const array = req.body
@@ -121,12 +122,24 @@ export const putAllCarts = async(req=request,res=response) => {
         res.json(resp)
         
     } catch (error) {
-        res.status(404).json({
-            msg:'error',
-            error:error.message
-        })
+       next(error)
     }
 }
+// export const putAllCarts = async(req=request,res=response) => {
+//     try {
+//         const cid = req.params.cid
+//         const array = req.body
+//         const resp = await putAllOfTheCart(cid,array)
+
+//         res.json(resp)
+        
+//     } catch (error) {
+//         res.status(404).json({
+//             msg:'error',
+//             error:error.message
+//         })
+//     }
+// }
 export const putQuantityCarts = async(req=request,res=response) => {
     try {
         const cid = req.params.cid

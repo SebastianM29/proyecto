@@ -35,6 +35,7 @@ const localStrategy = local.Strategy
                             role
                         }
                         const userSave = await User.create(datos)
+                        
                         console.log(userSave)
                         return done(null,userSave)
                     }else{

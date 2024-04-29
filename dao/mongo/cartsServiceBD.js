@@ -1,5 +1,7 @@
 import  products  from "./models/productsModels.js";
 import carts from "./models/cartsModels.js";
+import EErrors from "../../services/errors/enums.js";
+import CustomError from "../../services/errors/CustomError.js";
 
 
 export default class CartServiceDB {
@@ -41,32 +43,60 @@ export default class CartServiceDB {
         }
     }
 
-
+   /** TERMINADO */
     async cartsById (id) {
-        try { 
-        if (id) {
+       
+        
             const cartsValue = await carts.findById(id).populate('products.id')
+            if (!cartsValue) {
+                 const error = new CustomError(
+                        "Error acceso a carrito",
+                        "consulte ID",
+                        "m - Consulte su ID nuevamente",
+                         EErrors.NOT_FOUND
+                      );
+                      throw error
+            }
             console.log('populate',cartsValue)
             return cartsValue
-        }
+      
           
             
-        } catch (error) {
-            
-           
-            return  error.message
-            
-        }
+     
       
     }
-
+ 
+    /** TERMINADO */
     async addProductCart (cartId,productId,productStock) {
-        try {
+       
             
             const [car , prod ] = await Promise.all([
                  carts.findById(cartId),
                  products.findById(productId),
             ])
+
+            if (!car) {
+                console.log('deberia entrar aca');
+                const error = new CustomError(
+                    "Error  al encontrar Carrito",
+                    "consulte ID",
+                    "Error: ID.",
+                    EErrors.NOT_FOUND
+                  );
+                  throw error
+            }
+            if (!prod) {
+                console.log('deberia entrar aca producto');
+                const error = new CustomError(
+                    "Error al encontrar producto ",
+                    "consulte ID",
+                    "Error: ID.",
+                    EErrors.NOT_FOUND
+                  );
+                  throw error
+            }
+
+            
             console.log(`car: ${car} , products: ${prod}`)
             if (prod.stock === 0 || productStock > prod.stock) {
        
@@ -86,10 +116,7 @@ export default class CartServiceDB {
                 validate.quantity += 1
                 await carts.updateOne({_id:car._id},{$set: {products: car.products}})
                 await prod.save()
-                // const pop = await carts.findById(cartId).populate('products.id')
-                // console.log('deberia ver pop',pop.products)
-                // .populate('products.id')
-                // const resp = prod._id.toString()
+               
                
                 return car
                 
@@ -119,25 +146,33 @@ export default class CartServiceDB {
            
            
        
-        } catch (error) {
-
-             throw new Error ( `${error.message}` )
-            
-        }
     }
+    /** TERMINADO */
     async deleteProducts(cid,pid){
-        try {
+       
             const cartFind = await carts.findById(cid)
             const productFind = await products.findById(pid)
             
             console.log('este seria el producto ' , productFind)
             if (!cartFind) {
-              throw new Error ( ' No existe el carrito')
+                const error = new CustomError(
+                    "Error  al encontrar Carrito",
+                    "consulte ID",
+                    "Error: ID.",
+                    EErrors.NOT_FOUND
+                  );
+                  throw error
                 
             }
             if (!productFind) {
 
-              throw new Error ( ' No existe el producto en base de datos')
+                const error = new CustomError(
+                    "(E)Error al encontrar producto ",
+                    "consulte ID",
+                    "Error: ID.",
+                    EErrors.NOT_FOUND
+                  );
+                  throw error
 
             }
             for (const iterator of cartFind.products) {
@@ -158,23 +193,35 @@ export default class CartServiceDB {
                 msg: 'el producto ingresado no pertenece a este carrito'
             }
            
-        } catch (error) {
-            throw new Error (`codigo mal ingresado: ${error.message}`)
-        }
-
+     
     }
-
+    /** TERMINADO */
     async putAll(cid,arrayCarts){
-        try {
+      
             console.log('put all products',cid,'y el body!!!!',arrayCarts)
             const cart = await carts.findById(cid)
+            if (!cart) {
+                const error = new CustomError(
+                    "(E)Error al actualizar productos en el carrito ",
+                    "(C)consulte ID",
+                    "(M)Error: ID - Carrito.",
+                    EErrors.NOT_FOUND
+                  );
+                  throw error
+            }
             cart.products = []
             console.log('cart encontrado!!!',cart)
             for (const iterator of arrayCarts) {
                 console.log('viendo idividual individual', iterator)
                 const prodExist = await products.findById(iterator.id)
                 if (!prodExist) {
-                    throw new Error ('el id del producto no existe')
+                    const error = new CustomError(
+                        "Error al encontrar producto en el carrito",
+                        "consulte ID del producto",
+                        "Error: ID - producto",
+                        EErrors.NOT_FOUND
+                      );
+                      throw error
                 }
                 const obj = {
                     id : iterator.id,
@@ -188,12 +235,13 @@ export default class CartServiceDB {
                 msg:"actualizado",
                 cart
             }
-        } catch (error) {
+        
 
-            throw new Error (`Error : ${error.message}`)
             
-        }
+            
+        
     }
+
     async putQuantity(cid,pid,quantity){
        
         try {

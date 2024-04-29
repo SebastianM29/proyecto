@@ -25,6 +25,7 @@ const ProductsSchema = mongoose.Schema({
     },
     status:{
         type: Boolean,
+        default: true
         // required:[true,'codigo obligatorio']
     },
     stock:{

@@ -1,9 +1,13 @@
-export const generateErrorInfo = (user) =>{
-return 
-`requerido:
-*first_name: necesita uin string se recibio ${user.first_name}
-*last_name: necesita uin string se recibio ${user.last_name}
-*email: necesita uin string se recibio ${user.email}`
+export const generateErrorInfo = (obj) =>{
+
+return `requerido:
+*category: necesita uin string se recibio ${obj.category}
+*title: necesita uin string se recibio ${obj.title}
+*description: necesita uin string se recibio ${obj.description}
+*price: necesita uin string se recibio ${obj.price}
+*code: necesita uin string se recibio ${obj.code}
+*stock: necesita uin string se recibio ${obj.stock}
+`
 
 
 }

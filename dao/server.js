@@ -50,15 +50,19 @@ export class Server {
         //info clientes conectados
         this.io = new SocketIoServer(this.httpServer);
         /**cambiado */
+        
+       
 
 
         this.middlewares();
         this.routes();
-        this.conectionDB();
+        
         initializePassport()
         /**agregado */
         this.sockets()
         /**agregado */
+        this.conectionDB();
+        this.handler()
     }
 
     middlewares(){
@@ -69,7 +73,7 @@ export class Server {
         this.app.use(session({
             store:MongoStore.create({
                 mongoUrl: config.mongourlsession,
-                ttl:400
+                ttl:10000000
             }),
             secret: config.sessionKey,
             resave:true,
@@ -93,7 +97,6 @@ export class Server {
 
         //ubicacion de las plantillas para el renderizado
         this.app.set('view engine','handlebars')
-        this.app.use(errHandler)
     }
     routes(){
 
@@ -103,6 +106,12 @@ export class Server {
         this.app.use('/api/session/',sessionRoutes);
         this.app.use('/',viewsRoutes)
 
+       
+    }
+    
+    handler(){
+     console.log('minimo aca etra !');
+        this.app.use(errHandler)
     }
 
     sockets(){
@@ -117,6 +126,8 @@ export class Server {
         await databaseFactory()
 
     }
+
+   
     
     listen(){
             //para corroborar el funcionamiento ejecutar en tu local "socket.io/socket.io.js"

@@ -1,5 +1,8 @@
 // import  ProductServiceDB  from "../dao/productsServiceBD.js"
 import {ProductServiceDB} from "../dao/factory.js";
+import CustomError from "../services/errors/CustomError.js";
+import EErrors from "../services/errors/enums.js";
+import { generateErrorInfo } from "../services/errors/info.js";
 
 console.log('hola productService', ProductServiceDB)
 const prod = new ProductServiceDB()
