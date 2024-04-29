@@ -6,6 +6,7 @@ import CustomError from "../services/errors/CustomError.js";
 import { deleteTheProduct, getAllProducts, getProductById, postCreateTheProduct, putProductsById } from "../services/productServices.js";
 import { generateErrorInfo } from "../services/errors/info.js";
 import EErrors from "../services/errors/enums.js";
+import { generateProducts } from "../helpers/generateProducts.js";
 
 
 const allProducts = new ProductServiceDB()
@@ -85,6 +86,28 @@ export const getProducts = async(req=request,res=response) => {
     res.json(respDB)
     
   
+
+}
+/** delet mocks */
+export const mocking = (req,res) => {
+    try {
+        
+        let prod = []
+
+        for (let i = 0; i < 100; i++) {
+           
+           const value = generateProducts()
+           
+           prod.push(value)
+           }
+
+
+    res.json(prod)
+        
+    } catch (error) {
+        console.log(error.message)
+    }
+ 
 
 }
 /** cambiar luego */
