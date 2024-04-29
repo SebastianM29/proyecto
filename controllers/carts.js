@@ -97,7 +97,7 @@ export const addPostCarts = async(req=request,res=response,next) => {
 
 
 
-
+/** TERMINADO */
 export const deleteOfCarts = async(req=request,res=response,next) => {
     try {
         const cid = req.params.cid
@@ -112,7 +112,7 @@ export const deleteOfCarts = async(req=request,res=response,next) => {
        next(error)
     }
 }
-
+/** TERMINADO */
 export const putAllCarts = async(req=request,res=response,next) => {
     try {
         const cid = req.params.cid
@@ -125,23 +125,10 @@ export const putAllCarts = async(req=request,res=response,next) => {
        next(error)
     }
 }
-// export const putAllCarts = async(req=request,res=response) => {
-//     try {
-//         const cid = req.params.cid
-//         const array = req.body
-//         const resp = await putAllOfTheCart(cid,array)
-
-//         res.json(resp)
-        
-//     } catch (error) {
-//         res.status(404).json({
-//             msg:'error',
-//             error:error.message
-//         })
-//     }
-// }
-export const putQuantityCarts = async(req=request,res=response) => {
+/** TERMINADO */
+export const putQuantityCarts = async(req=request,res=response,next) => {
     try {
+        console.log('este seria el path');
         const cid = req.params.cid
         const pid = req.params.pid
         const quantity = req.body
@@ -151,14 +138,11 @@ export const putQuantityCarts = async(req=request,res=response) => {
         res.json(resp)
         
     } catch (error) {
-        res.status(404).json({
-            msg:'error',
-            error:error.message
-        })
+     next(error)
     }
 }
 
-export const deleteCarts = async(req=request,res=response) => {
+export const deleteCarts = async(req=request,res=response,next) => {
     try {
         const cid = req.params.cid
       
@@ -168,10 +152,7 @@ export const deleteCarts = async(req=request,res=response) => {
         res.json(resp)
         
     } catch (error) {
-        res.status(404).json({
-            msg:'error',
-            error:error.message
-        })
+       next(error)
     }
 }
 

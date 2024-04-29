@@ -241,20 +241,36 @@ export default class CartServiceDB {
             
         
     }
-
+     /** TERMINADO */
     async putQuantity(cid,pid,quantity){
        
-        try {
+       
+        console.log('deberia ver el cart ')
+      
         
             const cart = await carts.findById(cid)
             const prodExist = await products.findById(pid)
             
-            console.log('deberia ver el cart ',cart.products)
-            console.log('deberia ver el producto ',prodExist)
-
+            console.log('no esta carrito')
+            if (!cart) {
+                console.log('no esta carrito');
+                const error = new CustomError(
+                    "(E-N)Error al actualizar el carrito ",
+                    "(C)consulte ID",
+                    "(M)Error: ID - Carrito.",
+                    EErrors.NOT_FOUND
+                  );
+                  throw error
+            }
 
             if (!prodExist) {
-                throw new Error ('producto no existe en la base de datos carrito')
+                const error = new CustomError(
+                    "(E-N)Error al actualizar productos - no se encuentra ",
+                    "(C)consulte ID",
+                    "(M)Error: ID - Carrito.",
+                    EErrors.NOT_FOUND
+                  );
+                  throw error
                 
             }
 
@@ -275,12 +291,9 @@ export default class CartServiceDB {
             }
          
        
-        } catch (error) {
-
-            throw new Error (`Error : ${error.message}`)
-            
-        }
+      
     }
+    /** TERMINADO */
     async delCarts(cid){
         //otra opcion
         // const result = await carts.updateOne(
@@ -292,16 +305,30 @@ export default class CartServiceDB {
         //     throw new Error('No se pudo encontrar el carrito');
         // }
        
-        try {
+       
         
             const cart = await carts.findById(cid)
             if (!cart) {
-                throw new Error ('carrito inexistente') 
+                console.log('no esta carrito');
+                const error = new CustomError(
+                    "(E-N)no existe el carrito ",
+                    "(C)consulte ID",
+                    "(M)Error: ID - Carrito.",
+                    EErrors.NOT_FOUND
+                  );
+                  throw error
             }
             
 
             if (cart.products.length === 0) {
-                throw new Error ('no existe ningun producto en el carrito')
+                const error = new CustomError(
+                    "(E-N)no existe el carrito ",
+                    "(C)consulte ID",
+                    "(M)Error: no existe ningun producto en el carrito.",
+                    EErrors.NOT_FOUND
+                  );
+                  throw error 
+
                 
             }
             cart.products = []
@@ -312,10 +339,6 @@ export default class CartServiceDB {
             cart
            }
        
-        } catch (error) {
-
-            throw new Error (`Error : ${error.message}`)
-            
-        }
+     
     }
 }
