@@ -11,7 +11,8 @@ export default {
     // clientID  :process.env.CLIENTID,
     // clientSecret : process.env.CLIENTSECRET,
     callbackUrl :process.env.CALLBACKURL,
-    persistence : process.env.PERSISTENCE
+    persistence : process.env.PERSISTENCE,
+    entorno: process.env.ENV
 
 }
 

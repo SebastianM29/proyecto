@@ -32,6 +32,8 @@ import { databaseFactory } from "./factory.js";
 import { socketController } from "../sockets/socketControllers.js";
 /** manejo de errores por middleware */
 import errHandler  from "../middlewares/errors/index.js"
+import { addLogger } from "../middlewares/logger.js";
+
 
 
 
@@ -97,6 +99,7 @@ export class Server {
 
         //ubicacion de las plantillas para el renderizado
         this.app.set('view engine','handlebars')
+        this.app.use(addLogger)
     }
     routes(){
 

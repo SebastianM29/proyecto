@@ -65,7 +65,8 @@ export const getProd = async(req=request,res=response) => {
 
 export const getProducts = async(req=request,res=response) => {
     
-
+    req.logger.info('Deberia guardarse en el archivo')
+    req.logger.error('Deberia guardarse???')
     //limit page ,categoria, productos , sort
     const limits = req.query.limit || "10"
     const pages = req.query.page || "1"
