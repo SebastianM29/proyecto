@@ -12,13 +12,17 @@ import { generateProducts } from "../helpers/generateProducts.js";
 const allProducts = new ProductServiceDB()
 const cart = new CartServiceDB()
 
+/** APLICADO LOGGER */
 export const getProd = async(req=request,res=response) => {
     
     let array = []
     let contador = 0
     const {first_name,role,carts} = req.session.user
-
-    console.log('debo ver el id', carts)
+    if (req.logger.debug) {
+        req.logger.debug(`viendo el ID de carts, ${carts}`)
+    }
+       
+    
     //limit page ,categoria, productos , sort
     const limits = req.query.limit || "9"
     const pages = req.query.page || "1"
@@ -35,12 +39,7 @@ export const getProd = async(req=request,res=response) => {
     }
 
     const respDB  =await getAllProducts(obj)
-
-    
-
-    
     respDB.prevLink = respDB.hasPrevPage ? `http://localhost:3000/?page=${respDB.prevPage}`: ''
-
     respDB.nextLink = respDB.hasNextPage ? `http://localhost:3000/?page=${respDB.nextPage} `: ''
     // res.json(respDB)
     
@@ -55,18 +54,20 @@ export const getProd = async(req=request,res=response) => {
 
     respDB.role = role
     respDB.isValid = !(respDB.page <= 0 || respDB.page > respDB.totalPAges)
-    console.log('debo ver respdb',respDB.role)
+    req.logger.info(`ROL:${respDB.role}`)
      
    
     res.render('product', {respDB,carts,objSession} );
 
 }
 
-
+/** APLICADO LOGGER */
 export const getProducts = async(req=request,res=response) => {
+    if (req.logger.debug) {
+        req.logger.debug('Accediendo a: getProducts')
+    }
+       req.logger.info('Obteniendo todos los productos')
     
-    req.logger.info('Deberia guardarse en el archivo')
-    req.logger.error('Deberia guardarse???')
     //limit page ,categoria, productos , sort
     const limits = req.query.limit || "10"
     const pages = req.query.page || "1"
@@ -81,14 +82,11 @@ export const getProducts = async(req=request,res=response) => {
         ordering,
         status
     }
-
-     let respDB =await  getAllProducts(obj)
-
-    res.json(respDB)
-    
-  
-
+    let respDB =await  getAllProducts(obj)
+    res.json(respDB) 
 }
+
+
 /** delet mocks */
 export const mocking = (req,res) => {
     try {
@@ -111,39 +109,37 @@ export const mocking = (req,res) => {
  
 
 }
-/** cambiar luego */
+/** APLICADO LOGGER */
 export const getProductsPorId = async(req=request,res=response,next) => {
     try {
-        console.log('entrando');
+        if (req.logger.debug) {
+            req.logger.debug('Accediendo a: getProductByID')
+        }
+           req.logger.info('Obteniendo los productos por ID')
         const id = req.params.id
         const resp = await getProductById(id)
-        console.log('entrando este es el id',resp);
-    
+        
         res.json({
                 msg: 'producto entcontrado',
                 productos: resp           
                 })
     } catch (error) {
+        req.logger.error('Producto no encontrado por ID')
         next(error)
     }
-    
-       
-     
-
 }
 
-
-
-/** cambiar luego */
+/** APLICADO LOGGER */
 export const postProducts = async(req=request,res=response,next) => {
 
 
     try {
-     
-
-     
-            const resp = req.body
-            const prod = await postCreateTheProduct(resp)
+        if (req.logger.debug) {
+            req.logger.debug('Accediendo a: postProducts')
+        }
+           req.logger.info('Creando productos')
+           const resp = req.body
+           const prod = await postCreateTheProduct(resp)
           
         res.json({
                 msg: 'desde products: Post',
@@ -152,24 +148,20 @@ export const postProducts = async(req=request,res=response,next) => {
         })
         
     } catch (error) {
+        req.logger.error('Error al crear producto')
         next(error)
     }
-
-
-    
 }
 
-
-
-
-/** cambiar luego */
+/** APLICADO LOGGER */
 export const deleteProducts = async(req=request,res=response,next) => {
-   
-
     try {
+        if (req.logger.debug) {
+            req.logger.debug('Accediendo a: deleteProducts')
+        }
         const id = req.params.id 
-       
-       const resp = await deleteTheProduct(id)
+           req.logger.info(`Buscando el id ${id}`)
+        const resp = await deleteTheProduct(id)
     
         
         res.json({
@@ -177,25 +169,22 @@ export const deleteProducts = async(req=request,res=response,next) => {
           producto:resp
                    
           })
-       
     } catch (error) {
+        req.logger.error('Error al borrar producto')
         next(error)
     }
-    
-     
- 
-
 }
 
-
-
-
+/** APLICADO LOGGER */
 export const putProducts = async(req=request,res=response,next) => {
    try {
     
        const id = req.params.id 
        const valueUpd = req.body
-      
+       if (req.logger.debug) {
+       req.logger.debug('Accediendo a: putProducts')
+    }
+       req.logger.info(`Intentando actualizar ID: ${id} `)
        const resp = await putProductsById(id,valueUpd)
         
         res.json({
@@ -203,15 +192,10 @@ export const putProducts = async(req=request,res=response,next) => {
           resp
                    
           })
-       
-     
    } catch (error) {
-    
+        req.logger.error('Error al actualizar producto')
         next(error)
-    
-    
    }
-
 }
 
 export const fail = (req,res) => {

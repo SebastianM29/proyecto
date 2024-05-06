@@ -77,22 +77,17 @@ const localStrategy = local.Strategy
         }))
         passport.use('login', new localStrategy({
             passReqToCallback:true,usernameField:'email'}, async (req,username,password,done)=> {
-                console.log(req.body)
-                console.log('entrando a login')
                 try {
                     const findUser = await User.findOne({email:username})
                    
                     if (!findUser) {
-                        console.log('no existe usuario')
                         return done(null,false)
                     }
                     if (!compare(findUser,password)) {
-                        console.log('contraseña incorrecta')
                         return done(null,false)
                     }
                     //si no tiene carrito ya lo creamos y asignamos el id 
                     if (!findUser.carts) {
-                        console.log('no tiene carritto!!!!!!')
                         const createCart = await CartServiceDB.addCart()
                         findUser.carts = createCart._id
                         await findUser.save()
@@ -101,7 +96,6 @@ const localStrategy = local.Strategy
                     }
                     if (findUser.carts) {
                         const findUser = await User.findOne({email:username}).populate('carts')
-                        console.log('necesitaria ver el carrito que ya tiene',findUser)
                      
                         
                     }
@@ -122,9 +116,7 @@ const localStrategy = local.Strategy
             callbackURL:config.callbackUrl
             },async(accesToken,refreshToken,profile,done)=>{
              try {
-                console.log('no entra ni a palo,perfil completo',profile._json.email)
-                console.log('no entra ni a palo',profile._json)
-                console.log('viendo el clientId', config.clientSecret)
+                console.log('perfil',profile._json.email)
                 let searchEmail = profile._json.email
                 let user =await User.findOne({email: searchEmail })
                 if(!user) {
@@ -153,7 +145,6 @@ const localStrategy = local.Strategy
                     let result = await User.create(create)
                     return done(null,result)
                 }    
-                    console.log('viene a usuario existente',user)
                     return done(null,user)
              } catch (error) {
                 

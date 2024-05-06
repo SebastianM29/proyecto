@@ -20,33 +20,35 @@ export const getCartsAll = async(req=request,res=response) => {
     }
     }
 
-/** TERMINADO */
+/** APLICADO LOGGER */
 export const getCarts = async(req=request,res=response,next) => {
 try {
     const id = req.params.cid.toString()
-    console.log('debo entrar aca ehn el getCarts id',id)
-
+    if (req.logger.debug) {
+        req.logger.debug('Accediendo a: getCarts')
+    }
     const value = await getTheCartById(id)
     console.log('debo entrar aca ehn el getCarts',value)
     res.json(
         value
     )
 } catch (error) {
+    req.logger.error('Error al encontrar carrito por id')
     next(error)
 }
 }
 
 
 
-//render
+/** APLICADO LOGGER */
 export const getCartById = async(req=request,res=response) => {
 try {
     
     const {carts} = req.session.user
-    
-    console.log('este es el carrito',carts)
-    
-
+    if (req.logger.debug) {
+        req.logger.debug('Accediendo a: getCartById')
+    }
+       req.logger.info('ViendoCarrito de usuario')
 
     res.render('cart',{
         carts
@@ -56,15 +58,17 @@ try {
 }
 }
 
-
+/** APLICADO LOGGER */
 export const postCarts = async(req=request,res=response) => {
     try {
-          
+     
             const value =  await createTheCart()
+            if (req.logger.debug) {
+                req.logger.debug('Accediendo a: postCarts')
+            }
+               req.logger.info('Asignando Carrito para el usuario')
             res.json(value)
    
-        
-        
     } catch (error) {
         
        throw new Error ('Error al crear carrito')
@@ -72,7 +76,7 @@ export const postCarts = async(req=request,res=response) => {
     }
 }
 
-/** TERMINADO */
+/** APLICADO LOGGER */
 export const addPostCarts = async(req=request,res=response,next) => {
 
     try {
@@ -80,57 +84,65 @@ export const addPostCarts = async(req=request,res=response,next) => {
         const pid = req.params.pid
         
         const{productStock} = req.body
-
+        if (req.logger.debug) {
+            req.logger.debug(`Accediendo a: addPostCarts id Carrito:${cid} , id producto ${pid}`)
+        }
+           req.logger.info('Agregando producto al carrito del usuario y ejecutando compra')
         const resp = await addProductToTheCart(cid,pid,productStock)
-       console.log("seria el stock",productStock)
         
         res.json({resp})
         
     } catch (error) {
 
-        
-     next(error)
+      req.logger.error('Error al ingresar producto al carrito')
+      next(error)
         
     }
 }
 
-
-
-
-/** TERMINADO */
+/** APLICADO LOGGER */
 export const deleteOfCarts = async(req=request,res=response,next) => {
     try {
         const cid = req.params.cid
         const pid = req.params.pid
         const resp = await deleteProductsOfTheCart(cid,pid)
-
-        
-        
+        if (req.logger.debug) {
+            req.logger.debug(`Accediendo a: deleteOfCarts id Carrito:${cid} , id producto ${pid}`)
+        }
+        req.logger.info('Eliminando producto del carrito del usuario')
         res.json(resp)
         
     } catch (error) {
+       req.logger.error('Error al borrar el carrito')
        next(error)
     }
 }
-/** TERMINADO */
+/** APLICADO LOGGER */
 export const putAllCarts = async(req=request,res=response,next) => {
     try {
         const cid = req.params.cid
         const array = req.body
+        if (req.logger.debug) {
+            req.logger.debug(`Accediendo a: putAllCarts`)
+        }
         const resp = await putAllOfTheCart(cid,array)
-
         res.json(resp)
         
     } catch (error) {
+       req.logger.error('Error al actualizar los carritos')
        next(error)
     }
 }
-/** TERMINADO */
+/** APLICADO LOGGER */
 export const putQuantityCarts = async(req=request,res=response,next) => {
     try {
         console.log('este seria el path');
         const cid = req.params.cid
         const pid = req.params.pid
+        if (req.logger.debug) {
+            req.logger.debug(`Accediendo a: putQuantityCarts id Carrito:${cid} , id producto ${pid}`)
+        }
+        req.logger.info('Actualizando producto del carrito del usuario')
         const quantity = req.body
 
         const resp = await putQuantityIdInCart(cid,pid,quantity)
@@ -138,33 +150,41 @@ export const putQuantityCarts = async(req=request,res=response,next) => {
         res.json(resp)
         
     } catch (error) {
+     req.logger.error('Error al actualizar las cantidades')
      next(error)
     }
 }
 
+/** APLICADO LOGGER */
 export const deleteCarts = async(req=request,res=response,next) => {
     try {
         const cid = req.params.cid
-      
+        if (req.logger.debug) {
+            req.logger.debug(`Accediendo a: deleteCarts`)
+        }
+        req.logger.info('Eliminando Carrito')
 
         const resp = await deleteIdThisCart(cid)
 
         res.json(resp)
         
     } catch (error) {
+        req.logger.error('Error al borrar carrito por ID')
+
        next(error)
     }
 }
 
 export const purchaseCarts =  async(req,res) => {
     try {
-       
-        console.log('viendo este email',req.session.user)
         const {email} = req.session.user
         const cid = req.params.cid
         const{sumaAmount}=req.body
-        console.log('viendo este email',email, "y el id del carrito", cid)
+        if (req.logger.debug) {
+            req.logger.debug(`Accediendo a: Generador de tickets: PURCHASE`)
+        }
         const unique = uuidv4()
+        req.logger.info(`viendo el ${email} y el id del carrito ${cid} , para generar el ticket ${unique}`)
         const purchase_datetime = new Date().toISOString();
         const obj = {
 
@@ -175,12 +195,8 @@ export const purchaseCarts =  async(req,res) => {
 
 
         }
-
-
-
-        ticketDB.TicketsCreate(obj)
-        
-        console.log('entrando',cid)
+       ticketDB.TicketsCreate(obj)
+        req.logger.http(`ticket Creado`)
         res.json({msg:cid})
     } catch (error) {
         console.log(error.message)

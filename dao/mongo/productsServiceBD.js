@@ -48,12 +48,8 @@ export default class ProductServiceDB {
     }
     /** TERMINADO */
     async addProduct(obj){
-        
-        
-        console.log(obj);
-  
+   
             if (![obj.category, obj.title, obj.description, obj.price, obj.code, obj.stock].every(Boolean) ) {
-                 console.log('entra porque no haay nada');
                  const error = new CustomError(
                      "(E)Error Creacion producto",
                      "(C)Datos incompletos",
@@ -67,15 +63,14 @@ export default class ProductServiceDB {
                 
                 
                 const productoCreado = await products.create(obj)
-            return productoCreado
+                return productoCreado
 
-
-          
         }
+        
         /** TERMINADO */
         async deleteProducts(id){
            
-                console.log('entro a la clase?')
+                
                 const prodFind = await products.findById(id)
                 if (!prodFind) {
                     console.log('eliinando');
@@ -87,7 +82,7 @@ export default class ProductServiceDB {
                       );
                       throw error
                 }
-                console.log(prodFind)
+               
                 await products.findByIdAndDelete(id)
                 return prodFind
 

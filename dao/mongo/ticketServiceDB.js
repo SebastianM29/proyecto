@@ -6,9 +6,9 @@ export default class Tickets {
 
     }
     async TicketsCreate(obj) {
-        console.log('creando ticket',obj)
+       
         await ticket.create(obj)
-
+     
     }
 
 }

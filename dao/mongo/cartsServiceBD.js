@@ -97,7 +97,6 @@ export default class CartServiceDB {
             }
 
             
-            console.log(`car: ${car} , products: ${prod}`)
             if (prod.stock === 0 || productStock > prod.stock) {
        
                const resp = prod._id.toString()

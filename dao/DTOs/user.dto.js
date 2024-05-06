@@ -2,7 +2,7 @@
 
 export default class UserDTO {
     constructor(user) {
-        console.log('deberia ver el usuario',user)
+        console.log('deberia ver el usuario: DTO',user)
         this.first_name = (user.first_name).toUpperCase()
         this.last_name  = user.last_name || 'no info'
         this.age = user.age || 'no info'

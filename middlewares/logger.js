@@ -7,7 +7,7 @@ import config from "../config/config.js"
 
 /** middleware */
 export const addLogger = async(req,res,next) => {
-    let ent = "developmenft"
+    let ent = "development"
     let logger
     logger = config.entorno === ent ? devLogger: prodLogger
 
