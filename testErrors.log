@@ -1,0 +1,6 @@
+error: test error allLogs
+warning: test warning allLogs
+info: test info allLogs
+http: test http allLogs
+verbose: test verbose allLogs
+debug: test debug allLogs

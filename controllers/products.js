@@ -109,6 +109,28 @@ export const mocking = (req,res) => {
  
 
 }
+export const allLoggs = (req,res,next) => {
+    try {
+        req.logger.error('test error allLogs')
+        req.logger.warning('test warning allLogs')
+        req.logger.info('test info allLogs')
+        req.logger.http('test http allLogs')
+        req.logger.verbose('test verbose allLogs')
+        req.logger.debug('test debug allLogs')
+        req.logger.silly('test silly allLogs')
+        
+        res.json({msg:'llegando a allLoggs'}) 
+    } catch (error) {
+         console.log(error)  
+    }
+}
+
+
+
+
+
+
+
 /** APLICADO LOGGER */
 export const getProductsPorId = async(req=request,res=response,next) => {
     try {

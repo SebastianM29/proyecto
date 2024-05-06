@@ -121,5 +121,11 @@ Queda obviada la generacion de ruta privada ya q solo deje visual el campo de Ad
 ![alt text](image-51.png)
 *haciendo como dije un filter en el array solucionado, y mejora visual
 ![alt text](image-53.png)
+*entorno Produccion
+![alt text](image-56.png)
+*entorno Desarrollo
+![alt text](image-57.png)
+*ruta testeo logger
+![alt text](image-55.png)
 
 
