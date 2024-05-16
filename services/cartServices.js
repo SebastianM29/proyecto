@@ -8,40 +8,33 @@ import { addProductToCart,
          putQuantityIdCart } from "../persistence/cartData.js"
 
 export const getAllTheCarts = async() => {
-    const value = await getAllcarts()
-    return value
+    return await getAllcarts()
 }
 
 export const getTheCartById = async(id) =>{
-    const value = await getCartById(id) 
-    return value
+    return await getCartById(id) 
 }
 
 export const createTheCart = async() => {
-    const value = await createCart()
-    return value
+    return await createCart()
 }
 export const addProductToTheCart = async(cid,pid,productStock) => {
-const value = await addProductToCart(cid,pid,productStock)
-return value
+    return await addProductToCart(cid,pid,productStock)
+
 }
 
 export const deleteProductsOfTheCart = async (cid,pid) => {
-    const value = await deleteProductsOfCart(cid,pid)
-    return value
+    return await deleteProductsOfCart(cid,pid)
 }
 export const putAllOfTheCart = async(cid,array) => {
-    const value = await putAllOfcart(cid,array)
-    return value
+    return await putAllOfcart(cid,array)
     
 }
 
 export const putQuantityIdInCart = async (cid,pid,quantity) => {
-    const value = await putQuantityIdCart(cid,pid,quantity)
-    return value
+    return await putQuantityIdCart(cid,pid,quantity)
 }
 
 export const deleteIdThisCart = async (cid) => {
-    const value = await deleteCart(cid)
-    return value
+    return await deleteCart(cid)
 }

@@ -1,6 +1,6 @@
 import { Router} from "express";
 const router = Router()
-import { login, logout, register } from "../controllers/sessions.js";
+import { login, logout, newPass, register, restore, restorePass, testUser, updPass } from "../controllers/sessions.js";
 import passport from "passport";
 import UserDTO from "../dao/DTOs/user.dto.js";
 
@@ -29,6 +29,18 @@ router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'ht
     // console.log('nercesito verlooooo',req.session.user)
     res.redirect('/')
 })
+
+router.get('/restore', restore )
+router.post('/restorePass', restorePass)
+router.get('/new/:token', newPass)
+router.put('/updPass', updPass)
+
+
+/** PROBANDO ARTILLERY */
+router.get('/api/test/user', testUser )
+
+
+
 router.post('/login',passport.authenticate('login',{
       failureRedirect:'http://localhost:3000/login'
 }), login)

@@ -6,7 +6,8 @@ import { dbConnection } from "../db/config.js";
 
  const databaseFactory =  async() => {
     let CartServiceDB;
- let ProductServiceDB;
+    let ProductServiceDB;
+    let UserDB;
     switch (config.persistence) {
         case "MONGO":
             try {
@@ -14,12 +15,14 @@ import { dbConnection } from "../db/config.js";
                 console.log('Conectado a la base de datos MongoDBNOW');
                 
                 const { default: CartS} = await import('./mongo/cartsServiceBD.js');
-                const { default: Prod} = await import('./mongo/productsServiceBD.js');
+                const { default: Prod} = await import('./mongo/productsServiceBD.js');               
+                const { default: Users} = await import('./mongo/usermodelsBD.js');               
                 
                 CartServiceDB= CartS
                 ProductServiceDB = Prod
                 console.log(ProductServiceDB)
                 ProductServiceDB = Prod;
+                UserDB = Users;
             } catch (error) {
                 console.error('Error al conectar a la base de datos MongoDB:', error);
             }
@@ -38,9 +41,9 @@ import { dbConnection } from "../db/config.js";
             console.error('Tipo de persistencia no soportado:', config.persistence);
             break;
     }
-    return {CartServiceDB,ProductServiceDB}
+    return {CartServiceDB,ProductServiceDB,UserDB}
 }
-const{CartServiceDB,ProductServiceDB} = await databaseFactory()
+const{CartServiceDB,ProductServiceDB,UserDB} = await databaseFactory()
 
 
 
@@ -49,5 +52,6 @@ console.log('se ve afuera? hola productService', ProductServiceDB)
 export {
     CartServiceDB,
     ProductServiceDB,
+    UserDB,
     databaseFactory
 }

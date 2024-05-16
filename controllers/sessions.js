@@ -2,6 +2,13 @@
 import { request,response } from "express";
 import User from "../dao/mongo/models/usermodels.js";
 import UserDTO from "../dao/DTOs/user.dto.js";
+import { generateUsers } from "../helpers/generateUser.js";
+import { findServiceUSer, serviceFindByIDanUpdate } from "../services/userServices.js";
+import { mail } from "../helpers/nodemailer.js";
+import config from "../config/config.js"
+import { jwtVerify } from "../helpers/jwt.js";
+
+
 
 export const register = async(req = request,res = response)=> {
     try {
@@ -72,6 +79,61 @@ export const login =  async(req = request,res = response)=> {
     }
 }
 
+export const restore = (req,res) => {
+ res.render('restore')
+}
+export const restorePass = async(req,res,next) => {
+    /** ESTRUCTURAR LUEGO */
+    try {
+     const emailRestore = await findServiceUSer(req.body)
+     mail(emailRestore._id,emailRestore.email)
+  
+     
+    
+     res.status(200).json({
+     msg:"CORREO ENVIADO"
+        
+     })
+        
+    } catch (error) {
+        req.logger.error('Error USUARIO')
+        next(error)
+    }
+}
+
+export const newPass = async(req,res) => {
+    try {
+        const token = req.params.token
+        const data = jwtVerify(token,config.secretWORD)
+     
+        console.log('debo ver este nuevo mensaje nuevo password', data);
+     
+        
+       
+        res.render('newPass')
+           
+       } catch (error) {
+           req.logger.error('Error Pass')
+           res.render('expired')
+           
+       }
+
+}
+export const updPass = async(req,res,next) => {
+try {
+    const{token,password} = req.body
+    console.log('aca esta la pagina upd',token,password);
+    await serviceFindByIDanUpdate(token,password)
+    res.json({msg:"aca esta"})
+} catch (error) {
+    req.logger.error('Error en el update')
+    next(error)
+    
+}
+
+
+}
+
 export const logout =  (req = request,res = response)=>{
     try {
         req.session.destroy((err)=> {
@@ -87,3 +149,20 @@ export const logout =  (req = request,res = response)=>{
       throw error
     }
 } 
+
+export const testUser = (req,res) => {
+    try {
+        
+
+       
+            const value = generateUsers()
+            
+     
+        res.json(
+            
+            value
+        )
+    } catch (error) {
+        
+    }
+}

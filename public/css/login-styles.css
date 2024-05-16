@@ -28,9 +28,16 @@ label{
     font-size: 16px;
 }
 #link-register{
-    margin-top: 10px;
+    margin-top: 2px;
     font-size: 17px;
     color:rgb(62, 194, 60);
     text-align: end;
     text-decoration:underline !important;
+}
+#restore{
+    margin-top: 15px;
+    font-size: 20px;
+    text-align: end;
+    color: rgb(238, 255, 0);
+    margin-left: 10px;
 }

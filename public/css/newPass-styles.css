@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+}
+
+
+
+
+.fondoNewpass{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../image/image3.jpg');
+    background-size: cover;
+    
+    width: 100%;
+    height: 100vh;
+}
+
+
+#putDates{
+    background-color: rgba(157, 165, 42, 0.301);
+    display: flex;
+    flex-direction: column;
+   
+    padding: 10px;
+    height: 200px;
+    width: 400px;
+}

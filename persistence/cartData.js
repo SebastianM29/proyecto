@@ -8,34 +8,34 @@ console.log('hola',CartServiceDB)
 const cartDB = new CartServiceDB()
 
 export const getAllcarts = async() => {
-    const value = await cartDB.cartAll()
-    return value
+    return await cartDB.cartAll()
+    
 }
 export const getCartById = async(id) => {
-    const value = await cartDB.cartsById(id)
-    return value
+    return await cartDB.cartsById(id)
+    
 }
 export const createCart = async() => {
-   const value = await CartServiceDB.addCart()
-   return value
+   return await CartServiceDB.addCart()
+   
 }
 export const addProductToCart = async (cid,pid,productStock) => {
-    const value = await cartDB.addProductCart(cid,pid,productStock)
-    return value
+    return await cartDB.addProductCart(cid,pid,productStock)
+    
 }
 export const deleteProductsOfCart = async (cid,pid) => {
- const value = await cartDB.deleteProducts(cid,pid)
- return value
+ return await cartDB.deleteProducts(cid,pid)
+ 
 }
 export const putAllOfcart = async(cid,array) => {
-    const value = await cartDB.putAll(cid,array)
-    return value
+    return await cartDB.putAll(cid,array)
+    
 }
 export const putQuantityIdCart = async (cid,pid,quantity) => {
-    const value  = await cartDB.putQuantity(cid,pid,quantity)
-    return value
+    return await cartDB.putQuantity(cid,pid,quantity)
+    
 }
 export const deleteCart =  async (cid) => {
-    const value = await cartDB.delCarts(cid)
-    return value 
+    return await cartDB.delCarts(cid)
+     
 }

@@ -1,0 +1,24 @@
+body{
+    margin:0px;
+    
+    
+}
+
+.fondo-restore{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../image/image3.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+.restoreForm{
+    padding: 15px;
+    height: 200px;
+    width: 400px;
+    background-color: rgba(165, 42, 42, 0.177);
+    display: flex;
+    flex-direction: column;
+}
