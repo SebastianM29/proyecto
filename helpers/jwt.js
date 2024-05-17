@@ -3,7 +3,7 @@ import config from "../config/config.js"
 
 
 export const generateToken = (id) => {
-     return jwt.sign({id},config.secretWORD,{expiresIn:'20s'})
+     return jwt.sign({id},config.secretWORD,{expiresIn:'1h'})
 }
 
 export const jwtVerify = (token) => {
