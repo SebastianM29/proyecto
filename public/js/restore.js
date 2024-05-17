@@ -2,6 +2,7 @@ const restore =  document.querySelector('.restoreForm')
 
 restore.addEventListener('submit', async(e) => {
     e.preventDefault()
+    const messageButton = document.getElementById('linkRestore')
     try {
         console.log('entrando')
         const email = document.getElementById('email').value
@@ -19,15 +20,18 @@ restore.addEventListener('submit', async(e) => {
         
     
         if (data.ok) {
-            console.log('anda bien');  
-                 
+            messageButton.innerHTML = "Revise su correo"  
+            setTimeout(() => {
+                messageButton.innerHTML= "Envio link recuperacion"   
+            }, 3000); 
         }
         if (!data.ok) {
-         
+            messageButton.innerHTML= "Envie un email Registrado"
+            setTimeout(() => {
+                messageButton.innerHTML= "Envio link recuperacion"   
+            }, 3000);
             const resp = await data.json()
             console.log(resp)
-           
-            
         }
 
     } catch (error) {

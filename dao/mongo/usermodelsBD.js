@@ -33,10 +33,7 @@ export default class UserDB  {
 
     async findByIdAndUPD (token,pass) {
         const {id} = jwtVerify(token,config.secretWORD)
-        /** ERROR PERSONALIZADO */
-        /**        aca          */
-        /**-------------------- */
-        console.log("el token",id,"y el pass",pass);
+      
         const hashPass = createHash(pass)
         await User.findByIdAndUpdate(id,{password:hashPass},{new:true})
 

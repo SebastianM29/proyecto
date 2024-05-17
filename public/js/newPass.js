@@ -2,7 +2,7 @@ const pudDates = document.querySelector('#putDates')
 
 pudDates.addEventListener('submit', async(e)=> {
     try {
-        e.preventDefault()
+       
         const urlParams = window.location.pathname.split('/').pop()
         console.log('path token',urlParams);
     
@@ -26,8 +26,9 @@ pudDates.addEventListener('submit', async(e)=> {
         if (data.ok){
           console.log('deberia actualizarse');
         }
-        if (!data.ok) {
-            console.log('error de actualizacion');
+        if (!data) {
+            const resp = await data.json()
+            console.log('creo q no retorna nada',resp);
             
         }
         

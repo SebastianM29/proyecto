@@ -10,7 +10,7 @@ export default (error, req, res, next) => {
       console.log('deberia entrar?');
        res
          .status(404)
-         .json({ status: "Error Id", message: error.message ,causa : error.cause, error: error.name});
+         .json({ status: "Error", message: error.message ,causa : error.cause, error: error.name});
        break;
     case EErrors.REPEAT_CODE:
       console.log('err repeat');

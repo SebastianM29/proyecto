@@ -47,8 +47,8 @@ export const register = async(req = request,res = response)=> {
 
 export const login =  async(req = request,res = response)=> {
 
-    try {
-            console.log('este es el user de passport?',req.user)
+    try {   
+            req.logger.info('este es el user de passport?',req.user)
             if (req.user) {
             console.log('entro aca al res backend')
             const {first_name,last_name,email,age,role,carts} = req.user
@@ -80,11 +80,14 @@ export const login =  async(req = request,res = response)=> {
 }
 
 export const restore = (req,res) => {
+ req.logger.info('render restore')
  res.render('restore')
 }
 export const restorePass = async(req,res,next) => {
     /** ESTRUCTURAR LUEGO */
     try {
+     req.logger.info('enviando mail')
+
      const emailRestore = await findServiceUSer(req.body)
      mail(emailRestore._id,emailRestore.email)
   
@@ -96,17 +99,18 @@ export const restorePass = async(req,res,next) => {
      })
         
     } catch (error) {
-        req.logger.error('Error USUARIO')
+        req.logger.error('Error Envio de MAIL')
         next(error)
     }
 }
 
 export const newPass = async(req,res) => {
     try {
+        req.logger.info('render newPass')
+
         const token = req.params.token
         const data = jwtVerify(token,config.secretWORD)
      
-        console.log('debo ver este nuevo mensaje nuevo password', data);
      
         
        
@@ -122,7 +126,8 @@ export const newPass = async(req,res) => {
 export const updPass = async(req,res,next) => {
 try {
     const{token,password} = req.body
-    console.log('aca esta la pagina upd',token,password);
+    req.logger.info(`recibiendo token:${token} y pass:${password}`)
+
     await serviceFindByIDanUpdate(token,password)
     res.json({msg:"aca esta"})
 } catch (error) {
