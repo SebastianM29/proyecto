@@ -127,5 +127,20 @@ Queda obviada la generacion de ruta privada ya q solo deje visual el campo de Ad
 ![alt text](image-57.png)
 *ruta testeo logger
 ![alt text](image-55.png)
+*se inserta un link para recuperar password 
+![alt text](image-58.png)
+*Get para un envio de mail al correo
+![alt text](image-59.png)
+*el cual mediante un post a una funcion dentro de la carpeta controladores maneja la logica de nodemailer
+![alt text](image-60.png)
+*para enviar a otro Get y rechazar si el token expira o validarlo si esta dentro de los limites establecidos de dicho token
+![alt text](image-61.png)
+![alt text](image-62.png)
+*manejando errores en el front enviado desde el backend como : "pass mayor a 8 caracteres" , "no repetir contraseña" o en este caso y dentro de esta pagina "envie email nuevamente"(token vencido).
+![alt text](image-67.png)
+![alt text](image-64.png)
+![alt text](image-65.png)
+![alt text](image-66.png)
+
 
 

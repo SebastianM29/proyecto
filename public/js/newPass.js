@@ -53,7 +53,7 @@ pudDates.addEventListener('submit', async(e)=> {
         }
 
         if (data.status === 500) {
-            const resp = await data.json()
+            
            
             messageButton.innerHTML = "envie Email nuevamente"
             setTimeout(() => {
