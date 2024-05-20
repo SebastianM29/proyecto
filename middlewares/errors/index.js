@@ -16,7 +16,7 @@ export default (error, req, res, next) => {
       console.log('err repeat');
        res
          .status(400)
-         .json({ status: "error codigo repetido", error: error.name,causa : error.cause, message: error.message });
+         .json({ status: "Not Found", error: error.name,causa : error.cause, message: error.message });
        break;
     case EErrors.ROUTING_ERROR:
       console.log('err router');
