@@ -3,6 +3,7 @@ import path, { dirname } from "path";
 import handlebars from "express-handlebars";
 import { fileURLToPath } from "url";
 import  cors  from "cors";
+import swaggerUI from "swagger-ui-express";
 
 
 
@@ -33,6 +34,7 @@ import { socketController } from "../sockets/socketControllers.js";
 /** manejo de errores por middleware */
 import errHandler  from "../middlewares/errors/index.js"
 import { addLogger } from "../middlewares/logger.js";
+import { swaggerSpecs } from "../helpers/swaggerOptions.js";
 
 
 
@@ -108,6 +110,8 @@ export class Server {
         this.app.use('/',messagesRoutes);
         this.app.use('/api/session/',sessionRoutes);
         this.app.use('/',viewsRoutes)
+
+        this.app.use('/api/docs',swaggerUI.serve , swaggerUI.setup(swaggerSpecs))
 
        
     }
