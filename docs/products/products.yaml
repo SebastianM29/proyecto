@@ -53,6 +53,26 @@ paths:
             application/json:
               schema:
                 $ref: "#components/schemas/products"
+    delete:
+      summary: Eliminar producto
+      tags:
+        - Producto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: el id del producto
+          schema:
+           $type: string
+      responses:
+         "200":
+          description:  producto eliminado
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/products"
+         "404":
+          description: Producto no encontrado
 components:
   schemas:
     products:
