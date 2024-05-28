@@ -73,6 +73,30 @@ paths:
                 $ref: "#components/schemas/products"
          "404":
           description: Producto no encontrado
+    put:
+      summary: Actualizar producto
+      tags:
+        - Producto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Actualizando mediante Id
+          schema:
+           $type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/ProductCreation"
+      responses:
+         "200":
+          description:  producto eliminado
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/products"
 components:
   schemas:
     products:

@@ -1,0 +1,138 @@
+paths:
+  /carts/:
+    get:
+      summary: Obtener todos los carritos
+      tags:
+        - Carritos
+      responses:
+        "200":
+          description: Todos los carritos obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/carts"
+        "500":
+          description: Error interno del servidor
+    post:
+      summary: Crear carrito
+      tags:
+        - Carrito
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/CartCreation"
+      responses:
+        "200":
+          description: Carrito creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/carts"
+        "500":
+          description: Error interno del servidor
+  /carts/{id}:
+    get:
+      summary: Obtener un carrito por ID
+      tags:
+        - Carritos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Carrito obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/carts"
+    delete:
+      summary: Eliminar carrito
+      tags:
+        - Carrito
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Carrito eliminado
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/carts"
+        "404":
+          description: Carrito no encontrado
+    put:
+      summary: Actualizar carrito
+      tags:
+        - Carrito
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Actualizar mediante ID
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/CartCreation"
+      responses:
+        "200":
+          description: Carrito actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/carts"
+
+components:
+  schemas:
+    carts:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: ID del carrito generado automáticamente
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: ObjectId
+                description: ID del producto
+              quantity:
+                type: number
+                description: Cantidad del producto en el carrito
+      example:
+        _id: ObjectId("60c72b2f5f1b2c001f8e4b23")
+        products:
+          - id: ObjectId("60c72b2f5f1b2c001f8e4b24")
+            quantity: 3
+    CartCreation:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: ID del producto
+              quantity:
+                type: number
+                description: Cantidad del producto en el carrito
