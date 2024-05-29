@@ -81,7 +81,13 @@ export class Server {
             }),
             secret: config.sessionKey,
             resave:true,
-            saveUninitialized:true
+            saveUninitialized:true,
+            //agregado
+            cookie: {
+                maxAge: 24 * 60 * 60 * 1000, // 1 día en milisegundos
+                secure: false, // true si usas HTTPS
+                httpOnly: true
+            }
         }))
         this.app.use(passport.initialize())
         this.app.use(passport.session())
