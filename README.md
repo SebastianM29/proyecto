@@ -141,6 +141,8 @@ Queda obviada la generacion de ruta privada ya q solo deje visual el campo de Ad
 ![alt text](image-64.png)
 ![alt text](image-65.png)
 ![alt text](image-66.png)
+*Documentacion en Swagger
+![alt text](image-68.png)
 
 
 
