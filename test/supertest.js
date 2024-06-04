@@ -128,6 +128,8 @@ describe('testing',()=> {
                
                 expect(response.statusCode).to.equal(302);
             });
+
+
         
            // Test para iniciar sesión correctamente con el usuario registrado anteriormente
             it('debería iniciar sesión correctamente', async () => {
@@ -140,10 +142,12 @@ describe('testing',()=> {
                 cookie = response.headers['set-cookie'][0];
 
                 const profileResponse = await requester.get('profile').set('Cookie', cookie);
-                console.log(profileResponse);
+                const text = profileResponse.text
+               
                
 
                 expect(response.headers['set-cookie']).to.be.ok;
+                expect(text).to.include('juan@hotmail.com')
                 // Verifica que se haya establecido la sesión correctamente
             });
         
