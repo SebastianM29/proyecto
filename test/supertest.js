@@ -138,7 +138,10 @@ describe('testing',()=> {
                 
                 const response = await requester.post('api/session/login').send(mockUs);
                 cookie = response.headers['set-cookie'][0];
-                console.log(response.body);
+
+                const profileResponse = await requester.get('profile').set('Cookie', cookie);
+                console.log(profileResponse);
+               
 
                 expect(response.headers['set-cookie']).to.be.ok;
                 // Verifica que se haya establecido la sesión correctamente
