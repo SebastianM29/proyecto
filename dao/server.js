@@ -61,7 +61,7 @@ export class Server {
         this.middlewares();
         this.routes();
         
-        initializePassport()
+        
         /**agregado */
         this.sockets()
         /**agregado */
@@ -80,8 +80,8 @@ export class Server {
                 ttl:10000000
             }),
             secret: config.sessionKey,
-            resave:true,
-            saveUninitialized:true,
+            resave:false,
+            saveUninitialized:false,
             //agregado
             cookie: {
                 maxAge: 24 * 60 * 60 * 1000, // 1 día en milisegundos
@@ -89,6 +89,9 @@ export class Server {
                 httpOnly: true
             }
         }))
+
+        initializePassport()
+        
         this.app.use(passport.initialize())
         this.app.use(passport.session())
 

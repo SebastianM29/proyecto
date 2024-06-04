@@ -14,6 +14,6 @@ export const generateUsers = () => {
         age: faker.string.numeric(2),
         password: faker.string.numeric(6),
         role: "user",
-        carts: faker.database.mongodbObjectId()
+        // carts: faker.database.mongodbObjectId()
     }
 }

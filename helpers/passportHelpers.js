@@ -62,6 +62,7 @@ const localStrategy = local.Strategy
                            }
                            const userSave = await User.create(datos)
                            console.log(userSave)
+                        //    return done(null,false)
                            return done(null,userSave)
     
                     }

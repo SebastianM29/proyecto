@@ -6,7 +6,7 @@ import UserDTO from "../dao/DTOs/user.dto.js";
 
 
 
-router.post('/register',passport.authenticate('register',{successRedirect:'http://localhost:3000/login',failureRedirect:'http://localhost:3000/register'/*,failureFlash:true*/})/*,register*/ )
+router.post('/register',passport.authenticate('register',{successRedirect:'http://localhost:3000/login',failureRedirect:'http://localhost:3000/register'}) )
 router.get('/github',passport.authenticate('github',{scope:['user:email']}),async(req,res)=>{
   
 })
