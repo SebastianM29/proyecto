@@ -119,7 +119,7 @@ describe('testing',()=> {
             let cookie; // Variable para almacenar la cookie de sesión
             let anotherCookie
            // Test para registrar un nuevo usuario y obtener la cookie de sesión
-            it('registro', async () => {
+            it('registro, usuario creado por faker', async () => {
           
                 const user = generateUsers()
         
@@ -152,7 +152,7 @@ describe('testing',()=> {
             });
         
             //Test para cerrar sesión correctamente
-            it('debería cerrar sesión correctamente', async () => {
+            it('debería cerrar sesiónes correctamente', async () => {
                 const response = await requester.get('api/session/logout').set('Cookie', cookie);
                 const responseTwo = await requester.get('api/session/logout').set('Cookie', anotherCookie);
         
