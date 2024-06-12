@@ -9,6 +9,7 @@ export default class UserDTO {
         this.email = user.email
         this.carts = user.carts
         this.role = user.role || 'user'
+        this.id = user.id || 'ID'
   
     }
 

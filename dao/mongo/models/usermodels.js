@@ -26,7 +26,7 @@ const UserSchema = new Schema({
     },
     role:{
         type:String,
-        enum:['user','admin'],
+        enum:['user','admin','PREMIUM'],
         default:'user'
 
     },
@@ -34,6 +34,21 @@ const UserSchema = new Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:'carts'
             
+    },
+    documents:[
+        {
+            name:{
+                type:String,
+
+            },
+            reference:{
+                type:String
+            }
+
+        }
+    ],
+    last_conection:{
+        tipe:String
     }
     
 

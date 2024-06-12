@@ -3,7 +3,7 @@ import { request,response } from "express";
 import User from "../dao/mongo/models/usermodels.js";
 import UserDTO from "../dao/DTOs/user.dto.js";
 import { generateUsers } from "../helpers/generateUser.js";
-import { findServiceUSer, serviceFindByIDanUpdate } from "../services/userServices.js";
+import { findByIdChangePremiumSer, findServiceUSer, getUserByIdServAndCharge, serviceFindByIDanUpdate } from "../services/userServices.js";
 import { mail } from "../helpers/nodemailer.js";
 import config from "../config/config.js"
 import { jwtVerify } from "../helpers/jwt.js";
@@ -51,8 +51,9 @@ export const login =  async(req = request,res = response)=> {
             req.logger.info('este es el user de passport?',req.user)
             if (req.user) {
             console.log('entro aca al res backend')
-            const {first_name,last_name,email,age,role,carts} = req.user
+            const {first_name,last_name,email,age,role,carts,_id} = req.user
             const idCart = carts
+            const idUserString = _id ? _id.toString() : null
             console.log('este seria el carrito asignado que quilombo tengo',idCart)
             /** agregar dtos */
 
@@ -62,7 +63,8 @@ export const login =  async(req = request,res = response)=> {
                 email,
                 age,
                 role,
-                carts:idCart
+                carts:idCart,
+                id:idUserString
             }
        )
 
@@ -170,4 +172,49 @@ export const testUser = (req,res) => {
     } catch (error) {
         
     }
+}
+
+export const premium = async (req,res,next) => {
+    try {
+        const id = req.params.uid
+        const changeToPremium = await findByIdChangePremiumSer(id)
+        console.log('viendo el iod',changeToPremium);
+        req.session.user.role = changeToPremium.role
+        req.session.save()
+        console.log('como queda??',req.session.user);
+        res.json({
+            msg: "acceso a usuario premium"
+        })
+        
+    } catch (error) {
+        req.logger.error('Error en el update a premium')
+        next(error)
+    }
+
+}
+
+export const documentPremium = async(req,res,next) => {
+    try {
+        console.log('llego al path premium!');
+        const id = req.params.uid
+        const document = req.files.document
+        const home = req.files.home 
+         console.log('viendo el home en actualizar',home);
+        const validatePremium={
+            document,
+            home
+        }
+
+       const user = await getUserByIdServAndCharge(id,validatePremium)
+       res.json(user)
+
+
+        
+        console.log(id);
+    } catch (error) {
+        req.logger.error('Error en el update a Premium')
+        console.log(error.message);
+        next(error)
+    }
+  
 }

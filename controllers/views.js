@@ -24,3 +24,13 @@ export const viewProfile = (req,res)=>{
     res.render('profile',{info})
 
 }
+
+export const viewPremium = async (req,res) => {
+    const{id,first_name,role} = req.session.user;
+    const obj = {
+        id,
+        first_name,
+        role
+    }
+res.render('premium',{obj})
+}

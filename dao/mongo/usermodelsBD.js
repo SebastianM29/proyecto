@@ -30,6 +30,77 @@ export default class UserDB  {
        
         return value
     }
+    async getUserByIdAndCharge(id,charge){
+       const value =  await User.findById(id)
+       if (!charge.document || !charge.home || !charge.document[0] || !charge.home[0]) {
+        const error = new CustomError(
+            "Error cargando los documentos",
+            "verifique la carga",
+            "Error: Documentos.",
+            EErrors.NOT_FOUND
+          );
+          throw error
+        
+       }
+       if (value === null) {
+       
+        const error = new CustomError(
+            "Error Usuario en Base de datos",
+            "verifique ID",
+            "Error: ID.",
+            EErrors.NOT_FOUND
+          );
+          throw error
+       };
+       value.documents = []
+       for (const key in charge) {
+         const obj = {
+            name: charge[key][0].fieldname,
+            reference:charge[key][0].destination
+         }
+         value.documents.push(obj)
+       }
+       console.log('no se q se debe ver',charge.document[0])
+        console.log(value);
+        await value.save()
+        return ({
+            msg : "info actualizada" 
+        })
+    }
+
+    async findByIdChangePremium (id) {
+        const user =  await User.findById(id)
+        console.log('encontrado usuario',user.documents);
+
+       if (!user) {
+        const error = new CustomError(
+            "Error Usuario en Base de datos",
+            "verifique ID",
+            "Error: ID.",
+            EErrors.NOT_FOUND
+          );
+          throw error
+       }
+       
+       if (user.documents.length != 2) {
+         console.log('no cumple');
+         const error = new CustomError(
+            "No cumple requisitos para usuario Premium",
+            "verifique documentos",
+            "Error: Documentos.",
+            EErrors.NOT_FOUND
+          );
+          throw error
+        
+       }
+       
+       const userUpd = await User.findByIdAndUpdate(id,{role:'PREMIUM'},{new:true})
+       return userUpd
+       
+       
+
+       
+    }
 
     async findByIdAndUPD (token,pass) {
         const {id} = jwtVerify(token,config.secretWORD)

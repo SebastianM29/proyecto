@@ -101,6 +101,9 @@ export class Server {
             helpers: {
                 eq: function(a, b) {
                     return a === b;
+                },
+                log: function(context) {
+                    console.log(context);
                 }
             }
         }));
