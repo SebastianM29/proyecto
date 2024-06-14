@@ -9,9 +9,39 @@ import { compare, createHash } from "../../helpers/hash.js";
 
 export default class UserDB  { 
     constructor() {
-
+      this.options = {
+        timeZone: 'America/Argentina/Buenos_Aires',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
      
 
+    }
+    async getTimeUserLoggin(id){
+      let now = new Date()
+      
+      const format = new Intl.DateTimeFormat('es-AR',this.options);
+      const date = format.format(now);
+      //anidado va a ser  siempre entre comillas
+      return await User.findByIdAndUpdate(id,{'last_conection.loggin': date},{new:true})
+      
+
+    };
+
+    async getTimeUserLogout(id){
+       let now = new Date()
+         
+       const format = new Intl.DateTimeFormat('es-AR',this.options);
+       const date = format.format(now);
+       //anidado va a ser  siempre entre comillas
+       return await User.findByIdAndUpdate(id,{'last_conection.logout': date},{new:true})
+       
+ 
     }
 
     async getUserByEmail(email){

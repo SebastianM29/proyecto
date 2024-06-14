@@ -6,6 +6,8 @@ import { documentPremium, login, logout, newPass, premium, register, restore, re
 import passport from "passport";
 import UserDTO from "../dao/DTOs/user.dto.js";
 import { storageDocuments } from "../helpers/multer.js";
+import UserDB from "../dao/mongo/usermodelsBD.js";
+const userServ = new UserDB()
 
 const uploadDoc = multer({storage: storageDocuments})
 
@@ -16,13 +18,13 @@ router.get('/github',passport.authenticate('github',{scope:['user:email']}),asyn
   
 })
 //el que usa github
-router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'http://localhost:3000/login'}),(req,res)=>{
+router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'http://localhost:3000/login'}),async(req,res)=>{
     const { first_name, last_name, email, age, password, carts ,_id } = req.user;
 
     const cart = carts ? carts.toString() : null; // Obtén el ID del carrito como cadena de texto si existe
     const idUserString = _id ? _id.toString() : null
     // Asigna los datos desestructurados a req.session.user
-   
+    await userServ.getTimeUserLoggin(_id)
     const info = new UserDTO({ 
         first_name,
         last_name,

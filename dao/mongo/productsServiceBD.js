@@ -1,8 +1,14 @@
-
+import fs from "fs-extra";
+import path, { dirname } from "path";
 import CustomError from "../../services/errors/CustomError.js";
 import EErrors from "../../services/errors/enums.js";
 import { generateErrorInfo } from "../../services/errors/info.js";
 import  products  from "./models/productsModels.js";
+import { fileURLToPath } from "url";
+
+const __filename =  fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
 
 
 
@@ -84,7 +90,10 @@ export default class ProductServiceDB {
                       );
                       throw error
                 }
-               
+                console.log(__dirname);
+                console.log(prodFind.thumbnail);
+                await fs.unlink( path.join(__dirname,'../../public',prodFind.thumbnail)  )
+                
                 await products.findByIdAndDelete(id)
                 return prodFind
 

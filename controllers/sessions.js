@@ -1,13 +1,14 @@
 
 import { request,response } from "express";
 import User from "../dao/mongo/models/usermodels.js";
+import UserDB from "../dao/mongo/usermodelsBD.js";
 import UserDTO from "../dao/DTOs/user.dto.js";
 import { generateUsers } from "../helpers/generateUser.js";
 import { findByIdChangePremiumSer, findServiceUSer, getUserByIdServAndCharge, serviceFindByIDanUpdate } from "../services/userServices.js";
 import { mail } from "../helpers/nodemailer.js";
 import config from "../config/config.js"
 import { jwtVerify } from "../helpers/jwt.js";
-
+const userServ = new UserDB()
 
 
 export const register = async(req = request,res = response)=> {
@@ -55,8 +56,9 @@ export const login =  async(req = request,res = response)=> {
             const idCart = carts
             const idUserString = _id ? _id.toString() : null
             console.log('este seria el carrito asignado que quilombo tengo',idCart)
+            await userServ.getTimeUserLoggin(_id)
             /** agregar dtos */
-
+  
             const info = new UserDTO({
                 first_name,
                 last_name,
@@ -141,13 +143,20 @@ try {
 
 }
 
-export const logout =  (req = request,res = response)=>{
+export const logout =  async(req = request,res = response)=>{
     try {
-        req.session.destroy((err)=> {
+        
+        const {id}=req.session.user 
+        console.log(id);
+        await userServ.getTimeUserLogout(id)
+        req.session.destroy(async(err)=> {
             if (err) {
 
                 res.status.send('error al destruir session')
             }
+           
+           
+           
             res.clearCookie('connect.sid')
             res.redirect('/login')
         })
