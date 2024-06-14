@@ -1,4 +1,5 @@
 import { Router } from "express";
+import multer from "multer";
 import { 
      allLoggs,
      deleteProducts,
@@ -11,6 +12,9 @@ import {
      putProducts } from "../controllers/products.js";
 import { checkingAuth } from "../middlewares/session.js";
 import { testLogger } from "../middlewares/logger.js";
+import { storageProducts } from "../helpers/multer.js";
+
+const upload = multer({storage:storageProducts})
 
 const router = Router()
 
@@ -23,7 +27,7 @@ router.get('/loggerTest',testLogger,allLoggs)
 
 router.get('/products/',getProducts)
 router.get('/products/:id',getProductsPorId)
-router.post('/products',postProducts)
+router.post('/products',upload.single('thumbnail'),postProducts)
 router.delete('/products/:id',deleteProducts)
 router.put('/products/:id',putProducts)
 

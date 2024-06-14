@@ -52,14 +52,17 @@ padding: 10px;
 margin-top: 100px;
 background-color: rgba(214, 221, 175, 0.275);
 width: 80%;
-height: 900px;
+min-height: 900px;
+height: auto;
+box-sizing: border-box; /* Incluye padding y border en el cálculo del tamaño */
+
 }
 .prod{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 170px;
-    height: 400px;
+    max-height: 500px;
     margin: 10px;
     background-color: rgba(238, 208, 186, 0.603);
     
@@ -68,6 +71,8 @@ height: 900px;
     
     
 }
+
+
 .items{
 
     margin-left: 10px;
@@ -179,3 +184,15 @@ a:hover{
     margin-bottom: 3px; /* Ajusta el margen inferior según sea necesario */
 }
 
+.ie{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#imageP{
+    margin-top: 5px;
+    width: 80%;
+    height: auto;
+    align-content: center;
+}

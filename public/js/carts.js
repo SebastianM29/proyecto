@@ -51,10 +51,13 @@ const comprar = async() => {
 
     //ITERATOR.CANTIDAD
     //ITERATOR.stock
-    const noStock = respprod.filter(element => element.cantidad > element.stock)
-    const siStock = respprod.filter(element => element.cantidad < element.stock)
+    const noStock = respprod.filter(element => parseInt(element.cantidad) > parseInt(element.stockTotal))
+    const siStock = respprod.filter(element => parseInt(element.cantidad) <= parseInt(element.stockTotal))
     console.log('deberia tener los q no tienen stock', noStock);
+    noStock.forEach(element => console.log(element));
+
     console.log('deberia tener los q no tienen stock', siStock);
+    siStock.forEach(element => console.log(element));
 
 
     for (const iterator of siStock) {

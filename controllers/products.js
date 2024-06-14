@@ -156,18 +156,22 @@ export const postProducts = async(req=request,res=response,next) => {
 
 
     try {
+        
         if (req.logger.debug) {
             req.logger.debug('Accediendo a: postProducts')
         }
            req.logger.info('Creando productos')
-           const resp = req.body
-           const prod = await postCreateTheProduct(resp)
+           const thumbnail = "/products/" + req.file.filename
+           console.log('este seria el path', thumbnail);
           
-        res.json({
-                msg: 'desde products: Post',
-                prod
-                
-        })
+           const {category,title,description,price,code,stock} = req.body
+           const all = {category,title,description,price,code,stock,thumbnail}
+           console.log(all)
+           const prod = await postCreateTheProduct(all)
+           console.log(prod);
+      res.json({
+        msg: 'success'
+      })
         
     } catch (error) {
         req.logger.error('Error al crear producto')

@@ -33,7 +33,7 @@
     <div class="editAndProducts">
     {{#if (eq obj.role 'PREMIUM')}}
     <div class="products">
-        <form id="addProduct">
+        <form id="addProduct" enctype="multipart/form-data">
           <h4>Agregar producto</h4>
           <input class="form-control rounded-0 mb-1" type="text" id="categoria" name="categoria" placeholder="Categoria" autocomplete="off">
           <input class="form-control rounded-0 mb-1" type="text" id="titulo" name="titulo" placeholder="Titulo" autocomplete="off">
@@ -41,6 +41,7 @@
           <input class="form-control rounded-0 mb-1" type="text" id="precio" name="precio" placeholder="Precio" autocomplete="off">
           <input class="form-control rounded-0 mb-1" type="text" id="codigo" name="codigo" placeholder="Codigo" autocomplete="off">
           <input class="form-control rounded-0 mb-1" type="text" id="stock" name="stock" placeholder="Stock" autocomplete="off">
+           <input type="file" class="form-control" id="thumbnail" placeholder="subir">
           <button  type="submit" id="agregar" class="form-control btn btn-warning mt-2 rounded-0">Agregar</button>
           </form>
           <form id="actProductForm">

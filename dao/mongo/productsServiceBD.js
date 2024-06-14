@@ -50,6 +50,7 @@ export default class ProductServiceDB {
     async addProduct(obj){
    
             if (![obj.category, obj.title, obj.description, obj.price, obj.code, obj.stock].every(Boolean) ) {
+                console.log('vavio');
                  const error = new CustomError(
                      "(E)Error Creacion producto",
                      "(C)Datos incompletos",
@@ -60,10 +61,11 @@ export default class ProductServiceDB {
                     
                     
                 }
+                console.log('objeto en la clase productop',obj);
                 
+                return await products.create(obj)
+            
                 
-                const productoCreado = await products.create(obj)
-                return productoCreado
 
         }
         

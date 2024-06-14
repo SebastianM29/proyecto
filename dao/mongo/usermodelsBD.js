@@ -61,6 +61,7 @@ export default class UserDB  {
          value.documents.push(obj)
        }
        console.log('no se q se debe ver',charge.document[0])
+        value.status = true
         console.log(value);
         await value.save()
         return ({
@@ -70,7 +71,7 @@ export default class UserDB  {
 
     async findByIdChangePremium (id) {
         const user =  await User.findById(id)
-        console.log('encontrado usuario',user.documents);
+       
 
        if (!user) {
         const error = new CustomError(
@@ -82,7 +83,7 @@ export default class UserDB  {
           throw error
        }
        
-       if (user.documents.length != 2) {
+       if (user.status === false) {
          console.log('no cumple');
          const error = new CustomError(
             "No cumple requisitos para usuario Premium",

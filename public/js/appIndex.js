@@ -48,7 +48,8 @@ const agregarAlCarrito = async(id) => {
        precio,
        codigo,
        cantidad : 1,
-       stock
+       stock,
+       stockTotal: stockSave
 
     }
 
@@ -202,7 +203,7 @@ const eliminarProd = async(id) => {
 
 /** agregar producto siendo admin */
 addProduct.addEventListener('submit',async(e)=>{
-    // e.preventDefault()
+    e.preventDefault()
    
     try {
         const categoria = document.getElementById('categoria').value
@@ -211,32 +212,35 @@ addProduct.addEventListener('submit',async(e)=>{
         const precio = document.getElementById('precio').value
         const codigo = document.getElementById('codigo').value
         const stock = document.getElementById('stock').value
-        const formData = {
-            category : categoria,
-            title: titulo,
-            description: descripcion,
-            price: precio,
-            code: codigo,
-            stock: stock,
-        }
-        console.log(formData)
-        const resp = await fetch('/products',{
+        const thumbnail = document.getElementById('thumbnail').files[0]
+
+        const formData = new FormData()
+        formData.append('category', categoria)
+        formData.append('title', titulo)
+        formData.append('description', descripcion)
+        formData.append('price', precio,)
+        formData.append('code', codigo)
+        formData.append('stock', stock)
+        formData.append('thumbnail', thumbnail)
+
+     
+       
+        const resp = await fetch("/products",{
             method: 'POST',
-            headers:{
-                'content-Type' : 'application/json'
-            },
-            body: JSON.stringify(formData)
+            body:formData
         })
        
         if (resp.ok) {
             const datos = await resp.json()  
             console.log('datos obtenidos',datos)
+            window.location.reload()
       
         }
         if(!resp.ok){
             const datos = await resp.json() 
             console.log('algo paso',datos);
         }
+   
         
     } catch (error) {
 
@@ -292,7 +296,7 @@ actform.removeAttribute('hidden')
 
     actProducts.addEventListener('submit', async(e) => {
         try {
-               // e.preventDefault()
+    e.preventDefault()
     const idCapture = actProducts.getAttribute('data-id')
     console.log('estoy tocando ese boton',idCapture);
     const categoria = document.getElementById('categoriaAct').value
@@ -320,6 +324,7 @@ actform.removeAttribute('hidden')
     if (resp.ok) {
         const datos = await resp.json()  
         console.log('datos obtenidos',datos)
+        window.location.reload()
   
     }
     if(!resp.ok){

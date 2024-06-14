@@ -48,7 +48,7 @@
        
        <div class="a2">
           {{#if (eq respDB.role 'admin')}}
-          <form id="addProduct">
+          <form id="addProduct" enctype="multipart/form-data">
           <h4>Agregar producto</h4>
           <input class="form-control rounded-0 mb-1" type="text" id="categoria" name="categoria" placeholder="Categoria" autocomplete="off">
           <input class="form-control rounded-0 mb-1" type="text" id="titulo" name="titulo" placeholder="Titulo" autocomplete="off">
@@ -56,6 +56,7 @@
           <input class="form-control rounded-0 mb-1" type="text" id="precio" name="precio" placeholder="Precio" autocomplete="off">
           <input class="form-control rounded-0 mb-1" type="text" id="codigo" name="codigo" placeholder="Codigo" autocomplete="off">
           <input class="form-control rounded-0 mb-1" type="text" id="stock" name="stock" placeholder="Stock" autocomplete="off">
+          <input type="file" class="form-control" id="thumbnail" placeholder="subir">
           <button  type="submit" id="agregar" class="form-control btn btn-warning mt-2 rounded-0">Agregar</button>
           </form>
           <form id="actProductForm" hidden>
@@ -90,8 +91,11 @@
           <div class="a1">
           {{#each respDB.docs}}
           <div class="prod"  data-producto-id="{{this._id}}" id="producto-{{this._id}}">
-          <div>
-          
+          <div id="imageAndInfo">
+            <div class="ie" >
+                <img id="imageP" src="{{this.thumbnail}}" alt="10"> 
+             </div>
+
           <p class="items mt-2" id="categoria{{this._id}}" ><strong>Categoria: </strong>{{this.category}}</p>
           <p class="items" id="titulo{{this._id}}"><strong>Titulo: </strong>{{this.title}}</p>
           <p class="items" id="descripcion{{this._id}}" ><strong>Descripcion: </strong>{{this.description}}</p>
@@ -101,6 +105,9 @@
           </div>
           <div>
             {{#if (eq ../respDB.role 'user')}}
+           <button id={{this._id}} class="btn btn-warning mb-2" onclick="agregarAlCarrito(this.id)">agregar al carrito</button>
+           {{/if}}
+            {{#if (eq ../respDB.role 'PREMIUM')}}
            <button id={{this._id}} class="btn btn-warning mb-2" onclick="agregarAlCarrito(this.id)">agregar al carrito</button>
            {{/if}}
            {{#if (eq ../respDB.role 'admin')}}
