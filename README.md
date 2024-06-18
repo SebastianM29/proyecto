@@ -145,4 +145,10 @@ Queda obviada la generacion de ruta privada ya q solo deje visual el campo de Ad
 ![alt text](readme/image-68.png)
 Pruebas de test en el desarrollo
 ![alt text](readme/image-69.png)
-
+*Usuarios Premium
+![alt text](image-1.png)
+*Subida de documentos en el cual posteriormente se valida si estan los archivos y te habilita subir productos
+![alt text](image-2.png)
+*se agrego imagenes tanto en carpeta de productos,perfil y documentos ( visualizacion )
+![alt text](image-3.png)
+![alt text](image-4.png)

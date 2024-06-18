@@ -10,20 +10,21 @@
 <body>
     <div class="fondo-profile">
         <div class="profile">
-           <img src="./image/image4.jpg" alt="imagen">
            {{#if info}}
+           <img src="{{info.perfilPicture}}" alt="imagen">
            <p class="profile-info" ><strong>Nombre:</strong> {{info.first_name}}</p>      
            <p class="profile-info"><strong>apellido:</strong> {{info.last_name}}</p>      
            <p class="profile-info"><strong>edad:</strong> {{info.age}}</p>      
            <p class="profile-info"><strong>email:</strong> {{info.email}}</p>  
            <form id="perfilPicture" enctype="multipart/form-data">
-           <label for="upload">Foto de perfil</label>
+           <label class="data" data-id="{{info.id}}" for="upload">Foto de perfil</label>
            <input type="file" class="form-control" id="upload" placeholder="subir">
-           <button class="form-control mt-2" type="submit">subir foto de perfil</button>
+           <button class="form-control mt-2" id="fotoPerfil" type="submit">subir foto de perfil</button>
            </form>    
            {{/if}}
            <a id="boton-profile" href="/">volver a productos</a></div>
     </div>
-    
+          <script src="./js/perfil.js"></script>
+  
 </body>
 </html>

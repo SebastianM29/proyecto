@@ -10,6 +10,7 @@ export default class UserDTO {
         this.carts = user.carts
         this.role = user.role || 'user'
         this.id = user.id || 'ID'
+        this.perfilPicture = user.perfilPicture || 'empty'
   
     }
 

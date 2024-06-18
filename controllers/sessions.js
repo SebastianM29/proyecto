@@ -52,7 +52,7 @@ export const login =  async(req = request,res = response)=> {
             req.logger.info('este es el user de passport?',req.user)
             if (req.user) {
             console.log('entro aca al res backend')
-            const {first_name,last_name,email,age,role,carts,_id} = req.user
+            const {first_name,last_name,email,age,role,carts,_id,perfilPicture} = req.user
             const idCart = carts
             const idUserString = _id ? _id.toString() : null
             console.log('este seria el carrito asignado que quilombo tengo',idCart)
@@ -66,7 +66,8 @@ export const login =  async(req = request,res = response)=> {
                 age,
                 role,
                 carts:idCart,
-                id:idUserString
+                id:idUserString,
+                perfilPicture
             }
        )
 
@@ -226,4 +227,19 @@ export const documentPremium = async(req,res,next) => {
         next(error)
     }
   
+}
+
+export const picture= async (req,res) => {
+try {
+    const id = req.params.id
+    const img = req.file.filename
+    const perfilPicture = '/perfil/' + img
+    const actPicture = await User.findByIdAndUpdate(id,{perfilPicture},{new:true})
+    req.session.user.perfilPicture = perfilPicture
+    console.log(actPicture);
+    
+
+} catch (error) {
+    
+}
 }

@@ -59,7 +59,12 @@ const UserSchema = new Schema({
             logout:{
                 type:String
             }
-        }
+        },
+    perfilPicture:{
+
+        type: String,
+        
+    }
     
     
 

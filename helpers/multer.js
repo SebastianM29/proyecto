@@ -14,6 +14,8 @@ export const storageDocuments = multer.diskStorage({
         cb(null,new Date().getTime() + path.extname(file.originalname))
     }
 })
+
+
 export const storagePerfil = multer.diskStorage({
     destination: function(req,res,cb) {
         cb(null,path.join(_dirname, '../public/perfil'))
@@ -22,6 +24,8 @@ export const storagePerfil = multer.diskStorage({
         cb(null,new Date().getTime() + path.extname(file.originalname))
     }
 })
+
+
 export const storageProducts = multer.diskStorage({
     destination: function(req,res,cb) {
         cb(null,path.join(_dirname, '../public/products'))

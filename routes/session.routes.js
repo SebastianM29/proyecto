@@ -2,14 +2,15 @@
 import multer from "multer";
 import { Router} from "express";
 const router = Router()
-import { documentPremium, login, logout, newPass, premium, register, restore, restorePass, testUser, updPass } from "../controllers/sessions.js";
+import { documentPremium, login, logout, newPass, picture, premium, register, restore, restorePass, testUser, updPass } from "../controllers/sessions.js";
 import passport from "passport";
 import UserDTO from "../dao/DTOs/user.dto.js";
-import { storageDocuments } from "../helpers/multer.js";
+import { storageDocuments, storagePerfil } from "../helpers/multer.js";
 import UserDB from "../dao/mongo/usermodelsBD.js";
 const userServ = new UserDB()
 
 const uploadDoc = multer({storage: storageDocuments})
+const uploadPicture = multer({storage: storagePerfil})
 
 
 
@@ -53,7 +54,7 @@ router.post('/login',passport.authenticate('login',{
       failureRedirect:'http://localhost:3000/login'
 }), login)
 
-
+router.post('/:id/picture',uploadPicture.single('perfilPicture'),picture)
 router.post('/users/premium/:uid/documents',uploadDoc.fields([{name:'document',maxCount:1},{name:'home',maxCount:1}]),documentPremium)//va a ir actualizando a premium, subiendo los documentos que pide
 router.post('/users/premium/:uid',premium)//deberia validar si el id q pasa es premium, si es premium poner "premium"
 
