@@ -24,6 +24,7 @@ perfil.addEventListener('submit',async(e) =>{
         }
         if (resp.ok) {
             console.log('anda joya');
+            window.location.reload()
         }
 
     } catch (error) {

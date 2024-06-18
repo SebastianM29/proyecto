@@ -236,7 +236,10 @@ try {
     const perfilPicture = '/perfil/' + img
     const actPicture = await User.findByIdAndUpdate(id,{perfilPicture},{new:true})
     req.session.user.perfilPicture = perfilPicture
-    console.log(actPicture);
+    req.session.save()
+    res.json({
+        msg: "enviado"
+    })
     
 
 } catch (error) {
