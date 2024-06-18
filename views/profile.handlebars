@@ -15,7 +15,12 @@
            <p class="profile-info" ><strong>Nombre:</strong> {{info.first_name}}</p>      
            <p class="profile-info"><strong>apellido:</strong> {{info.last_name}}</p>      
            <p class="profile-info"><strong>edad:</strong> {{info.age}}</p>      
-           <p class="profile-info"><strong>email:</strong> {{info.email}}</p>      
+           <p class="profile-info"><strong>email:</strong> {{info.email}}</p>  
+           <form id="perfilPicture" enctype="multipart/form-data">
+           <label for="upload">Foto de perfil</label>
+           <input type="file" class="form-control" id="upload" placeholder="subir">
+           <button class="form-control mt-2" type="submit">subir foto de perfil</button>
+           </form>    
            {{/if}}
            <a id="boton-profile" href="/">volver a productos</a></div>
     </div>
