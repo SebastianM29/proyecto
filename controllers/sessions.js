@@ -1,4 +1,9 @@
 
+import fs from "fs-extra";
+import { fileURLToPath } from "url";
+import path, { dirname } from "path";
+
+
 import { request,response } from "express";
 import User from "../dao/mongo/models/usermodels.js";
 import UserDB from "../dao/mongo/usermodelsBD.js";
@@ -9,6 +14,9 @@ import { mail } from "../helpers/nodemailer.js";
 import config from "../config/config.js"
 import { jwtVerify } from "../helpers/jwt.js";
 const userServ = new UserDB()
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 
 export const register = async(req = request,res = response)=> {
@@ -231,8 +239,17 @@ export const documentPremium = async(req,res,next) => {
 
 export const picture= async (req,res) => {
 try {
+    const {picturepath} = req.body
+    console.log('viendo el src',picturepath);
+    if (picturepath !== 'empty') {
+        const filePath = path.join(__dirname, '../public', picturepath);
+        console.log('Ruta completa a eliminar:', filePath);
+        await fs.unlink(filePath)
+        
+    }
     const id = req.params.id
     const img = req.file.filename
+    console.log('viendo el src',picturepath);
     const perfilPicture = '/perfil/' + img
     const actPicture = await User.findByIdAndUpdate(id,{perfilPicture},{new:true})
     req.session.user.perfilPicture = perfilPicture
