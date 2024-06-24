@@ -8,8 +8,9 @@ import { request,response } from "express";
 import User from "../dao/mongo/models/usermodels.js";
 import UserDB from "../dao/mongo/usermodelsBD.js";
 import UserDTO from "../dao/DTOs/user.dto.js";
+import UsersDTO from "../dao/DTOs/users.dto.js";
 import { generateUsers } from "../helpers/generateUser.js";
-import { findByIdChangePremiumSer, findServiceUSer, getUserByIdServAndCharge, serviceFindByIDanUpdate } from "../services/userServices.js";
+import { deleteUserSer, findByIdChangePremiumSer, findServiceUSer, getAllUsersSer, getUserByIdServAndCharge, serviceFindByIDanUpdate } from "../services/userServices.js";
 import { mail } from "../helpers/nodemailer.js";
 import config from "../config/config.js"
 import { jwtVerify } from "../helpers/jwt.js";
@@ -177,15 +178,9 @@ export const logout =  async(req = request,res = response)=>{
 
 export const testUser = (req,res) => {
     try {
-        
-
-       
             const value = generateUsers()
-            
-     
         res.json(
-            
-            value
+              value
         )
     } catch (error) {
         
@@ -196,10 +191,10 @@ export const premium = async (req,res,next) => {
     try {
         const id = req.params.uid
         const changeToPremium = await findByIdChangePremiumSer(id)
-        console.log('viendo el iod',changeToPremium);
+      
         req.session.user.role = changeToPremium.role
         req.session.save()
-        console.log('como queda??',req.session.user);
+      
         res.json({
             msg: "acceso a usuario premium"
         })
@@ -262,4 +257,38 @@ try {
 } catch (error) {
     
 }
+}
+
+export const allUsers = async(req,res,next) => {
+try {
+    const usuarios = await getAllUsersSer()
+    const value = new UsersDTO(usuarios)
+    console.log(value);
+
+    res.json({
+        msg: 'all users'
+    })
+} catch (error) {
+    req.logger.error('Error al mostrar todos los usuarios')
+    console.log(error.message);
+    next(error)
+}
+}
+
+export const deleteUser = async(req,res,next) =>{
+    try {
+       const id = req.params.id
+       console.log(id);
+       const resp = await deleteUserSer(id)
+       res.json({
+        msg: resp
+       })
+        
+    } catch (error) {
+        req.logger.error('error al borrar Usuario')
+        console.log(error.message);
+        next(error)
+        
+    }
+
 }

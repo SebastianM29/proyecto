@@ -1,4 +1,6 @@
 import { request,response } from "express";
+import { getAllUsersSer } from "../services/userServices.js";
+import UsersDTO from "../dao/DTOs/users.dto.js";
 
 
 export const viewRegister =  (req = request ,res = response)=> {
@@ -38,4 +40,12 @@ export const viewPremium = async (req,res) => {
         perfilPicture
     }
 res.render('premium',{obj})
+}
+
+
+export const getAllUsers = async (req,res) => {
+    const usuarios = await getAllUsersSer()
+    const filtroUser =  new UsersDTO(usuarios)
+    console.log('estoy viendo esto',filtroUser);
+    res.render('allUsers',{filtroUser})
 }

@@ -19,3 +19,11 @@ export const getUserByIdPerAndCharge = async(id,charge) => {
 export const findByIdChangePremiumPer = async (id) => {
 return user.findByIdChangePremium(id)
 }
+
+export const getAllusersPer = async() => {
+return user.getAllUsers()
+}
+
+export const deleteUserPer = async(id) => {
+return user.deleteUser(id)
+}

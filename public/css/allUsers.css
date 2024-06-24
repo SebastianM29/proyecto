@@ -1,0 +1,32 @@
+h1{
+    color: aquamarine;
+}
+
+.delete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px; /* Adjust the size as needed */
+    height: 20px; /* Adjust the size as needed */
+    background-color: blueviolet;
+    margin-top: 5px;
+    margin-left: 10px;
+    /* text-align: center; */
+    border-radius: 50%;
+    cursor: pointer;
+    
+}
+.delete:hover{
+    background-color: rgb(164, 111, 213); 
+}
+table{
+    width: 100%;
+}
+tr th{
+    border: 1px solid rgb(223, 33, 19);
+    padding: 5px;
+}
+
+td{
+    padding: 5px;
+}

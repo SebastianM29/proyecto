@@ -2,7 +2,7 @@
 import multer from "multer";
 import { Router} from "express";
 const router = Router()
-import { documentPremium, login, logout, newPass, picture, premium, register, restore, restorePass, testUser, updPass } from "../controllers/sessions.js";
+import { allUsers, deleteUser, documentPremium, login, logout, newPass, picture, premium, register, restore, restorePass, testUser, updPass } from "../controllers/sessions.js";
 import passport from "passport";
 import UserDTO from "../dao/DTOs/user.dto.js";
 import { storageDocuments, storagePerfil } from "../helpers/multer.js";
@@ -38,28 +38,31 @@ router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'ht
     // console.log('nercesito verlooooo',req.session.user)
     res.redirect('/')
 })
+router.post('/login',passport.authenticate('login',{
+      failureRedirect:'http://localhost:3000/login'
+}), login)
+
+
 
 router.get('/restore', restore )
 router.post('/restorePass', restorePass)
 router.get('/new/:token', newPass)
 router.put('/updPass', updPass)
 
+router.get('/allusers',allUsers)
 
 /** PROBANDO ARTILLERY */
 router.get('/api/test/user', testUser )
 
 
 
-router.post('/login',passport.authenticate('login',{
-      failureRedirect:'http://localhost:3000/login'
-}), login)
 
 router.post('/:id/picture',uploadPicture.single('perfilPicture'),picture)
 router.post('/users/premium/:uid/documents',uploadDoc.fields([{name:'document',maxCount:1},{name:'home',maxCount:1}]),documentPremium)//va a ir actualizando a premium, subiendo los documentos que pide
 router.post('/users/premium/:uid',premium)//deberia validar si el id q pasa es premium, si es premium poner "premium"
 
 
-
+router.delete('/deleteUser/:id',deleteUser)
 router.get('/logout', logout)
 
 

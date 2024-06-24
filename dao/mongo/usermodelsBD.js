@@ -43,6 +43,9 @@ export default class UserDB  {
        
  
     }
+    async getAllUsers(){
+     return User.find()
+    }
 
     async getUserByEmail(email){
        const value =  await User.findOne(email)
@@ -165,6 +168,20 @@ export default class UserDB  {
         const hashPass = createHash(pass)
         await User.findByIdAndUpdate(id,{password:hashPass},{new:true})
 
+    }
+
+    async deleteUser(id) {
+      const user = await User.findByIdAndDelete(id)
+      if (!user) {
+        const error = new CustomError(
+          "Error user",
+          "usuario no encontrado",
+          "Error: user",
+           EErrors.NOT_FOUND
+        );
+        throw error
+      } 
+      console.log(user)
     }
 
    
