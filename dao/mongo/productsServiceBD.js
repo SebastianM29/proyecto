@@ -79,7 +79,9 @@ export default class ProductServiceDB {
         async deleteProducts(id){
            
                 
-                const prodFind = await products.findById(id)
+                const prodFind = await products.findById(id).populate('createdBy')
+                const creatorByEmail = prodFind.createdBy.email
+                const creatorByRole = prodFind.createdBy.role
                 if (!prodFind) {
                     console.log('eliinando');
                     const error = new CustomError(
@@ -95,7 +97,12 @@ export default class ProductServiceDB {
                 await fs.unlink( path.join(__dirname,'../../public',prodFind.thumbnail)  )
                 
                 await products.findByIdAndDelete(id)
-                return prodFind
+                return {
+                    msg: 'eliminado',
+                    creatorByEmail,
+                    creatorByRole
+
+                }
 
          
         }
@@ -105,6 +112,7 @@ export default class ProductServiceDB {
         async getProductById(id) {
        
            const prodFind = await products.findById(id)
+           
            if (!prodFind) {
             console.log('no existe id');
             const error = new CustomError(

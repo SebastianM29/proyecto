@@ -39,6 +39,10 @@ const ProductsSchema = mongoose.Schema({
     thumbnail:{
         type: String,
         
+    },
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
     }
 
 })

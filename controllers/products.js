@@ -157,7 +157,8 @@ export const postProducts = async(req=request,res=response,next) => {
 
 
     try {
-        
+        const {id} = req.session.user
+        console.log('viendo id',id);
         if (req.logger.debug) {
             req.logger.debug('Accediendo a: postProducts')
         }
@@ -166,7 +167,16 @@ export const postProducts = async(req=request,res=response,next) => {
            console.log('este seria el path', thumbnail);
           
            const {category,title,description,price,code,stock} = req.body
-           const all = {category,title,description,price,code,stock,thumbnail}
+           const all = {
+            category,
+            title,
+            description,
+            price,
+            code,
+            stock,
+            thumbnail,
+            createdBy:id}
+
            console.log(all)
            const prod = await postCreateTheProduct(all)
            console.log(prod);
@@ -189,6 +199,7 @@ export const deleteProducts = async(req=request,res=response,next) => {
         const id = req.params.id 
            req.logger.info(`Buscando el id ${id}`)
         const resp = await deleteTheProduct(id)
+        console.log('ruta delete productos',resp);
     
         
         res.json({
