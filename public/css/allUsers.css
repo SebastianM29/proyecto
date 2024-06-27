@@ -1,32 +1,31 @@
-h1{
-    color: aquamarine;
+body{
+    background-image: url('../image/image3.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
 }
 
-.delete{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px; /* Adjust the size as needed */
-    height: 20px; /* Adjust the size as needed */
-    background-color: blueviolet;
-    margin-top: 5px;
-    margin-left: 10px;
-    /* text-align: center; */
-    border-radius: 50%;
-    cursor: pointer;
-    
+
+h1{
+    color: rgb(162, 123, 95);
 }
-.delete:hover{
-    background-color: rgb(164, 111, 213); 
+
+#DeleteUsersAfter{
+    margin-bottom: 20px;
 }
+
+
 table{
     width: 100%;
 }
 tr th{
     border: 1px solid rgb(223, 33, 19);
+    background-color: rgba(255, 228, 196, 0.495);
     padding: 5px;
 }
 
 td{
     padding: 5px;
+    
+    background-color: rgba(255, 228, 196, 0.495);
 }

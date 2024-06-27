@@ -2,7 +2,7 @@
 import multer from "multer";
 import { Router} from "express";
 const router = Router()
-import { allUsers, deleteUser, documentPremium, login, logout, newPass, picture, premium, register, restore, restorePass, testUser, updPass } from "../controllers/sessions.js";
+import { allUsers, changeRol, deleteUser, documentPremium, login, logout, newPass, picture, premium, register, restore, restorePass, testUser, updPass } from "../controllers/sessions.js";
 import passport from "passport";
 import UserDTO from "../dao/DTOs/user.dto.js";
 import { storageDocuments, storagePerfil } from "../helpers/multer.js";
@@ -48,6 +48,7 @@ router.get('/restore', restore )
 router.post('/restorePass', restorePass)
 router.get('/new/:token', newPass)
 router.put('/updPass', updPass)
+router.put('/change', changeRol)
 
 router.get('/allusers',allUsers)
 
@@ -62,7 +63,7 @@ router.post('/users/premium/:uid/documents',uploadDoc.fields([{name:'document',m
 router.post('/users/premium/:uid',premium)//deberia validar si el id q pasa es premium, si es premium poner "premium"
 
 
-router.delete('/deleteUser/:id',deleteUser)
+router.delete('/deleteUser',deleteUser)
 router.get('/logout', logout)
 
 

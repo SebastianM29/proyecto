@@ -1,9 +1,11 @@
 import CustomError from "../../services/errors/CustomError.js";
 import EErrors from "../../services/errors/enums.js";
 import User from "../mongo/models/usermodels.js" 
+import carts from "../mongo/models/cartsModels.js";
 import config from "../../config/config.js"
 import { jwtVerify } from "../../helpers/jwt.js";
 import { compare, createHash } from "../../helpers/hash.js";
+
 
 
 
@@ -24,22 +26,26 @@ export default class UserDB  {
     }
     async getTimeUserLoggin(id){
       let now = new Date()
+      let nowIso = new Date().toISOString()
+      
       
       const format = new Intl.DateTimeFormat('es-AR',this.options);
       const date = format.format(now);
       //anidado va a ser  siempre entre comillas
-      return await User.findByIdAndUpdate(id,{'last_conection.loggin': date},{new:true})
+      return await User.findByIdAndUpdate(id,{'connection.loggin': date,'connection.isoLoggin':nowIso},{new:true})
       
 
     };
 
     async getTimeUserLogout(id){
        let now = new Date()
+       let nowIso = new Date().toISOString()
          
        const format = new Intl.DateTimeFormat('es-AR',this.options);
        const date = format.format(now);
+       console.log('el horario en String', nowIso);
        //anidado va a ser  siempre entre comillas
-       return await User.findByIdAndUpdate(id,{'last_conection.logout': date},{new:true})
+       return await User.findByIdAndUpdate(id,{'connection.logout': date,'connection.isoLogout':nowIso},{new:true})
        
  
     }
@@ -93,7 +99,7 @@ export default class UserDB  {
          }
          value.documents.push(obj)
        }
-       console.log('no se q se debe ver',charge.document[0])
+       console.log('se debe ver',charge.document[0])
         value.status = true
         console.log(value);
         await value.save()
@@ -130,10 +136,21 @@ export default class UserDB  {
        
        const userUpd = await User.findByIdAndUpdate(id,{role:'PREMIUM'},{new:true})
        return userUpd
-       
-       
+ 
+    }
 
-       
+    async changeRole (id,role) {
+    const userUpd = await User.findByIdAndUpdate(id,{role:role},{new:true})
+    if (!userUpd) {
+      const error = new CustomError(
+        "Error al cambiar el Rol",
+        "verifique Rol",
+        "Error: Rol",
+        EErrors.NOT_FOUND
+      );
+      throw error
+    }
+    return userUpd
     }
 
     async findByIdAndUPD (token,pass) {
@@ -172,6 +189,10 @@ export default class UserDB  {
 
     async deleteUser(id) {
       const user = await User.findByIdAndDelete(id)
+      if (user.carts) {
+        const carrito = await carts.findByIdAndDelete(user.carts.toString())
+        console.log('carrito eliminado ', carrito);
+      }
       if (!user) {
         const error = new CustomError(
           "Error user",
@@ -181,7 +202,26 @@ export default class UserDB  {
         );
         throw error
       } 
-      console.log(user)
+     return user
+    }
+
+    async deleteBeforeTwo(admin) {
+      const twoMinutes =  new Date()
+      twoMinutes.setMinutes(twoMinutes.getMinutes() - 2)
+      const user = await User.find()
+      
+      for (const element of user) {
+          console.log(element._id.toString(),admin);
+          if (element.connection.loggin && element.connection.logout && element._id.toString() != admin) {
+
+          if (element.connection.isoLogout < twoMinutes.toISOString()) {
+            
+          await carts.findByIdAndDelete(element.carts.toString())
+          await User.findByIdAndDelete(element._id)
+            
+          }
+        }
+      }
     }
 
    

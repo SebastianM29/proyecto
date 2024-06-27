@@ -1,4 +1,4 @@
-import { deleteUserPer, findByIdChangePremiumPer, findUser, getAllusersPer, getUserByIdPerAndCharge, perFindByIDAndUpdate } from "../persistence/session.js"
+import { changeRolePer, deleteBeforeTwoPer, deleteUserPer, findByIdChangePremiumPer, findUser, getAllusersPer, getUserByIdPerAndCharge, perFindByIDAndUpdate } from "../persistence/session.js"
 
 
 
@@ -14,6 +14,10 @@ export const getUserByIdServAndCharge = async (id,charge) => {
   return await getUserByIdPerAndCharge(id,charge)
 }
 
+export const changeRoleSer= async(id,role) => {
+  return await changeRolePer(id,role)
+}
+
 export const findByIdChangePremiumSer = async(id) => {
   return await findByIdChangePremiumPer(id)
 }
@@ -24,4 +28,8 @@ export const getAllUsersSer = async () =>{
 
 export const deleteUserSer = async (id) => {
   return await deleteUserPer(id)
+}
+
+export const deleteBeforeTwoSer = async(admin) => {
+return await deleteBeforeTwoPer(admin)
 }

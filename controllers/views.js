@@ -44,8 +44,9 @@ res.render('premium',{obj})
 
 
 export const getAllUsers = async (req,res) => {
+    const{id} = req.session.user;
     const usuarios = await getAllUsersSer()
     const filtroUser =  new UsersDTO(usuarios)
-    console.log('estoy viendo esto',filtroUser);
-    res.render('allUsers',{filtroUser})
+ 
+    res.render('allUsers',{filtroUser,id})
 }

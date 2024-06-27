@@ -8,9 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-  {{log filtroUser}}
+
+  <h1 data-id="{{id}}" >Admin</h1>
     <div class="container">
-      <h1>hello</h1>
+      <button id="DeleteUsersAfter" class=" btn btn-warning mt-2  rounded-0" onclick="deleteBefore()">Borrar usuarios no conectados hace 2 dias</button>
       <table>
         <thead>
           <tr>
@@ -20,6 +21,8 @@
             <th>Email</th>
             <th>Id</th>
             <th>Perfil Picture</th>
+            <th>Rol</th>
+            <th>Modificar Rol</th>
             <th>Borrar</th>
           </tr>
         </thead>
@@ -33,7 +36,37 @@
             <td>{{this.email}}</td>
             <td>{{this.id}}</td>
             <td>{{this.perfilPicture}}</td>
-            <td class="delete" data-id="{{this.id}}" onclick="deleteItem('{{this.id}}')" >X</td>
+            <td>{{this.role}}</td>
+            <td>
+             <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{this.id}}">
+  Cambiar rol
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar rol</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <select class="form-select"  name="form-select" id="select-{{this.id}}">
+        <option value="user">user</option>
+        <option value="premium">premium</option>
+       </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="detectedRol('{{this.id}}')">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div></td>
+             
+
+            <td> <button class="btn btn-danger" data-id="{{this.id}}" onclick="deleteItem('{{this.id}}')" >Eliminar</button>  </td>
             </tr>
             {{/each}}
             {{/if}}
@@ -45,5 +78,7 @@
     
 
     <script src="./js/allUser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

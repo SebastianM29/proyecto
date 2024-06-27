@@ -51,12 +51,18 @@ const UserSchema = new Schema({
 
         }
     ],
-    last_conection:
+    connection:
         {
             loggin:{
                 type:String
             },
+            isoLoggin:{
+                type:String
+            },
             logout:{
+                type:String
+            },
+            isoLogout:{
                 type:String
             }
         },

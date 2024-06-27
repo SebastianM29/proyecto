@@ -10,8 +10,8 @@ import UserDB from "../dao/mongo/usermodelsBD.js";
 import UserDTO from "../dao/DTOs/user.dto.js";
 import UsersDTO from "../dao/DTOs/users.dto.js";
 import { generateUsers } from "../helpers/generateUser.js";
-import { deleteUserSer, findByIdChangePremiumSer, findServiceUSer, getAllUsersSer, getUserByIdServAndCharge, serviceFindByIDanUpdate } from "../services/userServices.js";
-import { mail } from "../helpers/nodemailer.js";
+import { changeRoleSer, deleteBeforeTwoSer, deleteUserSer, findByIdChangePremiumSer, findServiceUSer, getAllUsersSer, getUserByIdServAndCharge, serviceFindByIDanUpdate } from "../services/userServices.js";
+import { deleteUserMail, mail } from "../helpers/nodemailer.js";
 import config from "../config/config.js"
 import { jwtVerify } from "../helpers/jwt.js";
 const userServ = new UserDB()
@@ -60,11 +60,11 @@ export const login =  async(req = request,res = response)=> {
     try {   
             req.logger.info('este es el user de passport?',req.user)
             if (req.user) {
-            console.log('entro aca al res backend')
+          
             const {first_name,last_name,email,age,role,carts,_id,perfilPicture} = req.user
             const idCart = carts
             const idUserString = _id ? _id.toString() : null
-            console.log('este seria el carrito asignado que quilombo tengo',idCart)
+            req.logger.info('carrito asignado',idCart)
             await userServ.getTimeUserLoggin(_id)
             /** agregar dtos */
   
@@ -186,7 +186,22 @@ export const testUser = (req,res) => {
         
     }
 }
+export const changeRol = async (req,res,next) => {
+    try {
+    const {id,role} = req.body
+    console.log('id y role');
+    const actVal = await changeRoleSer(id,role)
+    console.log(actVal);
+    res.json({
+        msg: 'success'
+    })    
+    } catch (error) {
+        console.log(error);
+        req.logger.error('Error al cambiar el rol')
+        next(error)
+    }
 
+}
 export const premium = async (req,res,next) => {
     try {
         const id = req.params.uid
@@ -277,12 +292,22 @@ try {
 
 export const deleteUser = async(req,res,next) =>{
     try {
-       const id = req.params.id
-       console.log(id);
-       const resp = await deleteUserSer(id)
+       const id = req.query.id
+       const check = req.query.check
+       const admin = req.body.admin
+       if (id) {
+          const usuario = await deleteUserSer(id)
+          console.log(usuario.email);
+          deleteUserMail(usuario.email)
+       }
+       if (check) {
+        console.log('entrando a check');
+        await deleteBeforeTwoSer(admin)
+       }
        res.json({
-        msg: resp
+        msg: "success"
        })
+     
         
     } catch (error) {
         req.logger.error('error al borrar Usuario')

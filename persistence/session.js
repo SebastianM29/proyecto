@@ -8,22 +8,31 @@ return await user.getUserByEmail(email)
 
 }
 
-export const perFindByIDAndUpdate = (token, pass) => {
-    return user.findByIdAndUPD(token,pass)
+export const perFindByIDAndUpdate = async(token, pass) => {
+return await user.findByIdAndUPD(token,pass)
 }
 
 export const getUserByIdPerAndCharge = async(id,charge) => {
-    return user.getUserByIdAndCharge(id,charge)
+return await user.getUserByIdAndCharge(id,charge)
+}
+
+export const changeRolePer = async(id,role) =>{
+return await user.changeRole(id,role)
 }
 
 export const findByIdChangePremiumPer = async (id) => {
-return user.findByIdChangePremium(id)
+return await user.findByIdChangePremium(id)
 }
 
+
 export const getAllusersPer = async() => {
-return user.getAllUsers()
+return await user.getAllUsers()
 }
 
 export const deleteUserPer = async(id) => {
-return user.deleteUser(id)
+return await user.deleteUser(id)
+}
+
+export const deleteBeforeTwoPer = async (admin) => {
+return await user.deleteBeforeTwo(admin)
 }

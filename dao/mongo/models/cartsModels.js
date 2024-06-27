@@ -1,6 +1,6 @@
 import mongoose, { Schema,model } from "mongoose";
 
-const CartsSchema = Schema({
+const CartsSchema =new Schema({
     products:[
 
         {
