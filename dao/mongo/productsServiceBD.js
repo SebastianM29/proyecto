@@ -80,8 +80,10 @@ export default class ProductServiceDB {
            
                 
                 const prodFind = await products.findById(id).populate('createdBy')
+                console.log(prodFind);
                 const creatorByEmail = prodFind.createdBy.email
                 const creatorByRole = prodFind.createdBy.role
+                const product = prodFind.title
                 if (!prodFind) {
                     console.log('eliinando');
                     const error = new CustomError(
@@ -100,7 +102,8 @@ export default class ProductServiceDB {
                 return {
                     msg: 'eliminado',
                     creatorByEmail,
-                    creatorByRole
+                    creatorByRole,
+                    product
 
                 }
 

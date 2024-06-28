@@ -5,6 +5,7 @@ import carts from "../mongo/models/cartsModels.js";
 import config from "../../config/config.js"
 import { jwtVerify } from "../../helpers/jwt.js";
 import { compare, createHash } from "../../helpers/hash.js";
+import { deleteUserMailTwoDays } from "../../helpers/nodemailer.js";
 
 
 
@@ -215,7 +216,8 @@ export default class UserDB  {
           if (element.connection.loggin && element.connection.logout && element._id.toString() != admin) {
 
           if (element.connection.isoLogout < twoMinutes.toISOString()) {
-            
+            console.log('entro');
+          await deleteUserMailTwoDays(element.email)
           await carts.findByIdAndDelete(element.carts.toString())
           await User.findByIdAndDelete(element._id)
             

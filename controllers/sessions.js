@@ -191,7 +191,6 @@ export const changeRol = async (req,res,next) => {
     const {id,role} = req.body
     console.log('id y role');
     const actVal = await changeRoleSer(id,role)
-    console.log(actVal);
     res.json({
         msg: 'success'
     })    

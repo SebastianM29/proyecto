@@ -20,7 +20,7 @@ router.get('/github',passport.authenticate('github',{scope:['user:email']}),asyn
 })
 //el que usa github
 router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'http://localhost:3000/login'}),async(req,res)=>{
-    const { first_name, last_name, email, age, password, carts ,_id } = req.user;
+    const { first_name, last_name, email, age, perfilPicture, role, carts ,_id } = req.user;
 
     const cart = carts ? carts.toString() : null; // Obtén el ID del carrito como cadena de texto si existe
     const idUserString = _id ? _id.toString() : null
@@ -32,7 +32,10 @@ router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'ht
         email,
         age,
         id:idUserString,
-        carts: cart })
+        carts: cart ,
+        role,
+        perfilPicture
+      })
 
     req.session.user = info;
     // console.log('nercesito verlooooo',req.session.user)

@@ -8,6 +8,7 @@ import { deleteTheProduct, getAllProducts, getProductById, postCreateTheProduct,
 import { generateErrorInfo } from "../services/errors/info.js";
 import EErrors from "../services/errors/enums.js";
 import { generateProducts } from "../helpers/generateProducts.js";
+import { notifyUserDeleteProduct } from "../helpers/nodemailer.js";
 
 
 const allProducts = new ProductServiceDB()
@@ -199,7 +200,12 @@ export const deleteProducts = async(req=request,res=response,next) => {
         const id = req.params.id 
            req.logger.info(`Buscando el id ${id}`)
         const resp = await deleteTheProduct(id)
+        const { creatorByEmail,creatorByRole,product} = resp
         console.log('ruta delete productos',resp);
+        if (creatorByEmail !== 'adminCoder@coder.com' && creatorByRole !== 'admin') {
+            console.log('notioficando');
+            await notifyUserDeleteProduct(creatorByEmail,product);
+        }
     
         
         res.json({

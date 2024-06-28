@@ -150,8 +150,8 @@ export class Server {
     
     listen(){
             //para corroborar el funcionamiento ejecutar en tu local "socket.io/socket.io.js"
-            this.httpServer.listen(config.port,()=>{
-            console.log(`conectado al localhost ${config.port} , ProyectoFinal`)
+            this.httpServer.listen(config.port || 8080 ,()=>{
+            console.log(`conectado al localhost ${config.port || 8080} , ProyectoFinal`)
         })
 
     }
