@@ -2,8 +2,8 @@
   "name": "proyecto_final",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "module",
+  "main":"index.js",
+  "type":"module",
   "engines": {
     "node": ">=14.0.0"
   },
