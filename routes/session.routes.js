@@ -42,7 +42,7 @@ router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'ht
     res.redirect('/')
 })
 router.post('/login',passport.authenticate('login',{
-      failureRedirect:'http://localhost:3000/login'
+      failureRedirect:'http://proyecto-production-7bcc.up.railway.app/login'
 }), login)
 
 
