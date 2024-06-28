@@ -8,7 +8,7 @@
     "node": ">=14.0.0"
   },
   "scripts": {
-    "start":"node /app.js",
+    "start":"node app",
     "test": "mocha test/supertest.js"
   },
   "author": "",
