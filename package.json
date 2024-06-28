@@ -2,13 +2,13 @@
   "name": "proyecto_final",
   "version": "1.0.0",
   "description": "",
-  "main":"app.js",
+  "main":"app.mjs",
   "type":"module",
   "engines": {
     "node": ">=14.0.0"
   },
   "scripts": {
-    "start":"node /app.js",
+    "start":"node /app.mjs",
     "test": "mocha test/supertest.js"
   },
   "author": "",
