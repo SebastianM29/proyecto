@@ -3,7 +3,7 @@ config()
 
 export default {
     port : process.env.PORT,
-    mongourl : process.env.MONGOURL,
+    mongourl : process.env.MONGOURL || 8080,
     sessionKey : process.env.SESSIONKEY,
     mongourlsession : process.env.MONGOURLSESSION,
     adminEmail : process.env.ADMINEMAIL,
