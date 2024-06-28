@@ -45,7 +45,7 @@ const _filename = fileURLToPath(import.meta.url)
 const _dirname = dirname(_filename)
 
 
-export class Server {
+export default class Server {
     constructor() {
         this.app = express()
         /**cambiado */
