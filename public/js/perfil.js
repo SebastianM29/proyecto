@@ -11,7 +11,7 @@ perfil.addEventListener('submit',async(e) =>{
         e.preventDefault()
         const id = document.querySelector('.data').getAttribute('data-id')
         const pic = document.querySelector('#upload').files[0]
-        const picturepath = document.getElementById('picture').src.split('localhost:3000/')[1]
+        const picturepath = document.getElementById('picture').src.split('proyecto-production-7bcc.up.railway.app/')[1]
         const formData = new FormData()
         console.log(picturepath);
         
