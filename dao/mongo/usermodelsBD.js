@@ -1,3 +1,7 @@
+
+import { fileURLToPath } from "url";
+import path, { dirname } from "path";
+
 import CustomError from "../../services/errors/CustomError.js";
 import EErrors from "../../services/errors/enums.js";
 import User from "../mongo/models/usermodels.js" 
@@ -6,6 +10,9 @@ import config from "../../config/config.js"
 import { jwtVerify } from "../../helpers/jwt.js";
 import { compare, createHash } from "../../helpers/hash.js";
 import { deleteUserMailTwoDays } from "../../helpers/nodemailer.js";
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 
 
@@ -93,10 +100,13 @@ export default class UserDB  {
           throw error
        };
        value.documents = []
+       console.log('que trae charge',charge);
        for (const key in charge) {
+        console.log('estoy viendo en KEY',key);
+        console.log('viendo el obj,',charge[key][0].destination);
          const obj = {
             name: charge[key][0].fieldname,
-            reference:charge[key][0].destination
+            reference: path.join(__dirname, '../../documents',charge[key][0].filename)    
          }
          value.documents.push(obj)
        }
