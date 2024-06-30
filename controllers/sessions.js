@@ -214,7 +214,8 @@ export const premium = async (req,res,next) => {
         })
         
     } catch (error) {
-        req.logger.error('Error en el update a premium')
+        req.logger.error('Error en el update a premium, documentos')
+        console.log(error);
         next(error)
     }
 
