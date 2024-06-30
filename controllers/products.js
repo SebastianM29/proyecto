@@ -164,7 +164,7 @@ export const postProducts = async(req=request,res=response,next) => {
             req.logger.debug('Accediendo a: postProducts')
         }
            req.logger.info('Creando productos')
-           const thumbnail = "/products/" + req.file.filename
+           const thumbnail = "https://proyecto-production-7bcc.up.railway.app/products/" + req.file.filename
            console.log('este seria el path', thumbnail);
           
            const {category,title,description,price,code,stock} = req.body
@@ -180,7 +180,7 @@ export const postProducts = async(req=request,res=response,next) => {
 
            console.log(all)
            const prod = await postCreateTheProduct(all)
-           console.log(prod);
+           console.log('deberia ver elk resultado ??',prod);
       res.json({
         msg: 'success'
       })
