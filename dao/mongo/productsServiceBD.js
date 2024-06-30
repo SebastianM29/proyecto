@@ -94,9 +94,11 @@ export default class ProductServiceDB {
                       );
                       throw error
                 }
-                console.log(__dirname);
-                console.log(prodFind.thumbnail);
-                await fs.unlink( path.join(__dirname,'../../public',prodFind.thumbnail)  )
+                console.log('este es el dirname ?',__dirname);
+                const thumbnailPath = prodFind.thumbnail.replace('https://proyecto-production-7bcc.up.railway.app', '');
+                
+                console.log(thumbnailPath);
+                 await fs.unlink( path.join(__dirname,'../../public',thumbnailPath)  )
                 
                 await products.findByIdAndDelete(id)
                 return {
