@@ -260,7 +260,7 @@ try {
     const id = req.params.id
     const img = req.file.filename
     console.log('viendo el src',picturepath);
-    const perfilPicture = '/perfil/' + img
+    const perfilPicture = 'https://proyecto-production-7bcc.up.railway.app/perfil/' + img
     const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
     req.session.user.perfilPicture = perfilPicture
     req.session.save()
