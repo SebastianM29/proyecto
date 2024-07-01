@@ -18,6 +18,7 @@ perfil.addEventListener('submit',async(e) =>{
         formData.append('perfilPicture',pic)
         formData.append('picturepath',picturepath)
         console.log('andando bien',picturepath);
+        console.log('andando bien',pic);
         const resp = await fetch(`/api/session/${id}/picture`,{
             method: 'POST',
             body: formData

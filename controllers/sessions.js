@@ -65,6 +65,8 @@ export const login =  async(req = request,res = response)=> {
             const idCart = carts
             const idUserString = _id ? _id.toString() : null
             req.logger.info('carrito asignado',idCart)
+            console.log(perfilPicture)
+
             await userServ.getTimeUserLoggin(_id)
             /** agregar dtos */
   
@@ -249,19 +251,24 @@ export const documentPremium = async(req,res,next) => {
 
 export const picture= async (req,res) => {
 try {
-    const {picturepath} = req.body
-    console.log('viendo el src',picturepath);
-    if (picturepath !== 'empty') {
-        const filePath = path.join(__dirname, '../public/perfil', picturepath);
-        console.log('Ruta completa a eliminar:', filePath);
-        await fs.unlink(filePath)
+    console.log('se ve esto ===', req.file )
+    console.log(req.body);
+
+   
+    // if (picturepath !== undefined) {
+    //     console.log(picturepath);
+    //     const filePath = path.join(__dirname, '../public/perfil', picturepath);
+    //     console.log('Ruta completa a eliminar:', filePath);
+    //     await fs.unlink(filePath)
         
-    }
+    // }
     const id = req.params.id
     const img = req.file.filename
-    console.log('viendo el src',picturepath);
+    console.log(id,img);
+   
     const perfilPicture = 'https://proyecto-production-7bcc.up.railway.app/perfil/' + img
     const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
+    console.log('debeo ver la carga',actPicture);
     req.session.user.perfilPicture = perfilPicture
     req.session.save()
     res.json({
@@ -270,7 +277,7 @@ try {
     
 
 } catch (error) {
-    
+    console.log(error);
 }
 }
 
