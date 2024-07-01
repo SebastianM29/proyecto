@@ -261,7 +261,7 @@ try {
     const img = req.file.filename
     console.log('viendo el src',picturepath);
     const perfilPicture = '/perfil/' + img
-    const actPicture = await User.findByIdAndUpdate(id,{perfilPicture},{new:true})
+    const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
     req.session.user.perfilPicture = perfilPicture
     req.session.save()
     res.json({
