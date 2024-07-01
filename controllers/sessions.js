@@ -254,17 +254,20 @@ try {
     console.log('se ve esto ===', req.file )
     console.log(req.body);
 
-   
-    // if (picturepath !== undefined) {
-    //     console.log(picturepath);
-    //     const filePath = path.join(__dirname, '../public/perfil', picturepath);
-    //     console.log('Ruta completa a eliminar:', filePath);
-    //     await fs.unlink(filePath)
-        
-    // }
     const id = req.params.id
     const img = req.file.filename
+    const {picturepath} = req.body
     console.log(id,img);
+
+
+   
+    if (!picturepath) {
+        console.log(picturepath);
+        const filePath = path.join(__dirname, '../public/perfil', picturepath);
+        console.log('Ruta completa a eliminar:', filePath);
+        await fs.unlink(filePath)
+        
+    }
    
     const perfilPicture = 'https://proyecto-production-7bcc.up.railway.app/perfil/' + img
     const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
