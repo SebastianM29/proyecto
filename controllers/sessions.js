@@ -261,7 +261,7 @@ try {
 
 
    
-    if (!picturepath) {
+    if (picturepath !== undefined) {
         console.log(picturepath);
         const filePath = path.join(__dirname, '../public/perfil', picturepath);
         console.log('Ruta completa a eliminar:', filePath);
