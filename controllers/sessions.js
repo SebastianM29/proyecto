@@ -252,7 +252,7 @@ try {
     const {picturepath} = req.body
     console.log('viendo el src',picturepath);
     if (picturepath !== 'empty') {
-        const filePath = path.join(__dirname, '../public', picturepath);
+        const filePath = path.join(__dirname, '../public/perfil', picturepath);
         console.log('Ruta completa a eliminar:', filePath);
         await fs.unlink(filePath)
         
