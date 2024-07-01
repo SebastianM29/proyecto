@@ -263,7 +263,7 @@ try {
    
     if (picturepath !== undefined) {
         console.log(picturepath);
-        const filePath = path.join(__dirname, '../public/perfil', picturepath);
+        const filePath = path.join(__dirname, '../public', picturepath);
         console.log('Ruta completa a eliminar:', filePath);
         await fs.unlink(filePath)
         
