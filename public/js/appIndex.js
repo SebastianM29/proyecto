@@ -332,7 +332,7 @@ actform.removeAttribute('hidden')
         console.log('algo paso en add actualizar' , datos);
     }
     
-    window.location = 'http://proyecto-production-7bcc.up.railway.app/'
+    window.location = 'https://proyecto-production-7bcc.up.railway.app/'
     } catch (error) {
           console.log(error)  
     }
