@@ -22,20 +22,16 @@ documentsPremium.addEventListener('submit', async(e) => {
       body: formData
     })
 
-    // if (!res.ok) {
-    //   const respuesta = await res.json()
-    //   console.log('hay algo mal');
-    //   console.log(respuesta);      
-    // }
-    // if (res.ok) {
-    //   const respuesta = await res.json()
-      
-    //   console.log(respuesta);      
-    // }
+ 
 
     if (res.ok) {
       const datos = await res.json();
       console.log('datos obtenidos', datos);
+      const val = document.getElementById('uploadInfo')
+      val.innerHTML= 'Info actualizada'
+      setTimeout(() => {
+        val.innerHTML= 'Actualizar info'
+      }, 3000);
   } else {
       const errorData = await res.json();
       console.log('Algo salió mal:', errorData);
@@ -110,11 +106,22 @@ product.addEventListener('submit',async(e)=>{
       if (resp.ok) {
           const datos = await resp.json()  
           console.log('datos obtenidos',datos)
+          const val = document.getElementById('agregar')
+          val.innerHTML= 'Producto agregado'
+          setTimeout(() => {
+            val.innerHTML= 'Agregar producto'
+          }, 3000);
+          product.reset()
     
       }
       if(!resp.ok){
           const datos = await resp.json() 
           console.log('algo paso',datos);
+          const val = document.getElementById('agregar')
+          val.innerHTML= 'Verifique Datos'
+          setTimeout(() => {
+            val.innerHTML= 'Agregar producto'
+          }, 3000);
       }
       
   } catch (error) {
