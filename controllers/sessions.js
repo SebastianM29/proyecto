@@ -230,6 +230,7 @@ export const documentPremium = async(req,res,next) => {
         const document = req.files.document
         const home = req.files.home 
          console.log('viendo el home en actualizar',home);
+         console.log('viendo el home en actualizar',document);
         const validatePremium={
             document,
             home
