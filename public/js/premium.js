@@ -106,7 +106,7 @@ product.addEventListener('submit',async(e)=>{
       if (resp.ok) {
           const datos = await resp.json()  
           console.log('datos obtenidos',datos)
-          const val = document.getElementById('agregar')
+          const val = document.getElementById('agreg')
           val.innerHTML= 'Producto agregado'
           setTimeout(() => {
             val.innerHTML= 'Agregar producto'
@@ -117,7 +117,7 @@ product.addEventListener('submit',async(e)=>{
       if(!resp.ok){
           const datos = await resp.json() 
           console.log('algo paso',datos);
-          const val = document.getElementById('agregar')
+          const val = document.getElementById('agreg')
           val.innerHTML= 'Verifique Datos'
           setTimeout(() => {
             val.innerHTML= 'Agregar producto'
