@@ -12,6 +12,7 @@ documentsPremium.addEventListener('submit', async(e) => {
     const documento = document.getElementById('uploadDocumento').files[0]
     const domicilio = document.getElementById('uploadDomicilio').files[0]
     console.log('deberia ver el id?',id, documento);
+    console.log('deberia ver el domicilio?',domicilio);
     const formData = new FormData()
 
     formData.append('document',documento)
