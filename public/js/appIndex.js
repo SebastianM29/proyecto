@@ -225,7 +225,7 @@ addProduct.addEventListener('submit',async(e)=>{
 
      
        
-        const resp = await fetch("http://proyecto-production-7bcc.up.railway.app/products",{
+        const resp = await fetch("https://proyecto-production-7bcc.up.railway.app/products",{
             method: 'POST',
             body:formData
         })
