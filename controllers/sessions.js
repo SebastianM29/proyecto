@@ -256,9 +256,9 @@ try {
     console.log(req.body);
 
     const id = req.params.id
-    const img = req.file.filename
+    // const img = req.file.filename
     const {picturepath} = req.body
-    console.log(id,img);
+    console.log(id);
 
 
    

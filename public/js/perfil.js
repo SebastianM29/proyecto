@@ -24,7 +24,8 @@ perfil.addEventListener('submit',async(e) =>{
             body: formData
         })
         if (!resp.ok) {
-            console.log('anda mal');
+            const res = await resp.json()
+            console.log('anda mal',res);
         }
         if (resp.ok) {
             console.log('anda joya');
