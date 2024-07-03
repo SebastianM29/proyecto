@@ -284,11 +284,14 @@ export const allUsers = async(req,res,next) => {
 try {
     const usuarios = await getAllUsersSer()
     const value = new UsersDTO(usuarios)
+    console.log(value);
+
     res.json({
         msg: 'all users'
     })
 } catch (error) {
     req.logger.error('Error al mostrar todos los usuarios')
+    console.log(error.message);
     next(error)
 }
 }
@@ -300,9 +303,11 @@ export const deleteUser = async(req,res,next) =>{
        const admin = req.body.admin
        if (id) {
           const usuario = await deleteUserSer(id)
+          console.log(usuario.email);
           deleteUserMail(usuario.email)
        }
        if (check) {
+        console.log('entrando a check');
         await deleteBeforeTwoSer(admin)
        }
        res.json({
@@ -312,7 +317,7 @@ export const deleteUser = async(req,res,next) =>{
         
     } catch (error) {
         req.logger.error('error al borrar Usuario')
-
+        console.log(error.message);
         next(error)
         
     }
