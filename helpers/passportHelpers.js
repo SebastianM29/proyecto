@@ -93,7 +93,7 @@ const localStrategy = local.Strategy
                         findUser.carts = createCart._id
                         await findUser.save()
 
-                        console.log(findUser)
+                       
                     }
                     if (findUser.carts) {
                         const findUser = await User.findOne({email:username}).populate('carts')
