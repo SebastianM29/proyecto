@@ -14,8 +14,8 @@ perfil.addEventListener('submit',async(e) =>{
         const pictureElement = document.getElementById('picture')
         let picturepath = 'empty'
 
-        if (pictureElement && pictureElement.src.includes('proyecto-production-7bcc.up.railway.app/')) {
-            picturepath = pictureElement.src.split('proyecto-production-7bcc.up.railway.app/')[1];
+        if (pictureElement && pictureElement.src.includes('https://proyecto-production-7bcc.up.railway.app/')) {
+            picturepath = pictureElement.src.split('https://proyecto-production-7bcc.up.railway.app/')[1];
 
             
         }
