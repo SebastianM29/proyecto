@@ -12,13 +12,13 @@ perfil.addEventListener('submit',async(e) =>{
         const id = document.querySelector('.data').getAttribute('data-id')
         const pic = document.querySelector('#upload').files[0]
         const pictureElement = document.getElementById('picture')
-        // let picturepath = 'empty'
+        let picturepath = 'empty'
 
-        // if (pictureElement && pictureElement.src.includes('proyecto-production-7bcc.up.railway.app/')) {
-        //     picturepath = pictureElement.src.split('proyecto-production-7bcc.up.railway.app/')[1];
+        if (pictureElement && pictureElement.src.includes('proyecto-production-7bcc.up.railway.app/')) {
+            picturepath = pictureElement.src.split('proyecto-production-7bcc.up.railway.app/')[1];
 
             
-        // }
+        }
         const formData = new FormData()
         console.log(picturepath);
         
