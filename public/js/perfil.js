@@ -11,7 +11,14 @@ perfil.addEventListener('submit',async(e) =>{
         e.preventDefault()
         const id = document.querySelector('.data').getAttribute('data-id')
         const pic = document.querySelector('#upload').files[0]
-        const picturepath = document.getElementById('picture').src.split('proyecto-production-7bcc.up.railway.app/')[1]
+        const pictureElement = document.getElementById('picture')
+        let picturepath = 'empty'
+
+        if (pictureElement && pictureElement.src.includes('proyecto-production-7bcc.up.railway.app/')) {
+            picturepath = pictureElement.src.split('proyecto-production-7bcc.up.railway.app/')[1];
+
+            
+        }
         const formData = new FormData()
         console.log(picturepath);
         
@@ -19,7 +26,7 @@ perfil.addEventListener('submit',async(e) =>{
         formData.append('picturepath',picturepath)
         console.log('andando bien',picturepath);
         console.log('andando bien',pic);
-        const resp = await fetch(`/api/session/${id}/picture`,{
+        const resp = await fetch(`https://proyecto-production-7bcc.up.railway.app/api/session/${id}/picture`,{
             method: 'POST',
             body: formData
         })

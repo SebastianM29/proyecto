@@ -252,7 +252,7 @@ export const documentPremium = async(req,res,next) => {
 
 export const picture= async (req,res) => {
 try {
-    console.log('hola');
+    console.log('hola llego bien');
     // console.log('se ve esto ===', req.file )
     // console.log(req.body);
 
