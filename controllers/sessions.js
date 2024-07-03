@@ -312,6 +312,7 @@ export const deleteUser = async(req,res,next) =>{
         
     } catch (error) {
         req.logger.error('error al borrar Usuario')
+
         next(error)
         
     }
