@@ -252,13 +252,14 @@ export const documentPremium = async(req,res,next) => {
 
 export const picture= async (req,res) => {
 try {
+    console.log('hola');
     // console.log('se ve esto ===', req.file )
-    console.log(req.body);
+    // console.log(req.body);
 
-    const id = req.params.id
+    // const id = req.params.id
     // const img = req.file.filename
-    const {picturepath} = req.body
-    console.log(id);
+    // const {picturepath} = req.body
+    // console.log(id);
 
 
    
