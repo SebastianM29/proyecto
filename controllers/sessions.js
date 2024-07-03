@@ -252,27 +252,27 @@ export const documentPremium = async(req,res,next) => {
 export const picture= async (req,res) => {
 try {
     console.log('hola llego bien');
-    // console.log('se ve esto ===', req.file )
+    console.log('se ve esto ===', req.file )
 
-    // const id = req.params.id
-    // const img = req.file.filename
-    // const {picturepath} = req.body
+    const id = req.params.id
+    const img = req.file.filename
+    const {picturepath} = req.body
 
-    // if (picturepath !== 'empty') {
-    //     console.log('debo del el picturePath',picturepath);
-    //     const filePath = path.join(__dirname, '../public', picturepath);
-    //     console.log('Ruta completa a eliminar:', filePath);
-    //     await fs.unlink(filePath)
+    if (picturepath !== 'empty') {
+        console.log('debo del el picturePath',picturepath);
+        const filePath = path.join(__dirname, '../public', picturepath);
+        console.log('Ruta completa a eliminar:', filePath);
+        await fs.unlink(filePath)
         
-    // }
+    }
    
-    // const perfilPicture = 'https://proyecto-production-7bcc.up.railway.app/perfil/' + img
-    // const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
-    // req.session.user.perfilPicture = perfilPicture
-    // req.session.save()
-    // res.json({
-    //     msg: "enviado"
-    // })
+    const perfilPicture = 'https://proyecto-production-7bcc.up.railway.app/perfil/' + img
+    const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
+    req.session.user.perfilPicture = perfilPicture
+    req.session.save()
+    res.json({
+        msg: "enviado"
+    })
     
 
 } catch (error) {
