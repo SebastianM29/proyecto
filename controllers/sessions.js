@@ -270,14 +270,14 @@ try {
         
     }
    
-    const perfilPicture = 'https://proyecto-production-7bcc.up.railway.app/perfil/' + img
-    const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
-    console.log('debo ver la carga',actPicture);
-    req.session.user.perfilPicture = perfilPicture
-    req.session.save()
-    res.json({
-        msg: "enviado"
-    })
+    // const perfilPicture = 'https://proyecto-production-7bcc.up.railway.app/perfil/' + img
+    // const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
+    // console.log('debo ver la carga',actPicture);
+    // req.session.user.perfilPicture = perfilPicture
+    // req.session.save()
+    // res.json({
+    //     msg: "enviado"
+    // })
     
 
 } catch (error) {
