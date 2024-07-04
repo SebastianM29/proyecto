@@ -83,6 +83,7 @@ export const login =  async(req = request,res = response)=> {
        )
 
             req.session.user = info
+            await req.session.save()
        
             res.redirect('/')
         }
