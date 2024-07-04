@@ -26,7 +26,7 @@ perfil.addEventListener('submit',async(e) =>{
         }
 
 
-        console.log('andando bien',picturepath);
+        console.log('andando bien',pictureElement);
         console.log('andando bien',pic);
         const resp = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/${id}/picture`,{
             method: 'POST',
