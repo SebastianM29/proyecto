@@ -320,6 +320,7 @@ actform.removeAttribute('hidden')
 }
 }
 
+if (actProducts) {
 
     actProducts.addEventListener('submit', async(e) => {
         try {
@@ -366,4 +367,29 @@ actform.removeAttribute('hidden')
  
     
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+}
+   
 
