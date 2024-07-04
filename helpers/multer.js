@@ -18,7 +18,7 @@ export const storageDocuments = multer.diskStorage({
 
 export const storagePerfil = multer.diskStorage({
     destination: function(req,res,cb) {
-        cb(null,path.join(_dirname, '../perfil'))
+        cb(null,path.join(_dirname, '../public/perfil'))
     },
     filename: function(req,file,cb) {
         cb(null,new Date().getTime() + path.extname(file.originalname))
