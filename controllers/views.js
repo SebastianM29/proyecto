@@ -39,7 +39,7 @@ export const viewPremium = async (req,res) => {
         role,
         perfilPicture
     }
-    console.log(perfilPicture);
+   
 res.render('premium',{obj})
 }
 
