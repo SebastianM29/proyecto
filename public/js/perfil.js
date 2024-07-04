@@ -11,7 +11,7 @@ perfil.addEventListener('submit',async(e) =>{
         e.preventDefault()
         const id = document.querySelector('.data').getAttribute('data-id')
         const pic = document.querySelector('#upload').files[0]
-        const pictureElement = document.getElementById('picture').src.split('proyecto-production-1d58.up.railway.app/')[1]
+        // const pictureElement = document.getElementById('picture').src.split('proyecto-production-1d58.up.railway.app/')[1]
         
 
       
