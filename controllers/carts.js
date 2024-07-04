@@ -28,7 +28,7 @@ try {
         req.logger.debug('Accediendo a: getCarts')
     }
     const value = await getTheCartById(id)
-    console.log('debo entrar aca ehn el getCarts',value)
+   
     res.json(
         value
     )
