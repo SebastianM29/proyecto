@@ -25,6 +25,9 @@ perfil.addEventListener('submit',async(e) =>{
         formData.append('picturepath',picturepath)
 
         console.log('FormData content:')
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
 
 
         console.log('andando bien',picturepath);
