@@ -256,7 +256,7 @@ export const picture= async (req,res) => {
         console.log('hola llego bien');
 
     const id = req.params.id
-    // const img = req.file.filename
+    const img = req.file.filename
     const {picturepath} = req.body
 
     if (picturepath !== 'empty') {
@@ -267,10 +267,11 @@ export const picture= async (req,res) => {
         
     }
    
-    // const perfilPicture = 'https://proyecto-production-1d58.up.railway.app/perfil/' + img
-    // const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
+    const perfilPicture = 'https://proyecto-production-1d58.up.railway.app/perfil/' + img
+    const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
     req.session.user.perfilPicture = perfilPicture
     req.session.save()
+    console.log('quiero ver session en perfil como quedo', req.session.user);
     res.json({
         msg: "enviado"
     })
