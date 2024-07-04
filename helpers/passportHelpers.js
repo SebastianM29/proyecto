@@ -22,7 +22,7 @@ const localStrategy = local.Strategy
                 
                  
                 if (!searchUser) {
-                   
+                    let perfilPicture = 'perfil/algo.jpg';
                    if (role === 'admin'  ) {
 
                     if ( email === config.adminEmail && password === config.passAdmin ) {
@@ -32,7 +32,8 @@ const localStrategy = local.Strategy
                             email,
                             age,
                             password: createHash(password),
-                            role
+                            role,
+                            perfilPicture
                         }
                         const userSave = await User.create(datos)
                         
@@ -58,7 +59,8 @@ const localStrategy = local.Strategy
                             email,
                             age,
                             password: createHash(password),
-                            role
+                            role,
+                            perfilPicture
                            }
                            const userSave = await User.create(datos)
                            console.log(userSave)
