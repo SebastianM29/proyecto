@@ -12,7 +12,7 @@ perfil.addEventListener('submit',async(e) =>{
         const id = document.querySelector('.data').getAttribute('data-id')
         const pic = document.querySelector('#upload').files[0]
         const pictureElement = document.getElementById('picture')
-        let picturepath
+        let picturepath = 'empty'
 
         if ( pictureElement.src.includes('proyecto-production-1d58.up.railway.app/')) {
             picturepath = pictureElement.src.split('proyecto-production-1d58.up.railway.app/')[1];
