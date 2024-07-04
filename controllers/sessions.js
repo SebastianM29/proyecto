@@ -266,7 +266,7 @@ try {
         
     }
    
-    const perfilPicture = 'https://proyecto-production-7bcc.up.railway.app/perfil/' + img
+    const perfilPicture = 'https://proyecto-production-1d58.up.railway.app/perfil/' + img
     const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
     req.session.user.perfilPicture = perfilPicture
     req.session.save()

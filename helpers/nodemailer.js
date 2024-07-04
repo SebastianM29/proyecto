@@ -32,7 +32,7 @@ export const mail = async(id,email) => {
     subject: "correo de prueba",
     html:` <div>
       <h1> RESTABLEZCA LA CONTRASEÑA</h1>
-      <a href="http://proyecto-production-7bcc.up.railway.app/api/session/new/${jwt}">Haga click en este enlace</a>
+      <a href="http://proyecto-production-1d58.up.railway.app/api/session/new/${jwt}">Haga click en este enlace</a>
       </div>`,
       attachments:[]
    })
@@ -59,7 +59,7 @@ export const deleteUserMail = async(mail) => {
     subject: "correo de prueba",
     html:` <div>
       <h1>Nos comunicamos para informarle que eliminamos su cuenta de nuestra pagina debido a su inactividad</h1>
-      <a href="http://proyecto-production-7bcc.up.railway.app">Visite nuestra pagina</a>
+      <a href="http://proyecto-production-1d58.up.railway.app">Visite nuestra pagina</a>
       </div>`,
       attachments:[]
    })
@@ -85,7 +85,7 @@ export const deleteUserMailTwoDays = async(mail) => {
     subject: "correo de prueba",
     html:` <div>
       <h1>Informamos que eliminamos su cuenta de nuestra pagina debido a su inactividad en estas 48hs pasadas desde esta notificacion </h1>
-      <a href="http://proyecto-production-7bcc.up.railway.app">Visite nuestra pagina</a>
+      <a href="http://proyecto-production-1d58.up.railway.app">Visite nuestra pagina</a>
       </div>`,
       attachments:[]
    })
@@ -113,7 +113,7 @@ export const notifyUserDeleteProduct = async(email,product) => {
     html:` 
       <div>
       <h1>Nos comunicamos para informarle que eliminamos de nuestro catalogo su producto: ${product} .  </h1>
-      <a href="http://proyecto-production-7bcc.up.railway.app">Visite nuestra pagina</a>
+      <a href="http://proyecto-production-1d58.up.railway.app">Visite nuestra pagina</a>
       </div>`,
       attachments:[]
   })

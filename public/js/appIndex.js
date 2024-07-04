@@ -225,7 +225,7 @@ addProduct.addEventListener('submit',async(e)=>{
 
      
        
-        const resp = await fetch("https://proyecto-production-7bcc.up.railway.app/products",{
+        const resp = await fetch("https://proyecto-production-1d58.up.railway.app/products",{
             method: 'POST',
             body:formData
         })
@@ -263,7 +263,7 @@ actform.removeAttribute('hidden')
   
 
  try {
-    const resp = await fetch(`https://proyecto-production-7bcc.up.railway.app/products/${id}`)
+    const resp = await fetch(`https://proyecto-production-1d58.up.railway.app/products/${id}`)
     if (resp.ok) {
     const datos = await resp.json()
 
@@ -313,7 +313,7 @@ actform.removeAttribute('hidden')
     }
     console.log(formData)
     
-    const resp = await fetch(`https://proyecto-production-7bcc.up.railway.app/products/${idCapture}`,{
+    const resp = await fetch(`https://proyecto-production-1d58.up.railway.app/products/${idCapture}`,{
         method: 'PUT',
         headers:{
             'content-Type' : 'application/json'
@@ -332,7 +332,7 @@ actform.removeAttribute('hidden')
         console.log('algo paso en add actualizar' , datos);
     }
     
-    window.location = 'https://proyecto-production-7bcc.up.railway.app/'
+    window.location = 'https://proyecto-production-1d58.up.railway.app/'
     } catch (error) {
           console.log(error)  
     }
