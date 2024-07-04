@@ -21,8 +21,10 @@ perfil.addEventListener('submit',async(e) =>{
         }
         const formData = new FormData()
       
-        // formData.append('perfilPicture',pic)
-        // formData.append('picturepath',picturepath)
+        formData.append('perfilPicture',pic)
+        formData.append('picturepath',picturepath)
+
+        console.log('FormData content:')
 
 
         console.log('andando bien',picturepath);
