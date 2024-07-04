@@ -11,19 +11,21 @@ perfil.addEventListener('submit',async(e) =>{
         e.preventDefault()
         const id = document.querySelector('.data').getAttribute('data-id')
         const pic = document.querySelector('#upload').files[0]
-        const pictureElement = document.getElementById('picture').src.split('proyecto-production-1d58.up.railway.app/')[1]
+        const pictureElement = document.getElementById('picture')
         let picturepath = 'empty'
 
-        // if (pictureElement && pictureElement.src.includes('proyecto-production-1d58.up.railway.app/')) {
-        //     picturepath = pictureElement.src.split('proyecto-production-1d58.up.railway.app/')[1];
+        if ( pictureElement.src.includes('proyecto-production-1d58.up.railway.app/')) {
+            picturepath = pictureElement.src.split('proyecto-production-1d58.up.railway.app/')[1];
 
             
-        // }
+        }
         const formData = new FormData()
         console.log(picturepath);
         
         formData.append('perfilPicture',pic)
-        formData.append('picturepath',pictureElement)
+        formData.append('picturepath',picturepath)
+
+
         console.log('andando bien',picturepath);
         console.log('andando bien',pic);
         const resp = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/${id}/picture`,{
