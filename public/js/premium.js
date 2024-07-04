@@ -18,7 +18,7 @@ documentsPremium.addEventListener('submit', async(e) => {
     formData.append('document',documento)
     formData.append('home',domicilio)
   
-    const res = await fetch(`/api/session/users/premium/${id}/documents`,{
+    const res = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}/documents`,{
       method: 'POST',
       body: formData
     })
@@ -50,7 +50,7 @@ const checkPremium = async() => {
     const id = document.querySelector('.namePerfil').getAttribute('data-id')
 
     console.log('hola');
-    const resp = await fetch(`/api/session/users/premium/${id}`, {
+    const resp = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}`, {
       method: 'POST', 
       headers: {
           'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ product.addEventListener('submit',async(e)=>{
 
    
       console.log(formData)
-      const resp = await fetch('/products',{
+      const resp = await fetch('https://proyecto-production-1d58.up.railway.app/products',{
           method: 'POST',
           body:formData
       })
