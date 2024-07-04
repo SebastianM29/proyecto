@@ -14,12 +14,12 @@ const uploadPicture = multer({storage: storagePerfil})
 
 
 
-router.post('/register',passport.authenticate('register',{successRedirect:'http://proyecto-production-7bcc.up.railway.app/login',failureRedirect:'http://proyecto-production-7bcc.up.railway.app/register'}) )
+router.post('/register',passport.authenticate('register',{successRedirect:'http://proyecto-production-1d58.up.railway.app/login',failureRedirect:'http://proyecto-production-1d58.up.railway.app/register'}) )
 router.get('/github',passport.authenticate('github',{scope:['user:email']}),async(req,res)=>{
   
 })
 //el que usa github
-router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'http://proyecto-production-7bcc.up.railway.app/login'}),async(req,res)=>{
+router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'http://proyecto-production-1d58.up.railway.app/login'}),async(req,res)=>{
     const { first_name, last_name, email, age, perfilPicture, role, carts ,_id } = req.user;
    /**SACO TOSTRING a carts y a _ID */
     const cart = carts ? carts : null // Obtén el ID del carrito como cadena de texto si existe
