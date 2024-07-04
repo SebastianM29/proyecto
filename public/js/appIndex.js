@@ -225,8 +225,8 @@ if (addProduct) {
             formData.append('thumbnail', thumbnail)
     
          
-           
-            const resp = await fetch("https://proyecto-production-1d58.up.railway.app/products",{
+           console.log('que hay aca',formData);
+            const resp = await fetch("proyecto-production-1d58.up.railway.app/products",{
                 method: 'POST',
                 body:formData
             })
