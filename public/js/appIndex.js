@@ -202,53 +202,80 @@ const eliminarProd = async(id) => {
 }
 
 /** agregar producto siendo admin */
-addProduct.addEventListener('submit',async(e)=>{
-    e.preventDefault()
-   
-    try {
-        const categoria = document.getElementById('categoria').value
-        const titulo = document.getElementById('titulo').value
-        const descripcion = document.getElementById('descripcion').value
-        const precio = document.getElementById('precio').value
-        const codigo = document.getElementById('codigo').value
-        const stock = document.getElementById('stock').value
-        const thumbnail = document.getElementById('thumbnail').files[0]
-
-        const formData = new FormData()
-        formData.append('category', categoria)
-        formData.append('title', titulo)
-        formData.append('description', descripcion)
-        formData.append('price', precio,)
-        formData.append('code', codigo)
-        formData.append('stock', stock)
-        formData.append('thumbnail', thumbnail)
-
-     
+if (addProduct) {
+    addProduct.addEventListener('submit',async(e)=>{
+        e.preventDefault()
        
-        const resp = await fetch("https://proyecto-production-1d58.up.railway.app/products",{
-            method: 'POST',
-            body:formData
-        })
+        try {
+            const categoria = document.getElementById('categoria').value
+            const titulo = document.getElementById('titulo').value
+            const descripcion = document.getElementById('descripcion').value
+            const precio = document.getElementById('precio').value
+            const codigo = document.getElementById('codigo').value
+            const stock = document.getElementById('stock').value
+            const thumbnail = document.getElementById('thumbnail').files[0]
+    
+            const formData = new FormData()
+            formData.append('category', categoria)
+            formData.append('title', titulo)
+            formData.append('description', descripcion)
+            formData.append('price', precio,)
+            formData.append('code', codigo)
+            formData.append('stock', stock)
+            formData.append('thumbnail', thumbnail)
+    
+         
+           
+            const resp = await fetch("https://proyecto-production-1d58.up.railway.app/products",{
+                method: 'POST',
+                body:formData
+            })
+           
+            if (resp.ok) {
+                const datos = await resp.json()  
+                console.log('datos obtenidos',datos)
+                window.location.reload()
+          
+            }
+            if(!resp.ok){
+                const datos = await resp.json() 
+                console.log('algo paso',datos);
+            }
        
-        if (resp.ok) {
-            const datos = await resp.json()  
-            console.log('datos obtenidos',datos)
-            window.location.reload()
-      
+            
+        } catch (error) {
+    
+            console.log( 'msg!!!!!',error)
+            
         }
-        if(!resp.ok){
-            const datos = await resp.json() 
-            console.log('algo paso',datos);
-        }
-   
-        
-    } catch (error) {
+    
+    })
 
-        console.log( 'msg!!!!!',error)
-        
-    }
 
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+}
+
 /** Actualizar */
 const actualizar  = async( id ) => {
   
