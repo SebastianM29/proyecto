@@ -3,47 +3,50 @@ const documentsPremium = document.querySelector('.infoPremium')
 const product = document.getElementById('addProduct')
 
 
-
-documentsPremium.addEventListener('submit', async(e) => {
-  try {
-    e.preventDefault()
-    console.log('click en subir archivo');
-    const id = document.querySelector('.namePerfil').getAttribute('data-id')
-    const documento = document.getElementById('uploadDocumento').files[0]
-    const domicilio = document.getElementById('uploadDomicilio').files[0]
-    console.log('deberia ver el id?',id, documento);
-    console.log('deberia ver el domicilio?',domicilio);
-    const formData = new FormData()
-
-    formData.append('document',documento)
-    formData.append('home',domicilio)
+if (documentsPremium) {
+  documentsPremium.addEventListener('submit', async(e) => {
+    try {
+      e.preventDefault()
+      console.log('click en subir archivo');
+      const id = document.querySelector('.namePerfil').getAttribute('data-id')
+      const documento = document.getElementById('uploadDocumento').files[0]
+      const domicilio = document.getElementById('uploadDomicilio').files[0]
+      console.log('deberia ver el id?',id, documento);
+      console.log('deberia ver el domicilio?',domicilio);
+      const formData = new FormData()
   
-    const res = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}/documents`,{
-      method: 'POST',
-      body: formData
-    })
-
- 
-
-    if (res.ok) {
-      const datos = await res.json();
-      console.log('datos obtenidos', datos);
-      const val = document.getElementById('uploadInfo')
-      val.innerHTML= 'Info actualizada'
-      setTimeout(() => {
-        val.innerHTML= 'Actualizar info'
-      }, 3000);
-  } else {
-      const errorData = await res.json();
-      console.log('Algo salió mal:', errorData);
-  }
+      formData.append('document',documento)
+      formData.append('home',domicilio)
     
-  } catch (error) {
-    console.log(error);
-  }
+      const res = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}/documents`,{
+        method: 'POST',
+        body: formData
+      })
+  
+   
+  
+      if (res.ok) {
+        const datos = await res.json();
+        console.log('datos obtenidos', datos);
+        const val = document.getElementById('uploadInfo')
+        val.innerHTML= 'Info actualizada'
+        setTimeout(() => {
+          val.innerHTML= 'Actualizar info'
+        }, 3000);
+    } else {
+        const errorData = await res.json();
+        console.log('Algo salió mal:', errorData);
+    }
+      
+    } catch (error) {
+      console.log(error);
+    }
+  
+  
+  })
+  
+}
 
-
-})
 
 const checkPremium = async() => {
   try {
@@ -76,59 +79,65 @@ const checkPremium = async() => {
 
 }
 
-product.addEventListener('submit',async(e)=>{
-  e.preventDefault()
- 
-  try {
-      const categoria = document.getElementById('categoria').value
-      const titulo = document.getElementById('titulo').value
-      const descripcion = document.getElementById('descripcion').value
-      const precio = document.getElementById('precio').value
-      const codigo = document.getElementById('codigo').value
-      const stock = document.getElementById('stock').value
-      const thumbnail = document.getElementById('thumbnail').files[0]
 
-      const formData = new FormData()
-      formData.append('category', categoria)
-      formData.append('title', titulo)
-      formData.append('description', descripcion)
-      formData.append('price', precio,)
-      formData.append('code', codigo)
-      formData.append('stock', stock)
-      formData.append('thumbnail', thumbnail)
-
+if (product) {
+  
+  product.addEventListener('submit',async(e)=>{
+    e.preventDefault()
    
-      console.log(formData)
-      const resp = await fetch('https://proyecto-production-1d58.up.railway.app/products',{
-          method: 'POST',
-          body:formData
-      })
+    try {
+        const categoria = document.getElementById('categoria').value
+        const titulo = document.getElementById('titulo').value
+        const descripcion = document.getElementById('descripcion').value
+        const precio = document.getElementById('precio').value
+        const codigo = document.getElementById('codigo').value
+        const stock = document.getElementById('stock').value
+        const thumbnail = document.getElementById('thumbnail').files[0]
+  
+        const formData = new FormData()
+        formData.append('category', categoria)
+        formData.append('title', titulo)
+        formData.append('description', descripcion)
+        formData.append('price', precio,)
+        formData.append('code', codigo)
+        formData.append('stock', stock)
+        formData.append('thumbnail', thumbnail)
+  
      
-      if (resp.ok) {
-          const datos = await resp.json()  
-          console.log('datos obtenidos',datos)
-          const val = document.getElementById('agreg')
-          val.innerHTML= 'Producto agregado'
-          setTimeout(() => {
-            val.innerHTML= 'Agregar producto'
-          }, 3000);
-          product.reset()
-    
-      }
-      if(!resp.ok){
-          const datos = await resp.json() 
-          console.log('algo paso',datos);
-          const val = document.getElementById('agreg')
-          val.innerHTML= 'Verifique Datos'
-          setTimeout(() => {
-            val.innerHTML= 'Agregar producto'
-          }, 3000);
-      }
+        console.log(formData)
+        const resp = await fetch('https://proyecto-production-1d58.up.railway.app/products',{
+            method: 'POST',
+            body:formData
+        })
+       
+        if (resp.ok) {
+            const datos = await resp.json()  
+            console.log('datos obtenidos',datos)
+            const val = document.getElementById('agreg')
+            val.innerHTML= 'Producto agregado'
+            setTimeout(() => {
+              val.innerHTML= 'Agregar producto'
+            }, 3000);
+            product.reset()
       
-  } catch (error) {
+        }
+        if(!resp.ok){
+            const datos = await resp.json() 
+            console.log('algo paso',datos);
+            const val = document.getElementById('agreg')
+            val.innerHTML= 'Verifique Datos'
+            setTimeout(() => {
+              val.innerHTML= 'Agregar producto'
+            }, 3000);
+        }
+        
+    } catch (error) {
+  
+        console.log( 'msg!!!!!',error)
+        
+    }
+  
+  })
 
-      console.log( 'msg!!!!!',error)
-      
-  }
+}
 
-})
