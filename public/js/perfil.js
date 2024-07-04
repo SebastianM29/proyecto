@@ -11,18 +11,14 @@ perfil.addEventListener('submit',async(e) =>{
         e.preventDefault()
         const id = document.querySelector('.data').getAttribute('data-id')
         const pic = document.querySelector('#upload').files[0]
-        const pictureElement = document.getElementById('picture')
-        let picturepath = 'empty'
+        const pictureElement = document.getElementById('picture').src.split('proyecto-production-1d58.up.railway.app/')[1]
+        
 
-        if ( pictureElement.src.includes('proyecto-production-1d58.up.railway.app/')) {
-            picturepath = pictureElement.src.split('proyecto-production-1d58.up.railway.app/')[1];
-
-            
-        }
+      
         const formData = new FormData()
       
         formData.append('perfilPicture',pic)
-        formData.append('picturepath',picturepath)
+        formData.append('picturepath',pictureElement)
 
         console.log('FormData content:')
         for (let pair of formData.entries()) {
