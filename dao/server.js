@@ -120,7 +120,7 @@ export class Server {
         this.app.use('/',cartsRoutes);
         this.app.use('/',productsRoutes);
         this.app.use('/',messagesRoutes);
-        this.app.use('api/session/',sessionRoutes);
+        this.app.use('/api/session/',sessionRoutes);
         this.app.use('/',viewsRoutes)
 
         this.app.use('/api/docs',swaggerUI.serve , swaggerUI.setup(swaggerSpecs))
