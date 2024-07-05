@@ -229,9 +229,9 @@ export const documentPremium = async(req,res,next) => {
     try {
   
         const id = req.params.uid
-        const document = req.files.documento
-        const home = req.files.domicilio
-        console.log('ver doument',document,home);
+        // const document = req.files.documento
+        // const home = req.files.domicilio
+        console.log('ver doument',req.files);
     //     console.log(req.files);
     //     const validatePremium={
     //         document,
