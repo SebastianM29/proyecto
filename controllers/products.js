@@ -158,8 +158,8 @@ export const postProducts = async(req=request,res=response,next) => {
 
 
     try {
-        // const {id} = req.session.user
-        // console.log('viendo id',id);
+        const {id} = req.session.user
+        console.log('viendo id',id);
         if (req.logger.debug) {
             req.logger.debug('Accediendo a: postProducts')
         }
