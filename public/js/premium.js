@@ -5,7 +5,7 @@ const product = document.getElementById('addProduct')
   
   
   
-  if (documentsPremium) {
+  
     documentsPremium.addEventListener('submit', async(e) => {
       try {
         e.preventDefault()
@@ -56,8 +56,7 @@ const product = document.getElementById('addProduct')
     
     })
     
-  }
-  
+ 
   
   
   

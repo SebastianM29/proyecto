@@ -32,7 +32,7 @@ export const viewProfile = (req,res)=>{
 }
 
 export const viewPremium = async (req,res) => {
-    const{id,first_name,role,perfilPicture,documents} = req.session.user;
+    const{id,first_name,role,perfilPicture} = req.session.user;
     const obj = {
         id,
         first_name,
