@@ -72,11 +72,7 @@ export class Server {
     middlewares(){
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended:true}));
-        this.app.use(cors({
-            origin: '*', // Permitir cualquier origen
-            methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-            allowedHeaders: ['Content-Type', 'Authorization'] // Headers permitidos
-        }))
+        this.app.use(cors())
         //congif de session
         this.app.use(session({
             store:MongoStore.create({
