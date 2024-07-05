@@ -15,14 +15,14 @@ export const viewLogin = (req,res)=> {
 
 export const viewProfile = (req,res)=>{
 
-    const{first_name,last_name,age,email,id,perfilPicture}=req.session.user
+    const{first_name,last_name,age,email,id}=req.session.user
     const info = {
         first_name,
         last_name,
         age,
         email,
         id,
-        perfilPicture
+       
     }
     console.log('hjol',perfilPicture);
     console.log('info',info);
