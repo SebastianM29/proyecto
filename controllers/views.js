@@ -22,7 +22,7 @@ export const viewProfile = (req,res)=>{
         age,
         email,
         id,
-        perfilPicture
+        // perfilPicture
     }
     console.log('hjol',perfilPicture);
     console.log('info',info);
@@ -37,8 +37,8 @@ export const viewPremium = async (req,res) => {
         id,
         first_name,
         role,
-        perfilPicture,
-        documents
+        // perfilPicture,
+        // documents
     }
    
 res.render('premium',{obj})

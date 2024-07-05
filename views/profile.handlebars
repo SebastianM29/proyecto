@@ -11,7 +11,7 @@
     <div class="fondo-profile">
         <div class="profile">
            {{#if info}}
-           <img id="picture" src="{{info.perfilPicture}}" alt="imagen">
+           {{!-- <img id="picture" src="{{info.perfilPicture}}" alt="imagen"> --}}
            <p class="profile-info" ><strong>Nombre:</strong> {{info.first_name}}</p>      
            <p class="profile-info"><strong>apellido:</strong> {{info.last_name}}</p>      
            <p class="profile-info"><strong>edad:</strong> {{info.age}}</p>      
@@ -22,7 +22,7 @@
            <button class="form-control mt-2" id="fotoPerfil" type="submit">subir foto de perfil</button>
            </form>    
            {{/if}}
-           <a id="boton-profile" href="/">volver a productos</a></div>
+           <a id="boton-profile" href="https://proyecto-production-1d58.up.railway.app">volver a productos</a></div>
     </div>
           <script src="./js/perfil.js"></script>
   

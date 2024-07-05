@@ -22,7 +22,7 @@ const localStrategy = local.Strategy
                 
                  
                 if (!searchUser) {
-                    let perfilPicture = 'perfil/algo.jpg';
+                    // let perfilPicture = 'perfil/algo.jpg';
                    if (role === 'admin'  ) {
 
                     if ( email === config.adminEmail && password === config.passAdmin ) {
@@ -33,7 +33,7 @@ const localStrategy = local.Strategy
                             age,
                             password: createHash(password),
                             role,
-                            perfilPicture
+                            // perfilPicture
                         }
                         const userSave = await User.create(datos)
                         
@@ -60,7 +60,7 @@ const localStrategy = local.Strategy
                             age,
                             password: createHash(password),
                             role,
-                            perfilPicture
+                            // perfilPicture
                            }
                            const userSave = await User.create(datos)
                            console.log(userSave)
@@ -123,10 +123,10 @@ const localStrategy = local.Strategy
                 let searchEmail = profile._json.email
                 let user =await User.findOne({email: searchEmail })
                 if(!user) {
-                    let perfilPicture = 'perfil/algo.jpg';
-                    let documents = []
+                    // let perfilPicture = 'perfil/algo.jpg';
+                    // let documents = []
                     const createCart = await CartServiceDB.addCart()
-                  
+                  //** este esta com */
                     // const carritoAsignado = {
                     //     id: createCart._id
                     // };
@@ -142,8 +142,8 @@ const localStrategy = local.Strategy
                         age:' ',
                         password:' ',
                         carts:carritoAsignado,
-                        perfilPicture,
-                        documents
+                        // perfilPicture,
+                        // documents
                         
                     }
                     
