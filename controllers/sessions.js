@@ -254,6 +254,8 @@ export const documentPremium = async(req,res,next) => {
 export const picture= async (req,res) => {
     try {
         
+        const {id} = req.body
+        console.log('este es el id',id);
     //     console.log('hola llego bien');
 
     // const id = req.params.id

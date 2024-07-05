@@ -30,7 +30,10 @@ perfil.addEventListener('submit',async(e) =>{
         console.log('andando bien',pic);
         const resp = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/${id}/picture`,{
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id})
         })
         if (!resp.ok) {
             const res = await resp.json()
