@@ -78,6 +78,7 @@ export default class UserDB  {
         return value
     }
     async getUserByIdAndCharge(id,charge){
+      console.log('debo ver el charge', charge);
        const value =  await User.findById(id)
        if (!charge.document || !charge.home || !charge.document[0] || !charge.home[0]) {
         const error = new CustomError(
@@ -106,7 +107,7 @@ export default class UserDB  {
         console.log('viendo el obj,',charge[key][0].destination);
          const obj = {
             name: charge[key][0].fieldname,
-            reference: path.join(__dirname, '../../public/documents',charge[key][0].filename)    
+            reference: path.join(__dirname, '../../documents',charge[key][0].filename)    
          }
          value.documents.push(obj)
        }
