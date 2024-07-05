@@ -207,7 +207,8 @@ export const deleteProducts = async(req=request,res=response,next) => {
             await notifyUserDeleteProduct(creatorByEmail,product);
         }
     
-        
+        res.set('Access-Control-Allow-Origin', 'https://proyecto-production-1d58.up.railway.app');
+
         res.json({
           msg:'producto eliminado',
           producto:resp
