@@ -47,6 +47,12 @@ const _dirname = dirname(_filename)
 
 export class Server {
     constructor() {
+        this.optionCors = {
+            origin: 'https://proyecto-production-1d58.up.railway.app',
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            allowedHeaders: ['Content-Type', 'Authorization']
+          };
+          
         this.app = express()
         /**cambiado */
         //creo servidor http para socket
@@ -72,7 +78,7 @@ export class Server {
     middlewares(){
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended:true}));
-        this.app.use(cors())
+        this.app.use(cors(this.optionCors))
         //congif de session
         this.app.use(session({
             store:MongoStore.create({
