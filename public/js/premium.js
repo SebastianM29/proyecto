@@ -22,7 +22,7 @@ const product = document.getElementById('addProduct')
         formData.append('documento',documento)
         formData.append('domicilio',domicilio)
 
-        
+
        const url = `/api/session/users/premium/${id}/documents`
         const res = await fetch(url,{
           method: 'POST',
@@ -41,6 +41,11 @@ const product = document.getElementById('addProduct')
           }, 3000);
       } else {
           const errorData = await res.json();
+          const val = document.getElementById('uploadInfo')
+          val.innerHTML= 'error'
+          setTimeout(() => {
+            val.innerHTML= 'Actualizar info'
+          }, 3000);
           console.log('Algo salió mal:', errorData);
       }
         
@@ -80,7 +85,7 @@ if (product) {
         const stock = document.getElementById('stock').value
         const thumbnail = document.getElementById('thumbnail').files[0]
   
-        const formData = new FormData()
+        let formData = new FormData()
         formData.append('category', categoria)
         formData.append('title', titulo)
         formData.append('description', descripcion)
