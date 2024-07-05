@@ -15,16 +15,16 @@ export const viewLogin = (req,res)=> {
 
 export const viewProfile = (req,res)=>{
 
-    const{first_name,last_name,age,email,id}=req.session.user
+    const{first_name,last_name,age,email,id,perfilPicture}=req.session.user
     const info = {
         first_name,
         last_name,
         age,
         email,
         id,
-       
+        perfilPicture
     }
- 
+    console.log('hjol',perfilPicture);
     console.log('info',info);
     
     res.render('profile',{info})
@@ -32,12 +32,13 @@ export const viewProfile = (req,res)=>{
 }
 
 export const viewPremium = async (req,res) => {
-    const{id,first_name,role} = req.session.user;
+    const{id,first_name,role,perfilPicture,documents} = req.session.user;
     const obj = {
         id,
         first_name,
         role,
-    
+        perfilPicture,
+       
     }
    
 res.render('premium',{obj})
