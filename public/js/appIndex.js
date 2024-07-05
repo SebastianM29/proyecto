@@ -226,7 +226,7 @@ if (addProduct) {
     
          
            console.log('que hay aca',formData);
-            const resp = await fetch("https://proyecto-production-1d58.up.railway.app/products",{
+            const resp = await fetch("/products",{
                 method: 'POST',
                 body:formData
             })

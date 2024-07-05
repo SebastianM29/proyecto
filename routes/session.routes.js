@@ -20,7 +20,7 @@ router.get('/github',passport.authenticate('github',{scope:['user:email']}),asyn
 })
 //el que usa github
 router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'http://proyecto-production-1d58.up.railway.app/login'}),async(req,res)=>{
-    const { first_name, last_name, email, age, perfilPicture, role, carts ,_id ,documents} = req.user;
+    const { first_name, last_name, email, age, perfilPicture, role, carts ,_id } = req.user;
    /**SACO TOSTRING a carts y a _ID */
     const cart = carts ? carts : null // Obtén el ID del carrito como cadena de texto si existe
     const idUserString = _id ? _id : null
@@ -35,7 +35,7 @@ router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'ht
         carts: cart ,
         role,
         perfilPicture,
-        documents
+     
       })
 
     req.session.user = info;

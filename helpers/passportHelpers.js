@@ -124,7 +124,7 @@ const localStrategy = local.Strategy
                 let user =await User.findOne({email: searchEmail })
                 if(!user) {
                     let perfilPicture = 'perfil/algo.jpg';
-                    let documents = []
+                 
                     const createCart = await CartServiceDB.addCart()
                   
                     // const carritoAsignado = {
@@ -143,7 +143,7 @@ const localStrategy = local.Strategy
                         password:' ',
                         carts:carritoAsignado,
                         perfilPicture,
-                        documents
+                     
                         
                     }
                     
