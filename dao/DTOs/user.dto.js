@@ -10,6 +10,7 @@ export default class UserDTO {
         this.role = user.role || 'user'
         this.id = user.id || 'ID'
         this.perfilPicture = user.perfilPicture
+        this.documents = user.documents
 
         // this.perfilPicture = user.perfilPicture || 'perfil/algo.jpg'
         // this.perfilPicture = user.perfilPicture || 'empty'
