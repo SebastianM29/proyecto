@@ -50,36 +50,7 @@
   }
   
   
-  const checkPremium = async() => {
-    try {
-      const id = document.querySelector('.namePerfil').getAttribute('data-id')
   
-      console.log('hola');
-      const resp = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}`, {
-        method: 'POST', 
-        headers: {
-            'Content-Type': 'application/json'
-        }
-      })
-  
-      if (resp.ok) {
-        console.log('excelente');
-        window.location.reload()
-      }
-      if (!resp.ok){
-        console.log('no se ve',resp.status);
-        const res =await resp.json()
-        console.log(res);
-  
-      }
-  
-  
-    } catch (error) {
-      console.log(error);
-    }
-  
-  
-  }
   
   
   if (product) {
@@ -150,3 +121,35 @@
 
 })
 
+
+
+const checkPremium = async() => {
+  try {
+    const id = document.querySelector('.namePerfil').getAttribute('data-id')
+
+    console.log('hola');
+    const resp = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}`, {
+      method: 'POST', 
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    })
+
+    if (resp.ok) {
+      console.log('excelente');
+      window.location.reload()
+    }
+    if (!resp.ok){
+      console.log('no se ve',resp.status);
+      const res =await resp.json()
+      console.log(res);
+
+    }
+
+
+  } catch (error) {
+    console.log(error);
+  }
+
+
+}
