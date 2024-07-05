@@ -107,7 +107,7 @@ export default class UserDB  {
         console.log('viendo el obj,',charge[key][0].destination);
          const obj = {
             name: charge[key][0].fieldname,
-            reference: path.join(__dirname, '../../documents',charge[key][0].filename)    
+            reference: path.join( '/documents',charge[key][0].filename)    
          }
          value.documents.push(obj)
        }
