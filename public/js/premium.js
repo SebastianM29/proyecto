@@ -15,10 +15,14 @@ const product = document.getElementById('addProduct')
         const domicilio = document.getElementById('uploadDomicilio').files[0]
         console.log('deberia ver el id?',id, documento);
         console.log('deberia ver el domicilio?',domicilio);
+
+
         let formData = new FormData()
     
         formData.append('documento',documento)
         formData.append('domicilio',domicilio)
+
+        
        const url = `/api/session/users/premium/${id}/documents`
         const res = await fetch(url,{
           method: 'POST',
