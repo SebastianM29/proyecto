@@ -37,8 +37,7 @@ export const viewPremium = async (req,res) => {
         id,
         first_name,
         role,
-        perfilPicture,
-        documents
+    
     }
    
 res.render('premium',{obj})
