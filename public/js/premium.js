@@ -11,14 +11,14 @@ const product = document.getElementById('addProduct')
         e.preventDefault()
         console.log('click en subir archivo');
         const id = document.querySelector('.namePerfil').getAttribute('data-id')
-        // const documento = document.getElementById('uploadDocumento').files[0]
-        // const domicilio = document.getElementById('uploadDomicilio').files[0]
-        // console.log('deberia ver el id?',id, documento);
-        // console.log('deberia ver el domicilio?',domicilio);
+        const documento = document.getElementById('uploadDocumento').files[0]
+        const domicilio = document.getElementById('uploadDomicilio').files[0]
+        console.log('deberia ver el id?',id, documento);
+        console.log('deberia ver el domicilio?',domicilio);
         const formData = new FormData()
     
-        // formData.append('document',documento)
-        // formData.append('home',domicilio)
+        formData.append('document',documento)
+        formData.append('home',domicilio)
       
         const res = await fetch(`/api/session/users/premium/${id}/documents`,{
           method: 'POST',
