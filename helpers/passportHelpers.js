@@ -40,19 +40,19 @@ const localStrategy = local.Strategy
                         console.log(userSave)
                         return done(null,userSave)
                     }else{
-                        console.log('utilice el mail o contraseña adecuada')
+                       
                         return done(null,false)
                     }
                     }
                 if (role=== 'user') {
                     if ( email === config.adminEmail || password === config.passAdmin ){
 
-                        console.log('mail/pass no autorizadas')
+                 
                         return done(null,false)
 
 
                     }else{
-                        console.log('entrando al passport',req.body)
+                       
                           const datos = {
                             first_name,
                             last_name,
@@ -63,7 +63,7 @@ const localStrategy = local.Strategy
                             perfilPicture
                            }
                            const userSave = await User.create(datos)
-                           console.log(userSave)
+                      
                         //    return done(null,false)
                            return done(null,userSave)
     
@@ -71,7 +71,7 @@ const localStrategy = local.Strategy
                     
                 }
             }
-                console.log('Usuario ya registrado',email)
+            
                 return done(null,false)
             } catch (error) {
                 return done(error)
@@ -106,7 +106,7 @@ const localStrategy = local.Strategy
                     
                      return done (null,findUser)
                 } catch (error) {
-                    console.log('entra aca??')
+                   
                     return done( error)
                     
                 }
@@ -119,7 +119,7 @@ const localStrategy = local.Strategy
             callbackURL:config.callbackUrl
             },async(accesToken,refreshToken,profile,done)=>{
              try {
-                console.log('perfil',profile._json.email)
+              
                 let searchEmail = profile._json.email
                 let user =await User.findOne({email: searchEmail })
                 if(!user) {
@@ -154,7 +154,7 @@ const localStrategy = local.Strategy
                     return done(null,user)
              } catch (error) {
                 
-                console.log(error)
+            
                 return done(error)
              }
             }
