@@ -98,7 +98,7 @@ export default class ProductServiceDB {
                 const thumbnailPath = prodFind.thumbnail
                 
                 console.log(thumbnailPath);
-                 await fs.unlink( path.join(__dirname,'../../public',thumbnailPath)  )
+                 await fs.unlink( path.join(__dirname,'../../',thumbnailPath)  )
                 
                 await products.findByIdAndDelete(id)
                 return {
