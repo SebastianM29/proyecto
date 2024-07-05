@@ -15,7 +15,7 @@ perfil.addEventListener('submit',async(e) =>{
         
 
        let pictureElement
-        const formData = new FormData()
+        let formData = new FormData()
       
         formData.append('perfilPicture',pic)
         formData.append('picturepath',pictureElement)
@@ -24,16 +24,17 @@ perfil.addEventListener('submit',async(e) =>{
         // for (let pair of formData.entries()) {
         //     console.log(pair[0] + ': ' + pair[1]);
         // }
-
+        // headers: {
+        //     'Content-Type': 'application/json'
+        // },
+        // body: JSON.stringify({id})
 
         console.log('andando bien',pictureElement);
         console.log('andando bien',pic);
         const resp = await fetch(`/api/session/${id}/picture`,{
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({id})
+            body: formData
+
         })
         if (!resp.ok) {
             const res = await resp.json()
