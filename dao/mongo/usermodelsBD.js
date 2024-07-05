@@ -99,7 +99,7 @@ export default class UserDB  {
           );
           throw error
        };
-       value.documents = []
+      
        console.log('que trae charge',charge);
        for (const key in charge) {
         console.log('estoy viendo en KEY',key);
