@@ -101,13 +101,13 @@ export default class UserDB  {
           throw error
        };
        value.documents = []
-       console.log('que trae charge',charge);
+      
        for (const key in charge) {
         console.log('estoy viendo en KEY',key);
         console.log('viendo el obj,',charge[key][0].destination);
          const obj = {
             name: charge[key][0].fieldname,
-            reference: path.join( '../documents/',charge[key][0].filename)    
+            reference: path.join( '/documents/',charge[key][0].filename)    
          }
          value.documents.push(obj)
        }
