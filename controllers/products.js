@@ -41,8 +41,8 @@ export const getProd = async(req=request,res=response) => {
     }
 
     const respDB  =await getAllProducts(obj)
-    respDB.prevLink = respDB.hasPrevPage ? `http://localhost:3000/?page=${respDB.prevPage}`: ''
-    respDB.nextLink = respDB.hasNextPage ? `http://localhost:3000/?page=${respDB.nextPage} `: ''
+    respDB.prevLink = respDB.hasPrevPage ? `https://proyecto-production-7bcc.up.railway.app/?page=${respDB.prevPage}`: ''
+    respDB.nextLink = respDB.hasNextPage ? `https://proyecto-production-7bcc.up.railway.app/?page=${respDB.nextPage} `: ''
     // res.json(respDB)
     
     //respDB.IsValid = (respDB.page > 0 && respDB.page <= respDB.totalPAges) otra opcion

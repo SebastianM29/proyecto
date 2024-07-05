@@ -94,11 +94,11 @@ export default class ProductServiceDB {
                       );
                       throw error
                 }
-                // console.log('este es el dirname ?',__dirname);
-                // const thumbnailPath = prodFind.thumbnail
+                console.log('este es el dirname ?',__dirname);
+                const thumbnailPath = prodFind.thumbnail
                 
-                // console.log(thumbnailPath);
-                //  await fs.unlink( path.join(__dirname,'../../' + thumbnailPath)  )
+                console.log(thumbnailPath);
+                 await fs.unlink( path.join(__dirname,'../../public/',thumbnailPath)  )
                 
                 await products.findByIdAndDelete(id)
                 return {
