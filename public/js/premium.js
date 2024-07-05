@@ -15,7 +15,7 @@ const product = document.getElementById('addProduct')
         const domicilio = document.getElementById('uploadDomicilio').files[0]
         console.log('deberia ver el id?',id, documento);
         console.log('deberia ver el domicilio?',domicilio);
-        const formData = new FormData()
+        let formData = new FormData()
     
         formData.append('documento',documento)
         formData.append('domicilio',domicilio)

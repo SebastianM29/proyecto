@@ -215,7 +215,7 @@ if (addProduct) {
             const stock = document.getElementById('stock').value
             const thumbnail = document.getElementById('thumbnail').files[0]
     
-            const formData = new FormData()
+            let formData = new FormData()
             formData.append('category', categoria)
             formData.append('title', titulo)
             formData.append('description', descripcion)
