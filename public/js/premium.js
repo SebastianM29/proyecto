@@ -1,5 +1,5 @@
 const product = document.getElementById('addProduct')
-(() => {
+
 
   const documentsPremium = document.querySelector('.infoPremium')
   
@@ -60,7 +60,7 @@ const product = document.getElementById('addProduct')
 
 
 
-})
+
 
 if (product) {
     
