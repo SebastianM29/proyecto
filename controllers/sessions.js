@@ -61,7 +61,7 @@ export const login =  async(req = request,res = response)=> {
             req.logger.info('este es el user de passport?',req.user)
             if (req.user) {
           
-            const {first_name,last_name,email,age,role,carts,_id,perfilPicture,documents } = req.user
+            const {first_name,last_name,email,age,role,carts,_id} = req.user
             const idCart = carts
             const idUserString = _id ? _id.toString() : null
             req.logger.info('carrito asignado',idCart)
@@ -78,8 +78,8 @@ export const login =  async(req = request,res = response)=> {
                 role,
                 carts:idCart,
                 id:idUserString,
-                perfilPicture,
-                documents
+                // perfilPicture,
+                // documents
             }
        )
 
@@ -254,28 +254,28 @@ export const documentPremium = async(req,res,next) => {
 export const picture= async (req,res) => {
     try {
         
-        console.log('hola llego bien');
+    //     console.log('hola llego bien');
 
-    const id = req.params.id
-    const img = req.file.filename
-    const {picturepath} = req.body
+    // const id = req.params.id
+    // const img = req.file.filename
+    // const {picturepath} = req.body
 
-    if (picturepath !== 'empty') {
-        console.log('debo del el picturePath',picturepath);
-        const filePath = path.join(__dirname, '../public', picturepath);
-        console.log('Ruta completa a eliminar:', filePath);
-        await fs.unlink(filePath)
+    // if (picturepath !== 'empty') {
+    //     console.log('debo del el picturePath',picturepath);
+    //     const filePath = path.join(__dirname, '../public', picturepath);
+    //     console.log('Ruta completa a eliminar:', filePath);
+    //     await fs.unlink(filePath)
         
-    }
+    // }
    
-    const perfilPicture = 'https://proyecto-production-1d58.up.railway.app/perfil/' + img
-    const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
-    req.session.user.perfilPicture = perfilPicture
-    req.session.save()
-    console.log('quiero ver session en perfil como quedo', req.session.user);
-    res.json({
-        msg: "enviado"
-    })
+    // const perfilPicture = 'https://proyecto-production-1d58.up.railway.app/perfil/' + img
+    // const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
+    // req.session.user.perfilPicture = perfilPicture
+    // req.session.save()
+    // console.log('quiero ver session en perfil como quedo', req.session.user);
+    // res.json({
+    //     msg: "enviado"
+    // })
     
 
 } catch (error) {
