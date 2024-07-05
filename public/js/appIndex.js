@@ -180,7 +180,7 @@ const eliminarProd = async(id) => {
             headers: {
                 'Content-Type': 'application/json' // Indica que los datos son de tipo JSON
             },
-            mode: 'no-cors' // Modo no-cors
+          
      
         })
         if (resp.ok) {
