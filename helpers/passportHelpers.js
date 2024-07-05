@@ -123,7 +123,7 @@ const localStrategy = local.Strategy
                 let searchEmail = profile._json.email
                 let user =await User.findOne({email: searchEmail })
                 if(!user) {
-                    let perfilPicture = 'perfil/algo.jpg';
+                   
                  
                     const createCart = await CartServiceDB.addCart()
                   
@@ -142,7 +142,7 @@ const localStrategy = local.Strategy
                         age:' ',
                         password:' ',
                         carts:carritoAsignado,
-                        perfilPicture,
+                    
                      
                         
                     }

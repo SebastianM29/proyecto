@@ -39,6 +39,7 @@ router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'ht
       })
 
     req.session.user = info;
+    req.session.save()
     
     // console.log('nercesito verlooooo',req.session.user)
     res.redirect('/')
