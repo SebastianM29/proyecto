@@ -19,8 +19,8 @@ const product = document.getElementById('addProduct')
     
         formData.append('document',documento)
         formData.append('home',domicilio)
-      
-        const res = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}/documents`,{
+       const url = `https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}/documents`
+        const res = await fetch(url,{
           method: 'POST',
           body: formData
         })
