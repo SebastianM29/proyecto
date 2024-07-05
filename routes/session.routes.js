@@ -63,7 +63,7 @@ router.get('/api/test/user', testUser )
 
 
 router.post('/:id/picture',uploadPicture.single('perfilPicture'),picture)
-router.post('/users/premium/:uid/documents',uploadDoc.fields([{name:'document',maxCount:1},{name:'home',maxCount:1}]),documentPremium)//va a ir actualizando a premium, subiendo los documentos que pide
+router.post('/users/premium/:uid/documents',uploadDoc.fields([{name:'document'},{name:'home'}]),documentPremium)//va a ir actualizando a premium, subiendo los documentos que pide
 router.post('/users/premium/:uid',premium)//deberia validar si el id q pasa es premium, si es premium poner "premium"
 
 

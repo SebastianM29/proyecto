@@ -231,7 +231,7 @@ export const documentPremium = async(req,res,next) => {
         const id = req.params.uid
         const document = req.files.document
         const home = req.files.home 
-
+        console.log(home,document);
         const validatePremium={
             document,
             home
