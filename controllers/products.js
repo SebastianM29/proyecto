@@ -199,7 +199,9 @@ export const deleteProducts = async(req=request,res=response,next) => {
         }
         const id = req.params.id 
            req.logger.info(`Buscando el id ${id}`)
+
         const resp = await deleteTheProduct(id)
+        
         const { creatorByEmail,creatorByRole,product} = resp
         console.log('ruta delete productos',resp);
         if (creatorByEmail !== 'adminCoder@coder.com' && creatorByRole !== 'admin') {

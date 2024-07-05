@@ -175,7 +175,7 @@ const eliminarProd = async(id) => {
     try {
         
         console.log('este seria el id', id)
-        const resp = await fetch(`https://proyecto-production-7bcc.up.railway.app/products/${id}`,{
+        const resp = await fetch(`/products/${id}`,{
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json' // Indica que los datos son de tipo JSON
