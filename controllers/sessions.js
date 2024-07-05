@@ -84,7 +84,7 @@ export const login =  async(req = request,res = response)=> {
        )
 
             req.session.user = info
-            req.session.save()
+            
        
             res.redirect('/')
         }
