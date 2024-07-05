@@ -231,19 +231,19 @@ export const documentPremium = async(req,res,next) => {
         const id = req.params.uid
         const document = req.files.documento
         const home = req.files.domicilio
-        console.log('ver doument',document);
-        console.log(req.files);
-        const validatePremium={
-            document,
-            home
-        }
+        console.log('ver doument',document,home);
+    //     console.log(req.files);
+    //     const validatePremium={
+    //         document,
+    //         home
+    //     }
 
-       const user = await getUserByIdServAndCharge(id,validatePremium)
-       res.json(user)
+    //    const user = await getUserByIdServAndCharge(id,validatePremium)
+    //    res.json(user)
 
 
         
-        console.log(id);
+    //     console.log(id);
     } catch (error) {
         req.logger.error('Error en el update a Premium')
         console.log(error.message);
