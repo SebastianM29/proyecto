@@ -229,9 +229,9 @@ export const documentPremium = async(req,res,next) => {
     try {
   
     //     const id = req.params.uid
-    //     const document = req.files.documento
-    //     const home = req.files.domicilio
-    //     console.log('ver doument',document);
+        const document ="documents" + req.files.documento.filename
+        const home ="documents" + req.files.domicilio.filename
+        console.log('ver doument',document,home);
     //     console.log(req.files);
     //     const validatePremium={
     //         document,
@@ -243,7 +243,7 @@ export const documentPremium = async(req,res,next) => {
 
 
         
-        console.log(req.files);
+        
     } catch (error) {
         req.logger.error('Error en el update a Premium')
         console.log(error.message);
