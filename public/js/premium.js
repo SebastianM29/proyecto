@@ -8,7 +8,7 @@ const product = document.getElementById('addProduct')
   
     documentsPremium.addEventListener('submit', async(e) => {
       try {
-        // e.preventDefault()
+        e.preventDefault()
         console.log('click en subir archivo');
         const id = document.querySelector('.namePerfil').getAttribute('data-id')
         const documento = document.getElementById('uploadDocumento').files[0]
