@@ -243,7 +243,7 @@ export const documentPremium = async(req,res,next) => {
 
 
         
-        console.log(id);
+        console.log(req.files);
     } catch (error) {
         req.logger.error('Error en el update a Premium')
         console.log(error.message);
