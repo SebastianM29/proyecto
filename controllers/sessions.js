@@ -61,7 +61,7 @@ export const login =  async(req = request,res = response)=> {
             req.logger.info('este es el user de passport?',req.user)
             if (req.user) {
           
-            const {first_name,last_name,email,age,role,carts,_id,perfilPicture,documents } = req.user
+            const {first_name,last_name,email,age,role,carts,_id,perfilPicture} = req.user
             const idCart = carts
             const idUserString = _id ? _id.toString() : null
             req.logger.info('carrito asignado',idCart)
@@ -79,7 +79,7 @@ export const login =  async(req = request,res = response)=> {
                 carts:idCart,
                 id:idUserString,
                 perfilPicture,
-                documents
+             
             }
        )
 
@@ -234,13 +234,13 @@ export const documentPremium = async(req,res,next) => {
         const home = req.file.domicilio[0].filename
         console.log('ver doument',document,home);
         console.log(req.files);
-    // //     const validatePremium={
-    // //         document,
-    // //         home
-    // //     }
+        const validatePremium={
+            document,
+            home
+        }
 
-    // //    const user = await getUserByIdServAndCharge(id,validatePremium)
-    // //    res.json(user)
+       const user = await getUserByIdServAndCharge(id,validatePremium)
+       res.json(user)
 
 
         
