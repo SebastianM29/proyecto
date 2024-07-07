@@ -61,7 +61,7 @@ const localStrategy = local.Strategy
                             password: createHash(password),
                             role,
                             perfilPicture,
-                            documents 
+                         
 
                            }
                            const userSave = await User.create(datos)
