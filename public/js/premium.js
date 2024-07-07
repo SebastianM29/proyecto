@@ -23,8 +23,8 @@ const product = document.getElementById('addProduct')
         formData.append('domicilio',domicilio)
 
 
-       const url = `https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}/documents`
-        const res = await fetch(url,{
+      
+        const res = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}/documents`,{
           method: 'POST',
           body: formData
         })
