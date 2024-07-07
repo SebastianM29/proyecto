@@ -230,13 +230,14 @@ export const documentPremium = async(req,res,next) => {
       
         console.log('llegando');
         const id = req.params.uid
-        const document = req.file.documento[0].filename
-        const home = req.file.domicilio[0].filename
+        const { documento, domicilio } = req.files;
+
+   
         console.log('ver doument',document,home);
         console.log(req.files);
         const validatePremium={
-            document,
-            home
+            document : documento,
+            home : domicilio
         }
 
        const user = await getUserByIdServAndCharge(id,validatePremium)
