@@ -227,11 +227,12 @@ export const premium = async (req,res,next) => {
 
 export const documentPremium = async(req,res,next) => {
     try {
-        console.log('llegando');
+        console.log(req.file)
+        // console.log('llegando');
     //     const id = req.params.uid
-        const document = req.file.documento[0].filename
-        const home = req.file.domicilio[0].filename
-        console.log('ver doument',document,home);
+        // const document = req.file.documento[0].filename
+        // const home = req.file.domicilio[0].filename
+        // console.log('ver doument',document,home);
     //     console.log(req.files);
     //     const validatePremium={
     //         document,
