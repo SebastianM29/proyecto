@@ -60,7 +60,9 @@ const localStrategy = local.Strategy
                             age,
                             password: createHash(password),
                             role,
-                            perfilPicture
+                            perfilPicture,
+                            documents 
+
                            }
                            const userSave = await User.create(datos)
                       
@@ -142,6 +144,7 @@ const localStrategy = local.Strategy
                         age:' ',
                         password:' ',
                         carts:carritoAsignado,
+                        documents:[]
                     
                      
                         
