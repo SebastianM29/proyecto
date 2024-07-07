@@ -5,12 +5,11 @@ const router = Router()
 import { allUsers, changeRol, deleteUser, documentPremium, login, logout, newPass, picture, premium, register, restore, restorePass, testUser, updPass } from "../controllers/sessions.js";
 import passport from "passport";
 import UserDTO from "../dao/DTOs/user.dto.js";
-import { storageDocuments, storageOneDocument, storagePerfil } from "../helpers/multer.js";
+import { storageDocuments, storagePerfil } from "../helpers/multer.js";
 import UserDB from "../dao/mongo/usermodelsBD.js";
 const userServ = new UserDB()
 
 const uploadDoc = multer({storage: storageDocuments})
-const uploadOneDoc = multer({storage: storageOneDocument})
 const uploadPicture = multer({storage: storagePerfil})
 
 
@@ -64,9 +63,9 @@ router.get('/api/test/user', testUser )
 
 
 
-// uploadDoc.fields([{name: 'documento', maxCount: 1 },{name: 'domicilio', maxCount: 1 }])
+
 router.post('/:id/picture',uploadPicture.single('perfilPicture'),picture)
-router.post('/users/premium/:uid/documents',uploadOneDoc.single('documento'),documentPremium)//va a ir actualizando a premium, subiendo los documentos que pide
+router.post('/users/premium/:uid/documents',uploadDoc.fields([{name: 'documento', maxCount: 1 },{name: 'domicilio', maxCount: 1 }]),documentPremium)//va a ir actualizando a premium, subiendo los documentos que pide
 router.post('/users/premium/:uid',premium)//deberia validar si el id q pasa es premium, si es premium poner "premium"
 
 

@@ -20,7 +20,7 @@ const product = document.getElementById('addProduct')
         let formData = new FormData()
     
         formData.append('documento',documento)
-        // formData.append('domicilio',domicilio)
+        formData.append('domicilio',domicilio)
 
 
        const url = `https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}/documents`

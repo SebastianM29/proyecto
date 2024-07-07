@@ -227,7 +227,7 @@ export const premium = async (req,res,next) => {
 
 export const documentPremium = async(req,res,next) => {
     try {
-        console.log(req.file)
+        console.log(req)
         // console.log('llegando');
     //     const id = req.params.uid
         // const document = req.file.documento[0].filename
