@@ -24,6 +24,7 @@
           <label for="upload">Domicilio</label>
           <input type="file" name="domicilio" id="uploadDomicilio" placeholder="subir">
           <button  type="submit" id="uploadInfo" class="btn btn-warning mt-2">Actualizar info</button>
+          <button  type="button" id="validatePremium" onclick="checkPremium()" class="btn btn-danger mt-2">Validar a Premium</button>
           
          </div>
          
@@ -32,7 +33,6 @@
        
     </form>
      
-          <button  type="button" id="validatePremium" onclick="checkPremium()" class="btn btn-danger mt-2">Validar a Premium</button>
     <div class="editAndProducts">
     {{#if (eq obj.role 'PREMIUM')}}
     <div class="products">
