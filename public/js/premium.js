@@ -22,9 +22,14 @@ const product = document.getElementById('addProduct')
         formData.append('documento',documento)
         formData.append('domicilio',domicilio)
 
+        if (!documento || !domicilio) {
+          console.error('Faltan archivos para subir');
+          return;
+        }
+
 
       
-        const res = await fetch(`https://proyecto-production-1d58.up.railway.app/api/session/users/premium/${id}/documents`,{
+        const res = await fetch(`/api/session/users/premium/${id}/documents`,{
           method: 'POST',
           body: formData
         })

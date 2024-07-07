@@ -165,6 +165,9 @@ export default class UserDB  {
     }
     return userUpd
     }
+    async updateAnything(id,upd) {
+     return User.findByIdAndUpdate(id,upd,{new:true})
+    }
 
     async findByIdAndUPD (token,pass) {
         const {id} = jwtVerify(token,config.secretWORD)

@@ -7,7 +7,9 @@ export const findUser = async(email) => {
 return await user.getUserByEmail(email)
 
 }
-
+export const updateAnythingPer = async (id,upd) => {
+return  await user.updateAnything(id,upd)
+}  
 export const perFindByIDAndUpdate = async(token, pass) => {
 return await user.findByIdAndUPD(token,pass)
 }

@@ -10,7 +10,7 @@ import UserDB from "../dao/mongo/usermodelsBD.js";
 import UserDTO from "../dao/DTOs/user.dto.js";
 import UsersDTO from "../dao/DTOs/users.dto.js";
 import { generateUsers } from "../helpers/generateUser.js";
-import { changeRoleSer, deleteBeforeTwoSer, deleteUserSer, findByIdChangePremiumSer, findServiceUSer, getAllUsersSer, getUserByIdServAndCharge, serviceFindByIDanUpdate } from "../services/userServices.js";
+import { changeRoleSer, deleteBeforeTwoSer, deleteUserSer, findByIdChangePremiumSer, findServiceUSer, getAllUsersSer, getUserByIdServAndCharge, serviceFindByIDanUpdate, updateAnythingSer } from "../services/userServices.js";
 import { deleteUserMail, mail } from "../helpers/nodemailer.js";
 import config from "../config/config.js"
 import { jwtVerify } from "../helpers/jwt.js";
@@ -230,21 +230,39 @@ export const documentPremium = async(req,res,next) => {
       
         console.log('llegando');
         const id = req.params.uid
-        const { documento, domicilio } = req.files;
-
-   
-        console.log('ver doument',documento[0],domicilio[0]);
-        console.log(req.files);
-    //     const validatePremium={
-    //         document : documento,
-    //         home : domicilio
-    //     }
-
-    //    const user = await getUserByIdServAndCharge(id,validatePremium)
-    //    res.json(user)
-
-
+        // const { documento, domicilio } = req.files;
         
+        
+        // console.log('ver doument',documento[0],domicilio[0]);
+        // console.log(typeof req.files);
+        //     const validatePremium={
+        //         document : documento,
+        //         home : domicilio
+        //     }
+        
+        //    const user = await getUserByIdServAndCharge(id,validatePremium)
+        //    res.json(user)
+
+
+      /** Opcion sin multer solucion debido al Frontend */      
+
+
+      const newDocument = {
+        name: 'valor prueba',
+        reference: 'valor prueba',
+      };
+      const newAdress = {
+        name: 'valor prueba',
+        reference: 'valor prueba',
+      };
+            
+            await updateAnythingSer(id, {
+            status: true,
+            $push: {
+                documents: newDocument,
+                documents: newAdress
+            }
+        })
         
     } catch (error) {
         req.logger.error('Error en el update a Premium')

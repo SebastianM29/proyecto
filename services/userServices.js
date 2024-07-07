@@ -1,11 +1,13 @@
-import { changeRolePer, deleteBeforeTwoPer, deleteUserPer, findByIdChangePremiumPer, findUser, getAllusersPer, getUserByIdPerAndCharge, perFindByIDAndUpdate } from "../persistence/session.js"
+import { changeRolePer, deleteBeforeTwoPer, deleteUserPer, findByIdChangePremiumPer, findUser, getAllusersPer, getUserByIdPerAndCharge, perFindByIDAndUpdate, updateAnythingPer } from "../persistence/session.js"
 
 
 
 export const findServiceUSer = async(email) => {
   return await findUser(email)
 }
-
+export const updateAnythingSer = async (id,upd) => {
+  return await updateAnythingPer(id,upd)
+}
 export const serviceFindByIDanUpdate = async(token,pass) => {
   return await perFindByIDAndUpdate(token,pass)
 }
