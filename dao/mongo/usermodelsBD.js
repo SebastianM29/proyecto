@@ -102,23 +102,23 @@ export default class UserDB  {
        };
       
        console.log('que trae charge',charge);
-      //  for (const key in charge) {
-      //   console.log('estoy viendo en KEY',key);
-      //   console.log('viendo el obj,',charge[key][0].destination);
-      //    const obj = {
-      //       name: charge[key][0].fieldname,
-      //       reference: path.join(__dirname, '../.././public/documents',charge[key][0].filename)    
-      //    }
-      //    value.documents.push(obj)
-      //  }
-      //  console.log('se debe ver',charge.document[0])
-      //   value.status = true
-      //   console.log(value);
-      //   await value.save();
+       for (const key in charge) {
+        console.log('estoy viendo en KEY',key);
+        console.log('viendo el obj,',charge[key][0].destination);
+         const obj = {
+            name: charge[key][0].fieldname,
+            reference: path.join(__dirname, '../.././public/documents',charge[key][0].filename)    
+         }
+         value.documents.push(obj)
+       }
+       console.log('se debe ver',charge.document[0])
+        value.status = true
+        console.log(value);
+        await value.save();
 
-      //   return ({
-      //       msg : "info actualizada" 
-      //   })
+        return ({
+            msg : "info actualizada" 
+        })
     }
 
     async findByIdChangePremium (id) {
