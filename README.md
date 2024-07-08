@@ -154,3 +154,29 @@ Pruebas de test en el desarrollo
 ![alt text](readme/image-73.png)
 *se le agrego la conexion de loggin y logout
 ![alt text](readme/image-74.png)
+*Creacion de un producto usuario Premium
+![alt text](readme/image-75.png)
+![alt text](readme/image-76.png)
+*Eliminacion de producto Admin y posterior notificacion
+![alt text](readme/image-77.png)
+![alt text](readme/image-78.png)
+*Limpieza de usuarios no conectados hace dos dias - SE APLICA 2 MINUTOS PARA PROBAR SU FUNCIONAMIENTO, AL CABO DE 2 MINUTOS ELIMINA USUARIOS Q NO SE HAYAN CONECTADO EN ESE PERIODO- , enviando notificacion al mismo
+![alt text](readme/image-79.png)
+![alt text](readme/image-80.png)
+![alt text](readme/image-81.png)
+![alt text](readme/image-82.png)
+*usuario normal 
+![alt text](readme/image-83.png)
+![alt text](readme/image-84.png)
+*Cambio a PREMIUM por Admin
+![alt text](readme/image-85.png)
+![alt text](readme/image-86.png)
+![alt text](readme/image-87.png)
+![alt text](readme/image-88.png)
+*Proceso de compra
+![alt text](readme/image-89.png)
+![alt text](readme/image-90.png)
+![alt text](readme/image-91.png)
+![alt text](readme/image-92.png)
+*Ticket Generado
+![alt text](readme/image-93.png)
