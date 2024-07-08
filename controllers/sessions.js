@@ -227,36 +227,36 @@ export const documentPremium = async(req,res,next) => {
     try {
       
         const id = req.params.uid
-        const { documento, domicilio } = req.files;
-        console.log('ver doument',documento[0],domicilio[0]);
-        console.log(typeof req.files);
-            const validatePremium={
-                document : documento,
-                home : domicilio
-            }
-           const user = await getUserByIdServAndCharge(id,validatePremium)
-           res.json(user)
+        // const { documento, domicilio } = req.files;
+        // console.log('ver doument',documento[0],domicilio[0]);
+        // console.log(typeof req.files);
+        //     const validatePremium={
+        //         document : documento,
+        //         home : domicilio
+        //     }
+        //    const user = await getUserByIdServAndCharge(id,validatePremium)
+        //    res.json(user)
 
 
       /** Opcion sin multer solucion debido al Frontend */      
 
 
-    //   const newDocument = {
-    //     name: 'valor prueba',
-    //     reference: 'valor prueba',
-    //   };
-    //   const newAdress = {
-    //     name: 'valor prueba',
-    //     reference: 'valor prueba',
-    //   };
+      const newDocument = {
+        name: 'valor prueba',
+        reference: 'valor prueba',
+      };
+      const newAdress = {
+        name: 'valor prueba',
+        reference: 'valor prueba',
+      };
             
-    //         await updateAnythingSer(id, {
-    //         status: true,
-    //         $push: {
-    //             documents: newDocument,
-    //             documents: newAdress
-    //         }
-    //     })
+            await updateAnythingSer(id, {
+            status: true,
+            $push: {
+                documents: newDocument,
+                documents: newAdress
+            }
+        })
         
     } catch (error) {
         req.logger.error('Error en el update a Premium')
