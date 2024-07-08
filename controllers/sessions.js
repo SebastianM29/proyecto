@@ -278,13 +278,13 @@ export const picture= async (req,res) => {
     const img = req.file.filename
     const {picturepath} = req.body
 
-
+    if (picturepath !== '/perfil/algo.jpg') {
         console.log('debo del el picturePath',picturepath);
         const filePath = path.join(__dirname, '../public', picturepath);
         console.log('Ruta completa a eliminar:', filePath);
         await fs.unlink(filePath)
         
-  
+    }
    
     const perfilPicture = 'https://proyecto-production-1d58.up.railway.app/perfil/' + img
     const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
