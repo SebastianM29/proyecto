@@ -51,7 +51,6 @@ export default class UserDB  {
          
        const format = new Intl.DateTimeFormat('es-AR',this.options);
        const date = format.format(now);
-       console.log('el horario en String', nowIso);
        //anidado va a ser  siempre entre comillas
        return await User.findByIdAndUpdate(id,{'connection.logout': date,'connection.isoLogout':nowIso},{new:true})
        
@@ -78,7 +77,6 @@ export default class UserDB  {
         return value
     }
     async getUserByIdAndCharge(id,charge){
-      console.log('debo ver el charge', charge);
        const value =  await User.findById(id)
        if (!charge.document || !charge.home || !charge.document[0] || !charge.home[0]) {
         const error = new CustomError(
@@ -101,19 +99,14 @@ export default class UserDB  {
           throw error
        };
       
-       console.log('que trae charge',charge);
        for (const key in charge) {
-        console.log('estoy viendo en KEY',key);
-        console.log('viendo el obj,',charge[key][0].destination);
          const obj = {
             name: charge[key][0].fieldname,
             reference: path.join(__dirname, '../.././public/documents',charge[key][0].filename)    
          }
          value.documents.push(obj)
        }
-       console.log('se debe ver',charge.document[0])
         value.status = true
-        console.log(value);
         await value.save();
 
         return ({
@@ -136,7 +129,6 @@ export default class UserDB  {
        }
        
        if (user.status === false) {
-         console.log('no cumple');
          const error = new CustomError(
             "No cumple requisitos para usuario Premium",
             "verifique documentos",
@@ -174,11 +166,9 @@ export default class UserDB  {
         const user = await User.findById(id)
        
         const comparePass = compare(user,pass);
-        console.log(typeof pass)
    
 
         if (pass.length < 8 ){
-            console.log('debe ser 8');
             const error = new CustomError(
                 "Pass",
                 "deben ser 8 caracteres",
@@ -207,7 +197,6 @@ export default class UserDB  {
       const user = await User.findByIdAndDelete(id)
       if (user.carts) {
         const carrito = await carts.findByIdAndDelete(user.carts.toString())
-        console.log('carrito eliminado ', carrito);
       }
       if (!user) {
         const error = new CustomError(
@@ -227,11 +216,9 @@ export default class UserDB  {
       const user = await User.find()
       
       for (const element of user) {
-          console.log(element._id.toString(),admin);
           if (element.connection.loggin && element.connection.logout && element._id.toString() != admin) {
 
           if (element.connection.isoLogout < twoMinutes.toISOString()) {
-            console.log('entro');
           await deleteUserMailTwoDays(element.email)
           await carts.findByIdAndDelete(element.carts.toString())
           await User.findByIdAndDelete(element._id)

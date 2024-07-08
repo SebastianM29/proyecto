@@ -4,7 +4,6 @@ import  {CartServiceDB}  from "../dao/factory.js"
 
 
 
-console.log('hola',CartServiceDB)
 const cartDB = new CartServiceDB()
 
 export const getAllcarts = async() => {

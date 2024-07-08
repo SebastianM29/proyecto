@@ -15,11 +15,9 @@ export default class ProductServiceDB {
             await fs.promises.access(`${ProductServiceDB.path}.json`, fs.constants.F_OK)
             const data =  JSON.parse(fs.readFileSync(`${ProductServiceDB.path}.json`,'utf-8'))
             if (limits) {
-                console.log('viendo el limit',limits)
                 const limitResp = data.slice(0,limits)
                 return limitResp
             }
-            console.log('por fuera')
                 return data
         } catch (error) {
             return 'Sin Datos en el archivo'
@@ -34,13 +32,10 @@ export default class ProductServiceDB {
 
                 try {
                 await fs.promises.access(`${ProductServiceDB.path}.json`)
-                console.log('hay dato')
                 const data = await fs.promises.readFile(`${ProductServiceDB.path}.json`,'utf-8')
                 dataParse = JSON.parse(data)
-                console.log(data)
                 } catch (error) {
                     dataParse= []
-                    console.log(' no hay dato')      
                 }
                 for (const values of dataParse) {
                       if (values.id > newValue) {
@@ -101,7 +96,6 @@ export default class ProductServiceDB {
                 let dataParse = JSON.parse(data)
              
                 const idParse = JSON.parse(id)
-                console.log('esto se ve fuera de for of',JSON.parse(id))
 
                 for (const iterator of dataParse) {
                     
@@ -133,10 +127,8 @@ export default class ProductServiceDB {
             const dataParse = JSON.parse(data)
             
             for (const iterator of dataParse) {
-                console.log('entra al for?',iterator.id)
                 if (iterator.id === JSON.parse(id)) {
                     const findId = dataParse.find((element) => element.id === iterator.id)
-                    console.log(findId)
                     return findId
                 }
                 
@@ -164,7 +156,6 @@ export default class ProductServiceDB {
             
             const findUpdate = dataParse.find((element) => element.id === JSON.parse(id))
           
-            console.log('algo en update?', findUpdate,id)
             if (!findUpdate) {
                 return 'no se encontro ningun id'
             }
@@ -182,9 +173,7 @@ export default class ProductServiceDB {
                 if (element.id === JSON.parse(id)) {
                     for (const key in update) {
                        if (!findUpdate[key]) {
-                            console.log('verificANDO')
                             fields.push(key)
-                            console.log('verificANDO',fields)
                         }
                        
                         element[key] = update[key]
@@ -216,7 +205,6 @@ export default class ProductServiceDB {
 
 
         } catch (error) {
-            // console.error('Error', error.message)
             throw new Error ('Problema a la hora de actualiar producto')
         }
     }

@@ -95,7 +95,6 @@ export const deleteUserMailTwoDays = async(mail) => {
 }
 
 export const notifyUserDeleteProduct = async(email,product) => {
-  console.log('llega a nodem ailer?');
   const transport = nodemailer.createTransport({
     service:"gmail",
     host: "smtp.gmail.com",

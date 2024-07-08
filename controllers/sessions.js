@@ -161,7 +161,6 @@ export const logout =  async(req = request,res = response)=>{
     try {
         
         const {id}=req.session.user 
-        console.log(id);
         await userServ.getTimeUserLogout(id)
         req.session.destroy(async(err)=> {
             if (err) {
@@ -193,7 +192,6 @@ export const testUser = (req,res) => {
 export const changeRol = async (req,res,next) => {
     try {
     const {id,role} = req.body
-    console.log('id y role');
     const actVal = await changeRoleSer(id,role)
     res.json({
         msg: 'success'
@@ -228,7 +226,6 @@ export const premium = async (req,res,next) => {
 export const documentPremium = async(req,res,next) => {
     try {
       
-        console.log('llegando');
         const id = req.params.uid
         // const { documento, domicilio } = req.files;
         // console.log('ver doument',documento[0],domicilio[0]);
@@ -263,7 +260,6 @@ export const documentPremium = async(req,res,next) => {
         
     } catch (error) {
         req.logger.error('Error en el update a Premium')
-        console.log(error.message);
         next(error)
     }
   
@@ -272,16 +268,13 @@ export const documentPremium = async(req,res,next) => {
 export const picture= async (req,res) => {
     try {
         
-        console.log('hola llego bien');
 
     const id = req.params.id
     const img = req.file.filename
     const {picturepath} = req.body
 
     if (picturepath !== 'perfil/algo.jpg') {
-        console.log('debo del el picturePath',picturepath);
         const filePath = path.join(__dirname, '../public/', picturepath);
-        console.log('Ruta completa a eliminar:', filePath);
         await fs.unlink(filePath)
         
     }
@@ -290,7 +283,6 @@ export const picture= async (req,res) => {
     const actPicture = await User.findByIdAndUpdate(id,{perfilPicture:perfilPicture},{new:true})
     req.session.user.perfilPicture = perfilPicture
     req.session.save()
-    console.log('quiero ver session en perfil como quedo', req.session.user);
     res.json({
         msg: "enviado"
     })
@@ -305,14 +297,12 @@ export const allUsers = async(req,res,next) => {
 try {
     const usuarios = await getAllUsersSer()
     const value = new UsersDTO(usuarios)
-    console.log(value);
 
     res.json({
         msg: 'all users'
     })
 } catch (error) {
     req.logger.error('Error al mostrar todos los usuarios')
-    console.log(error.message);
     next(error)
 }
 }
@@ -324,11 +314,9 @@ export const deleteUser = async(req,res,next) =>{
        const admin = req.body.admin
        if (id) {
           const usuario = await deleteUserSer(id)
-          console.log(usuario.email);
           deleteUserMail(usuario.email)
        }
        if (check) {
-        console.log('entrando a check');
         await deleteBeforeTwoSer(admin)
        }
        res.json({
@@ -338,7 +326,6 @@ export const deleteUser = async(req,res,next) =>{
         
     } catch (error) {
         req.logger.error('error al borrar Usuario')
-        console.log(error.message);
         next(error)
         
     }

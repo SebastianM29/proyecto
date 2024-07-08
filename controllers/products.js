@@ -31,7 +31,6 @@ export const getProd = async(req=request,res=response) => {
     const categoria = req.query.category
     const ordering = req.query.ordering || {}
     const status = req.query.status
-    // console.log("ruta veo status?",status)
     const obj={
         limits,
         pages,
@@ -159,13 +158,11 @@ export const postProducts = async(req=request,res=response,next) => {
 
     try {
         const {id} = req.session.user
-        console.log('viendo id',id);
         if (req.logger.debug) {
             req.logger.debug('Accediendo a: postProducts')
         }
            req.logger.info('Creando productos')
            const thumbnail = "/products/" + req.file.filename
-           console.log('este seria el path', thumbnail);
           
            const {category,title,description,price,code,stock} = req.body
            const all = {
@@ -178,9 +175,7 @@ export const postProducts = async(req=request,res=response,next) => {
             thumbnail,
             createdBy:id}
 
-           console.log(all)
            const prod = await postCreateTheProduct(all)
-           console.log('deberia ver elk resultado ??',prod);
       res.json({
         msg: 'success'
       })
@@ -203,9 +198,7 @@ export const deleteProducts = async(req=request,res=response,next) => {
         const resp = await deleteTheProduct(id)
         
         const { creatorByEmail,creatorByRole,product} = resp
-        console.log('ruta delete productos',resp);
         if (creatorByEmail !== 'adminCoder@coder.com' && creatorByRole !== 'admin') {
-            console.log('notioficando');
             await notifyUserDeleteProduct(creatorByEmail,product);
         }
     

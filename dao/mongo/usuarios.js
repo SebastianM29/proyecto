@@ -10,7 +10,6 @@ export class Usuarios {
     addUser(usuario,id){
         let users = {usuario,id}
         this.personas.push(users)
-        console.log('veo el arreglo', this.personas)
         return this.personas
 
     }

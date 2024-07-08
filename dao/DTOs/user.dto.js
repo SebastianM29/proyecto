@@ -16,7 +16,6 @@ export default class UserDTO {
         
         // this.perfilPicture = user.perfilPicture !== undefined ? user.perfilPicture : 'empty';
         
-        console.log('deberia ver el usuario: DTO',user)
     }
 
 }

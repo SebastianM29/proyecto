@@ -24,8 +24,7 @@ export const viewProfile = (req,res)=>{
         id,
         perfilPicture
     }
-    console.log('hjol',perfilPicture);
-    console.log('info',info);
+  
     
     res.render('profile',{info})
 

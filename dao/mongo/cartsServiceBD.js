@@ -17,7 +17,6 @@ export default class CartServiceDB {
        
 
          try {
-            console.log('aca va pasando Add cart')
             const cart = await carts.create({products:[]})
            
             return cart
@@ -25,7 +24,6 @@ export default class CartServiceDB {
 
          } catch (error) {
 
-             console.log(error)
             throw error
             
          }
@@ -57,7 +55,6 @@ export default class CartServiceDB {
                       );
                       throw error
             }
-            console.log('populate',cartsValue)
             return cartsValue
       
           
@@ -76,7 +73,6 @@ export default class CartServiceDB {
             ])
 
             if (!car) {
-                console.log('deberia entrar aca');
                 const error = new CustomError(
                     "Error  al encontrar Carrito",
                     "consulte ID",
@@ -86,7 +82,6 @@ export default class CartServiceDB {
                   throw error
             }
             if (!prod) {
-                console.log('deberia entrar aca producto');
                 const error = new CustomError(
                     "Error al encontrar producto ",
                     "consulte ID",
@@ -152,7 +147,6 @@ export default class CartServiceDB {
             const cartFind = await carts.findById(cid)
             const productFind = await products.findById(pid)
             
-            console.log('este seria el producto ' , productFind)
             if (!cartFind) {
                 const error = new CustomError(
                     "Error  al encontrar Carrito",
@@ -176,7 +170,6 @@ export default class CartServiceDB {
             }
             for (const iterator of cartFind.products) {
                 if (iterator.id.toString() === productFind._id.toString()) {
-                    console.log('esta adentro del if')
                     const valorDevuelto = cartFind.products.filter(element => element.id.toString() !== productFind._id.toString())
                     cartFind.products = valorDevuelto
                     // save() se puede aplicar a una instancia de un modelo, no al modelo en sí mismo.
@@ -197,7 +190,6 @@ export default class CartServiceDB {
     /** TERMINADO */
     async putAll(cid,arrayCarts){
       
-            console.log('put all products',cid,'y el body!!!!',arrayCarts)
             const cart = await carts.findById(cid)
             if (!cart) {
                 const error = new CustomError(
@@ -209,9 +201,7 @@ export default class CartServiceDB {
                   throw error
             }
             cart.products = []
-            console.log('cart encontrado!!!',cart)
             for (const iterator of arrayCarts) {
-                console.log('viendo idividual individual', iterator)
                 const prodExist = await products.findById(iterator.id)
                 if (!prodExist) {
                     const error = new CustomError(
@@ -244,15 +234,12 @@ export default class CartServiceDB {
     async putQuantity(cid,pid,quantity){
        
        
-        console.log('deberia ver el cart ')
       
         
             const cart = await carts.findById(cid)
             const prodExist = await products.findById(pid)
             
-            console.log('no esta carrito')
             if (!cart) {
-                console.log('no esta carrito');
                 const error = new CustomError(
                     "(E-N)Error al actualizar el carrito ",
                     "(C)consulte ID",
@@ -276,13 +263,10 @@ export default class CartServiceDB {
 
             const filterProd = cart.products.filter(element => element.id.toString() === prodExist._id.toString())
 
-            console.log('debo ver algo productyo encotnrado?',filterProd)
             
             if (filterProd.length !== 0) {
                 // filterProd.quantity = quantity
-                console.log(quantity.quantity)
                 filterProd[0].quantity = quantity.quantity
-                console.log('estoy en validacion ',filterProd[0].quantity)
                 await cart.save()
                 return cart
             }else{
@@ -308,7 +292,6 @@ export default class CartServiceDB {
         
             const cart = await carts.findById(cid)
             if (!cart) {
-                console.log('no esta carrito');
                 const error = new CustomError(
                     "(E-N)no existe el carrito ",
                     "(C)consulte ID",

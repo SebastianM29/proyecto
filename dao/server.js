@@ -135,7 +135,6 @@ export class Server {
     }
     
     handler(){
-     console.log('minimo aca etra !');
         this.app.use(errHandler)
     }
 

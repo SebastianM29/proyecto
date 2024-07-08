@@ -1,6 +1,5 @@
 const deleteItem = async(id) => {
     try {
-        console.log('deberia ver este id ',id)
         const resp = await fetch(`/api/session/deleteUser?id=${id}`,{
             method:'DELETE'
         })

@@ -48,7 +48,6 @@ export default class ProductServiceDB {
         return paginate
                 
         } catch (error) {
-            console.log(error.message)
             return 'Sin Datos en el archivo'
         }
     }
@@ -56,7 +55,6 @@ export default class ProductServiceDB {
     async addProduct(obj){
    
             if (![obj.category, obj.title, obj.description, obj.price, obj.code, obj.stock].every(Boolean) ) {
-                console.log('vavio');
                  const error = new CustomError(
                      "(E)Error Creacion producto",
                      "(C)Datos incompletos",
@@ -67,7 +65,6 @@ export default class ProductServiceDB {
                     
                     
                 }
-                console.log('objeto en la clase productop',obj);
                 
                 return await products.create(obj)
             
@@ -80,12 +77,10 @@ export default class ProductServiceDB {
            
                 
                 const prodFind = await products.findById(id).populate('createdBy')
-                console.log(prodFind);
                 const creatorByEmail = prodFind.createdBy.email
                 const creatorByRole = prodFind.createdBy.role
                 const product = prodFind.title
                 if (!prodFind) {
-                    console.log('eliinando');
                     const error = new CustomError(
                         "Error  eliminar datos",
                         "consulte ID",
@@ -94,10 +89,8 @@ export default class ProductServiceDB {
                       );
                       throw error
                 }
-                console.log('este es el dirname ?',__dirname);
                 const thumbnailPath = prodFind.thumbnail
                 
-                console.log(thumbnailPath);
                  await fs.unlink( path.join(__dirname,'../.././public',thumbnailPath)  )
                 
                 await products.findByIdAndDelete(id)
@@ -119,7 +112,6 @@ export default class ProductServiceDB {
            const prodFind = await products.findById(id)
            
            if (!prodFind) {
-            console.log('no existe id');
             const error = new CustomError(
                 "Error ID no valido",
                 "Inexistente ID",
