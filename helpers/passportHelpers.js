@@ -45,6 +45,7 @@ const localStrategy = local.Strategy
                     }
                     }
                 if (role=== 'user') {
+                    let perfilPicture = 'perfil/algo.jpg';
                     if ( email === config.adminEmail || password === config.passAdmin ){
 
                  

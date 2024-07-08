@@ -231,15 +231,12 @@ export const documentPremium = async(req,res,next) => {
         console.log('llegando');
         const id = req.params.uid
         // const { documento, domicilio } = req.files;
-        
-        
         // console.log('ver doument',documento[0],domicilio[0]);
         // console.log(typeof req.files);
         //     const validatePremium={
         //         document : documento,
         //         home : domicilio
         //     }
-        
         //    const user = await getUserByIdServAndCharge(id,validatePremium)
         //    res.json(user)
 
