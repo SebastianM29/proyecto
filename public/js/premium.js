@@ -19,8 +19,8 @@ const product = document.getElementById('addProduct')
 
         let formData = new FormData()
     
-        // formData.append('documento',documento)
-        // formData.append('domicilio',domicilio)
+        formData.append('documento',documento)
+        formData.append('domicilio',domicilio)
 
         if (!documento || !domicilio) {
           console.error('Faltan archivos para subir');
