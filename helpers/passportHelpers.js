@@ -22,7 +22,7 @@ const localStrategy = local.Strategy
                 
                  
                 if (!searchUser) {
-                    let perfilPicture = 'perfil/algo.jpg';
+                    let perfilPicture = '/perfil/algo.jpg';
                    if (role === 'admin'  ) {
 
                     if ( email === config.adminEmail && password === config.passAdmin ) {
@@ -45,7 +45,7 @@ const localStrategy = local.Strategy
                     }
                     }
                 if (role=== 'user') {
-                    let perfilPicture = 'perfil/algo.jpg';
+                    let perfilPicture = '/perfil/algo.jpg';
                     if ( email === config.adminEmail || password === config.passAdmin ){
 
                  
