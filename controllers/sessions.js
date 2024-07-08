@@ -278,7 +278,7 @@ export const picture= async (req,res) => {
     const img = req.file.filename
     const {picturepath} = req.body
 
-    if (picturepath !== 'empty') {
+    if (picturepath !== '/perfil/algo.jpg') {
         console.log('debo del el picturePath',picturepath);
         const filePath = path.join(__dirname, '../public', picturepath);
         console.log('Ruta completa a eliminar:', filePath);
